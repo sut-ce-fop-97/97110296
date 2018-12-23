@@ -6,7 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/amin/Desktop/project/src/simple_snake.c
+/home/amin/Desktop/project/src/structs.h
+
+/home/amin/Desktop/project/src/view.c
 stdio.h
 -
 stdbool.h
@@ -19,4 +21,12 @@ SDL2/SDL.h
 -
 SDL2/SDL2_gfxPrimitives.h
 -
+view.h
+/home/amin/Desktop/project/src/view.h
+structs.h
+/home/amin/Desktop/project/src/structs.h
+
+/home/amin/Desktop/project/src/view.h
+structs.h
+/home/amin/Desktop/project/src/structs.h
 

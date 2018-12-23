@@ -3,3 +3,9 @@
 //
 
 #include "logic.h"
+
+
+void lose(){
+
+
+}

@@ -5,4 +5,6 @@
 #ifndef PROJECT_LOGIC_H
 #define PROJECT_LOGIC_H
 
+void lose();
+
 #endif //PROJECT_LOGIC_H

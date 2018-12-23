@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6"/>
 	<Project>
-		<Option title="project"/>
+		<Option title="project_name"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
 		<Option virtualFolders="CMake Files\;"/>
@@ -27,8 +27,8 @@
 					<DistClean command="/usr/bin/make -j8 -f &quot;/home/amin/Desktop/project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="project">
-				<Option output="/home/amin/Desktop/project/cmake-build-debug/project" prefix_auto="0" extension_auto="0"/>
+			<Target title="project_name">
+				<Option output="/home/amin/Desktop/project/cmake-build-debug/project_name" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/amin/Desktop/project/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -42,14 +42,14 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/amin/Desktop/project/cmake-build-debug/Makefile&quot;  VERBOSE=1 project"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/amin/Desktop/project/cmake-build-debug/Makefile&quot;  VERBOSE=1 project_name"/>
 					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/amin/Desktop/project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j8 -f &quot;/home/amin/Desktop/project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j8 -f &quot;/home/amin/Desktop/project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="project/fast">
-				<Option output="/home/amin/Desktop/project/cmake-build-debug/project" prefix_auto="0" extension_auto="0"/>
+			<Target title="project_name/fast">
+				<Option output="/home/amin/Desktop/project/cmake-build-debug/project_name" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/amin/Desktop/project/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -63,7 +63,7 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/amin/Desktop/project/cmake-build-debug/Makefile&quot;  VERBOSE=1 project/fast"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/amin/Desktop/project/cmake-build-debug/Makefile&quot;  VERBOSE=1 project_name/fast"/>
 					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/amin/Desktop/project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j8 -f &quot;/home/amin/Desktop/project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j8 -f &quot;/home/amin/Desktop/project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -80,32 +80,8 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/amin/Desktop/project/src/logic.c">
-			<Option target="project"/>
-		</Unit>
-		<Unit filename="/home/amin/Desktop/project/src/logic.h">
-			<Option target="project"/>
-		</Unit>
-		<Unit filename="/home/amin/Desktop/project/src/main.c">
-			<Option target="project"/>
-		</Unit>
-		<Unit filename="/home/amin/Desktop/project/src/physics.c">
-			<Option target="project"/>
-		</Unit>
-		<Unit filename="/home/amin/Desktop/project/src/physics.h">
-			<Option target="project"/>
-		</Unit>
 		<Unit filename="/home/amin/Desktop/project/src/simple_snake.c">
-			<Option target="project"/>
-		</Unit>
-		<Unit filename="/home/amin/Desktop/project/src/structs.h">
-			<Option target="project"/>
-		</Unit>
-		<Unit filename="/home/amin/Desktop/project/src/view.c">
-			<Option target="project"/>
-		</Unit>
-		<Unit filename="/home/amin/Desktop/project/src/view.h">
-			<Option target="project"/>
+			<Option target="project_name"/>
 		</Unit>
 		<Unit filename="/home/amin/Desktop/project/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
