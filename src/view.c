@@ -9,7 +9,6 @@
 #include <math.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL2_gfxPrimitives.h>
-//#include <SDL_opengles2_gl2ext.h>
 #include "view.h"
 #include "structs.h"
 #include "physics.h"
@@ -17,18 +16,6 @@
 
 #define black 0,0 ,0, 255
 
-SDL_Window *window;
-
-SDL_Renderer *renderer;
-
-
-
-void  quit_window(){
-
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
-}
 
 
 
@@ -54,7 +41,7 @@ int to_int(char buff[5]) {
     return res;
 }
 
-void show_walls(struct SDL_Renderer * renderer, long long** walls, int n){
+void show_walls(struct SDL_Renderer * renderer, long long int ** walls, int n){
     for(int i = 0 ; i<n ; i++)
         thickLineRGBA(renderer, walls[i][0], walls[i][1], walls[i][2], walls[i][3], 5, black);
 }
@@ -88,18 +75,18 @@ double generate_walls(long long int ***walls, int *n, int *maxx, int *maxy) {
 
         }
     }
-    *maxx = max(*maxx, *maxy);
-    double ratio = 960.0 / *maxx;
+    int max_of_max = max(*maxx, *maxy);
+    double ratio = 960.0 / max_of_max;
     for(int i = 0 ; i<*n ; i++)
         for(int j = 0 ; j<4 ; j++){
             (*walls)[i][j] *= ratio;
             (*walls)[i][j] += 20;
         }
-    return  ratio;
     fclose(file);
+    return  ratio;
 }
 
-void show_bullet(Bullet_Node **bullets, SDL_Renderer *renderer) {
+void show_bullet(Bullet_Node **bullets, SDL_Renderer *renderer, double players) {
     Bullet_Node *b_node = *bullets;
     while(b_node != NULL){
         if(b_node->b.life_time == 0){
@@ -108,21 +95,45 @@ void show_bullet(Bullet_Node **bullets, SDL_Renderer *renderer) {
         }
         filledCircleRGBA(renderer, (Sint16) b_node->b.x, (Sint16) b_node->b.y, (Sint16) b_node->b.radius, black);
         b_node->b.life_time--;
-        b_node->b.x += 0.4*cos(b_node->b.angle);
-        b_node->b.y += 0.4*sin(b_node->b.angle);
+        b_node->b.x += sqrt(players) * 0.4*cos(b_node->b.angle);
+        b_node->b.y += sqrt(players) * 0.4*sin(b_node->b.angle);
         b_node = b_node->next;
     }
 }
 
 
-void show_scores(Tank **tanks, int n, double ratio, int maxx, int maxy, SDL_Renderer *renderer) {
-    int x = 20 + tanks[0]->width/2, y = 20+tanks[0]->barrel_lenght;
+void show_scores(Tank **tanks, int n, SDL_Renderer *renderer, double d) {
+    int x = d + 20, y = 160;
     for(int i = 0 ; i<n ; i++){
-        Tank* tmp_tank = init_tank(ratio, maxx, maxy, i);
+        Tank* tmp_tank = malloc(sizeof(Tank));
+        tmp_tank->bullet = tanks[i]->bullet;
+        tmp_tank->lenght = 150;
+        tmp_tank->width = 125;
+        tmp_tank->barrel_lenght = 100;
+        tmp_tank->barrel_thickness = 20;
+
+        switch(i){
+            case 0:
+                tmp_tank->light_color =  255 | (95 << 8) | (66 << 16) | (255 << 24);
+                tmp_tank->dark_color = 255 | (255 << 24);
+                break;
+            case 1:
+                tmp_tank->light_color =  66 | (134 << 8) | (244<< 16) | (255 << 24);
+                tmp_tank->dark_color = 0 | (80 << 8) | (255<< 16) | (255 << 24);
+                break;
+            case 2:
+                tmp_tank->light_color =  243 | (112 << 8) | (255 << 16) | (255 << 24);
+                tmp_tank->dark_color = 187 | (0 << 8) | (255 << 16) | (255 << 24);
+                break;
+            case 3:
+                tmp_tank->light_color =  155 | (255 << 8) | (106 << 16) | (255 << 24);
+                tmp_tank->dark_color = 0 | (255 << 8) | (38<< 16) | (255 << 24);
+                break;
+        }
         tmp_tank->x = x;
         tmp_tank->y = y;
         tmp_tank->angle = M_PI/2;
-        y += 50+tanks[i]->lenght/2;
-        show_tank(tanks[i], renderer);
+        y += 50+tmp_tank->lenght/2 + tmp_tank->barrel_lenght;
+        show_tank(tmp_tank, renderer);
     }
 }

@@ -197,12 +197,6 @@ project_BINARY_DIR:STATIC=/home/amin/Desktop/project/cmake-build-debug
 //Value Computed by CMake
 project_SOURCE_DIR:STATIC=/home/amin/Desktop/project
 
-//Value Computed by CMake
-project_name_BINARY_DIR:STATIC=/home/amin/Desktop/project/cmake-build-debug
-
-//Value Computed by CMake
-project_name_SOURCE_DIR:STATIC=/home/amin/Desktop/project
-
 
 ########################
 # INTERNAL cache entries

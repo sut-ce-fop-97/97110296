@@ -34,5 +34,11 @@ typedef struct {
     int pressed;
 } button_t;
 
+//typedef struct {
+//    double pos[4];
+//    enum dir{
+//        VERTICAL, HORIZONTAL
+//    };
+//}Wall;
 
 #endif //PROJECT_STRUCTS_H

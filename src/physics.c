@@ -40,29 +40,74 @@ void fire(Tank *t, Bullet_Node **bullets) {
     add_bullet(init_bullet(t), bullets);
 }
 
-void handle_keys(Tank *t) {
-//    SDL_Event event;
-//    while(SDL_PollEvent(&event)){
-//
-//        if(event.type == SDL_KEYDOWN )
-//            if(event.key.keysym.sym == SDLK_m)
-//                fire(t, bullets);
-//    }
+void handle_keys(Tank **tanks, int players/*, int **walls, int number_of_walls*/) {
 
     const Uint8* keyboard = SDL_GetKeyboardState(NULL);
     if(keyboard[SDL_SCANCODE_RIGHT]){
-        t->angle -= 2.0*(0.5-keyboard[SDL_SCANCODE_DOWN])*0.0034;
+//        if(can_turn(tanks[0], 1, walls, number_of_walls))
+        tanks[0]->angle -= 2.0*(0.5-keyboard[SDL_SCANCODE_DOWN])*0.0034 * sqrt(players);
     }
     if(keyboard[SDL_SCANCODE_LEFT]){
-        t->angle += 2.0*(0.5-keyboard[SDL_SCANCODE_DOWN])*0.0034;
+        tanks[0]->angle += 2.0*(0.5-keyboard[SDL_SCANCODE_DOWN])*0.0034 * sqrt(players);
     };
     if(keyboard[SDL_SCANCODE_UP]){
-        t->x += 0.3 * cos(-t->angle);
-        t->y += 0.3 * sin(-t->angle);
+        tanks[0]->x += sqrt(players) * 0.3 * cos(-tanks[0]->angle);
+        tanks[0]->y += sqrt(players) * 0.3 * sin(-tanks[0]->angle);
     }
     if(keyboard[SDL_SCANCODE_DOWN]){
-        t->x -= 0.3 * cos(-t->angle);
-        t->y -= 0.3 * sin(-t->angle);
+        tanks[0]->x -= sqrt(players) * 0.3 * cos(-tanks[0]->angle);
+        tanks[0]->y -= sqrt(players) * 0.3 * sin(-tanks[0]->angle);
+    }
+
+    if(players > 1){
+        if(keyboard[SDL_SCANCODE_D]){
+            tanks[1]->angle -= 2.0*(0.5-keyboard[SDL_SCANCODE_S])*0.0034 * sqrt(players);
+        }
+        if(keyboard[SDL_SCANCODE_A]){
+            tanks[1]->angle += 2.0*(0.5-keyboard[SDL_SCANCODE_S])*0.0034 * sqrt(players);
+        };
+        if(keyboard[SDL_SCANCODE_W]){
+            tanks[1]->x += sqrt(players) *  0.3 * cos(-tanks[1]->angle);
+            tanks[1]->y += sqrt(players) *  0.3 * sin(-tanks[1]->angle);
+        }
+        if(keyboard[SDL_SCANCODE_S]){
+            tanks[1]->x -= sqrt(players) * 0.3 * cos(-tanks[1]->angle);
+            tanks[1]->y -= sqrt(players) * 0.3 * sin(-tanks[1]->angle);
+        }
+    }
+
+    if(players > 2){
+        if(keyboard[SDL_SCANCODE_H]){
+            tanks[2]->angle -= 2.0*(0.5-keyboard[SDL_SCANCODE_G])*0.0034 * sqrt(players);
+        }
+        if(keyboard[SDL_SCANCODE_F]){
+            tanks[2]->angle += 2.0*(0.5-keyboard[SDL_SCANCODE_G])*0.0034 * sqrt(players);
+        };
+        if(keyboard[SDL_SCANCODE_T]){
+            tanks[2]->x += sqrt(players) * 0.3 * cos(-tanks[2]->angle);
+            tanks[2]->y += sqrt(players) * 0.3 * sin(-tanks[2]->angle);
+        }
+        if(keyboard[SDL_SCANCODE_G]){
+            tanks[2]->x -= sqrt(players) * 0.3 * cos(-tanks[2]->angle);
+            tanks[2]->y -= sqrt(players) * 0.3 * sin(-tanks[2]->angle);
+        }
+    }
+
+    if(players > 3){
+        if(keyboard[SDL_SCANCODE_L]){
+            tanks[3]->angle -= 2.0*(0.5-keyboard[SDL_SCANCODE_K])*0.0034 * sqrt(players);
+        }
+        if(keyboard[SDL_SCANCODE_J]){
+            tanks[3]->angle += 2.0*(0.5-keyboard[SDL_SCANCODE_K])*0.0034 * sqrt(players);
+        };
+        if(keyboard[SDL_SCANCODE_I]){
+            tanks[3]->x += sqrt(players) * 0.3 * cos(-tanks[3]->angle);
+            tanks[3]->y += sqrt(players) * 0.3 * sin(-tanks[3]->angle);
+        }
+        if(keyboard[SDL_SCANCODE_K]){
+            tanks[3]->x -= sqrt(players) * 0.3 * cos(-tanks[3]->angle);
+            tanks[3]->y -= sqrt(players) * 0.3 * sin(-tanks[3]->angle);
+        }
     }
 //
 //    if(keyboard[SDL_SCANCODE_M]){
@@ -72,15 +117,23 @@ void handle_keys(Tank *t) {
 }
 
 
-int handle_event(Tank* t, Bullet_Node** bullets) {
+int handle_event(Tank** tanks, Bullet_Node** bullets, int n) {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         if (event.type == SDL_QUIT) {
             return 0;
         }
-        if(event.type == SDL_KEYUP )
-            if(event.key.keysym.sym == SDLK_m)
-                fire(t, bullets);
+        if(event.type == SDL_KEYUP ){
+            if(event.key.keysym.sym == SDLK_SLASH)
+                fire(tanks[0], bullets);
+            if(n>1 && event.key.keysym.sym == SDLK_q)
+                fire(tanks[1], bullets);
+            if(n>2 && event.key.keysym.sym == SDLK_r)
+                fire(tanks[2], bullets);
+            if(n>3 && event.key.keysym.sym == SDLK_u)
+                fire(tanks[3], bullets);
+
+        }
     }
     return 1;
 }

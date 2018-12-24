@@ -36,7 +36,7 @@ static bool button(SDL_Renderer *r, button_t *btn) {
     return false;
 }
 
-int detemine_player_number(){
+int determine_player_number(){
     int res = 0;
     int quit = 0;
     SDL_Init(SDL_INIT_VIDEO);
@@ -53,8 +53,6 @@ int detemine_player_number(){
         fprintf(stderr, "create renderer failed: %s\n", SDL_GetError());
         return 1;
     }
-
-    SDL_Texture* txt = "salam";
 
     SDL_Rect rct;
     rct.x = 0 ;

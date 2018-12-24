@@ -10,10 +10,9 @@
 
 #include "structs.h"
 
-void move_tank();
 void tank_colision();
-int handle_event(Tank* t , Bullet_Node** bullets);
-void handle_keys(Tank *t);
+int handle_event(Tank** tanks , Bullet_Node** bullets, int n);
+void handle_keys(Tank **tanks, int players/*, Wall **walls, int number_of_walls*/);
 void add_bullet(Bullet* b, Bullet_Node** bullets);
 
 Tank *init_tank(double ratio, int maxx, int maxy, int i);

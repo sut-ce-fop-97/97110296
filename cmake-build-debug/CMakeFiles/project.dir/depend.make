@@ -53,7 +53,6 @@ CMakeFiles/project.dir/src/logic.c.o: ../src/logic.c
 CMakeFiles/project.dir/src/logic.c.o: ../src/logic.h
 
 CMakeFiles/project.dir/src/main.c.o: ../src/init.h
-CMakeFiles/project.dir/src/main.c.o: ../src/logic.h
 CMakeFiles/project.dir/src/main.c.o: ../src/main.c
 CMakeFiles/project.dir/src/main.c.o: ../src/physics.h
 CMakeFiles/project.dir/src/main.c.o: ../src/structs.h
@@ -86,6 +85,7 @@ CMakeFiles/project.dir/src/physics.c.o: /usr/include/SDL2/SDL_video.h
 CMakeFiles/project.dir/src/physics.c.o: /usr/include/SDL2/begin_code.h
 CMakeFiles/project.dir/src/physics.c.o: /usr/include/SDL2/close_code.h
 
+CMakeFiles/project.dir/src/simple_snake.c.o: ../src/simple_snake.c
 
 CMakeFiles/project.dir/src/view.c.o: ../src/physics.h
 CMakeFiles/project.dir/src/view.c.o: ../src/structs.h
