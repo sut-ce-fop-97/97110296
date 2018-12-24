@@ -123,6 +123,33 @@ project/fast:
 	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/build
 .PHONY : project/fast
 
+src/init.o: src/init.c.o
+
+.PHONY : src/init.o
+
+# target to build an object file
+src/init.c.o:
+	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/src/init.c.o
+.PHONY : src/init.c.o
+
+src/init.i: src/init.c.i
+
+.PHONY : src/init.i
+
+# target to preprocess a source file
+src/init.c.i:
+	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/src/init.c.i
+.PHONY : src/init.c.i
+
+src/init.s: src/init.c.s
+
+.PHONY : src/init.s
+
+# target to generate assembly for a file
+src/init.c.s:
+	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/src/init.c.s
+.PHONY : src/init.c.s
+
 src/logic.o: src/logic.c.o
 
 .PHONY : src/logic.o
@@ -267,6 +294,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... project"
 	@echo "... edit_cache"
+	@echo "... src/init.o"
+	@echo "... src/init.i"
+	@echo "... src/init.s"
 	@echo "... src/logic.o"
 	@echo "... src/logic.i"
 	@echo "... src/logic.s"

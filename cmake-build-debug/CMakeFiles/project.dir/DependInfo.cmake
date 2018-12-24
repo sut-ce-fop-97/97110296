@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
+  "/home/amin/Desktop/project/src/init.c" "/home/amin/Desktop/project/cmake-build-debug/CMakeFiles/project.dir/src/init.c.o"
   "/home/amin/Desktop/project/src/logic.c" "/home/amin/Desktop/project/cmake-build-debug/CMakeFiles/project.dir/src/logic.c.o"
   "/home/amin/Desktop/project/src/main.c" "/home/amin/Desktop/project/cmake-build-debug/CMakeFiles/project.dir/src/main.c.o"
   "/home/amin/Desktop/project/src/physics.c" "/home/amin/Desktop/project/cmake-build-debug/CMakeFiles/project.dir/src/physics.c.o"

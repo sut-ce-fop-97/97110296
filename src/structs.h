@@ -8,7 +8,9 @@
 typedef struct {
     int bullet;
     double x, y, angle;
-    const double radius ,barrel_lenght, barrel_thickness , width, lenght;
+    double radius ,barrel_lenght, barrel_thickness , width, lenght;
+    int light_color, dark_color;
+    int score;
 }Tank;
 
 typedef struct {
@@ -21,10 +23,16 @@ typedef struct Bullet_Node{
     struct Bullet_Node* next;
 }Bullet_Node;
 
-typedef struct {
-    int light , dark;
-}Color;
 
+
+typedef struct {
+    SDL_Rect draw_rect;    // dimensions of button
+    struct {
+        Uint8 r, g, b, a;
+    } colour;
+
+    int pressed;
+} button_t;
 
 
 #endif //PROJECT_STRUCTS_H

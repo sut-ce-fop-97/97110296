@@ -80,6 +80,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/amin/Desktop/project/src/init.c">
+			<Option target="project"/>
+		</Unit>
+		<Unit filename="/home/amin/Desktop/project/src/init.h">
+			<Option target="project"/>
+		</Unit>
 		<Unit filename="/home/amin/Desktop/project/src/logic.c">
 			<Option target="project"/>
 		</Unit>

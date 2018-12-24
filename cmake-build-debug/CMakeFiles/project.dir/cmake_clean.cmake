@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/project.dir/src/init.c.o"
   "CMakeFiles/project.dir/src/logic.c.o"
   "CMakeFiles/project.dir/src/main.c.o"
   "CMakeFiles/project.dir/src/physics.c.o"

@@ -9,27 +9,19 @@
 #include <math.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL2_gfxPrimitives.h>
+//#include <SDL_opengles2_gl2ext.h>
 #include "view.h"
 #include "structs.h"
+#include "physics.h"
 
 
-//#define red 255 , 0, 0,255
-#define light_red 255 , 95, 66,230
 #define black 0,0 ,0, 255
-//#define light_red2 242, 30, 0,230
 
 SDL_Window *window;
 
 SDL_Renderer *renderer;
 
-SDL_Renderer* init_window(){
-    SDL_Init(SDL_INIT_VIDEO);
-    SDL_Window* window = SDL_CreateWindow("Alter Tank", SDL_WINDOWPOS_CENTERED , SDL_WINDOWPOS_CENTERED, 1000, 1000, SDL_WINDOW_OPENGL);
-    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-    return renderer;
-
-}
 
 void  quit_window(){
 
@@ -41,50 +33,71 @@ void  quit_window(){
 
 
 void show_tank(Tank *t, SDL_Renderer *renderer) {
-
-    Color red = {
-            .light = 255 | (95 << 8) | (66<< 16) | (230<< 24),
-            .dark = 255  | (255 << 24)
-    };
-
     double a = t->angle, x = t->x, y = t->y;
-    thickLineColor(renderer, x + 30 * cos(a), y - 30 * sin(a), x - 30 * cos(a), y + 30 * sin(a), 50, red.light);                                                                         //shasi
-    thickLineColor(renderer, x, y, x + 40 * cos(a), y - 40 * sin(a), 10, red.dark);                                                                                                                 //barrel
-//    thickLineColor(renderer, x, y, x + 40 * cos(a), y - 40 * sin(a), 10, red.dark);
-    thickLineColor(renderer, x+30*cos(a)+20*sin(a) , y - 30 * sin(a) + 20 * cos(a), x - 30 * cos(a) + 20 * sin(a), y + 30 * sin(a) + 20 * cos(a), 10, red.dark);      //sheni 1
-    thickLineColor(renderer, x+30*cos(a)-20*sin(a) , y - 30 * sin(a) - 20 * cos(a), x - 30 * cos(a) - 20 * sin(a), y + 30 * sin(a) - 20 * cos(a), 10, red.dark);      //sheni 2
-    filledCircleColor(renderer, x, y, 20, red.dark);                                                                                                                                                                 //circle
-    circleRGBA(renderer, x, y, 20, black);                                                                                                                                                                     //circle border
+    thickLineColor(renderer, x + t->lenght/2 * cos(a), y - t->lenght/2 * sin(a), x - t->lenght/2 * cos(a), y + t->lenght/2 * sin(a), t->width, t->light_color);                                                                         //shasi
+    thickLineColor(renderer, x, y, x + t->barrel_lenght * cos(a), y - t->barrel_lenght * sin(a), t->barrel_thickness, t->dark_color);                                                                                                                 //barrel
+    thickLineColor(renderer, x+t->lenght/2*cos(a)+0.4*t->width*sin(a) , y - t->lenght/2 * sin(a) + 0.4*t->width * cos(a), x - t->lenght/2 * cos(a) + 0.4*t->width * sin(a), y + t->lenght/2 * sin(a) + 0.4*t->width * cos(a), 0.25*t->width, t->dark_color);      //sheni 1
+    thickLineColor(renderer, x+t->lenght/2*cos(a)-0.4*t->width*sin(a) , y - t->lenght/2 * sin(a) - 0.4*t->width * cos(a), x - t->lenght/2 * cos(a) - 0.4*t->width * sin(a), y + t->lenght/2 * sin(a) - 0.4*t->width * cos(a), 0.25*t->width, t->dark_color);      //sheni 2
+    filledCircleColor(renderer, x, y, 0.4*t->width, t->dark_color);                                                                                                                                                                 //circle
+    circleRGBA(renderer, x, y, 0.4*t->width, black);                                                                                                                                                                     //circle border
 
 }
 
 
-int to_int(char buff[50]) {
+int to_int(char buff[5]) {
     int res = 0;
-    while(*buff != NULL){
-        res = 10*res + *buff - '0';
-        buff++;
+    char* it = buff;
+    while(*it != '\0'){
+        res = 10*res + *it - '0';
+        it++;
     }
     return res;
 }
 
-void show_walls(struct SDL_Renderer * renderer){
-    FILE *file = fopen("/home/amin/Desktop/project/src/mapmap.txt", "r");
-    char buff[50] = {};
-    fscanf(file, "%s", buff);
-    int n = to_int(buff);
-    for(int i = 0 ; i<n ; i++){
-        int x[4];
-        for(int j = 0 ; j<4 ;j++){
-            fscanf(file, "%s", buff);
-            x[j] = to_int(buff);
-        }
-        thickLineRGBA(renderer, 20+130*x[0], 20+130*x[1], 20+130*x[2], 20+130*x[3], 5, black);
-    }
-    fclose(file);
+void show_walls(struct SDL_Renderer * renderer, long long** walls, int n){
+    for(int i = 0 ; i<n ; i++)
+        thickLineRGBA(renderer, walls[i][0], walls[i][1], walls[i][2], walls[i][3], 5, black);
 }
 
+int max(int a, int b){
+    if(a>b)
+        return a;
+    return b;
+}
 
+double generate_walls(long long int ***walls, int *n, int *maxx, int *maxy) {
+    FILE *file = fopen("/home/amin/Desktop/project/src/mapmap.txt", "r");
+    char buff[5] ;
+    for(int i = 0 ; i<5 ; i++)
+        buff[i] = '\0';
+    fscanf(file, "%s", buff);
+    *n = to_int(buff);
+    (*walls) = malloc(*n* sizeof(long long*));
+    for(int i = 0 ; i<*n ; i++)
+        (*walls)[i] = malloc(4*sizeof(long long));
+    for(int i = 0 ; i<*n ; i++){
+        for(int j = 0 ; j<4 ;j++){
+            for(int k = 0 ; k<5 ; k++)
+                buff[k] = '\0';
+            fscanf(file, "%s", buff);
+            (*walls)[i][j] = to_int(buff);
+            if(j & 1)
+                *maxy = max(*maxy, (*walls)[i][j]);
+            else
+                *maxx = max(*maxx, (*walls)[i][j]);
+
+        }
+    }
+    *maxx = max(*maxx, *maxy);
+    double ratio = 960.0 / *maxx;
+    for(int i = 0 ; i<*n ; i++)
+        for(int j = 0 ; j<4 ; j++){
+            (*walls)[i][j] *= ratio;
+            (*walls)[i][j] += 20;
+        }
+    return  ratio;
+    fclose(file);
+}
 
 void show_bullet(Bullet_Node **bullets, SDL_Renderer *renderer) {
     Bullet_Node *b_node = *bullets;
@@ -98,5 +111,18 @@ void show_bullet(Bullet_Node **bullets, SDL_Renderer *renderer) {
         b_node->b.x += 0.4*cos(b_node->b.angle);
         b_node->b.y += 0.4*sin(b_node->b.angle);
         b_node = b_node->next;
+    }
+}
+
+
+void show_scores(Tank **tanks, int n, double ratio, int maxx, int maxy, SDL_Renderer *renderer) {
+    int x = 20 + tanks[0]->width/2, y = 20+tanks[0]->barrel_lenght;
+    for(int i = 0 ; i<n ; i++){
+        Tank* tmp_tank = init_tank(ratio, maxx, maxy, i);
+        tmp_tank->x = x;
+        tmp_tank->y = y;
+        tmp_tank->angle = M_PI/2;
+        y += 50+tanks[i]->lenght/2;
+        show_tank(tanks[i], renderer);
     }
 }
