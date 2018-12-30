@@ -46,7 +46,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/amin/Desktop/project
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/amin/Desktop/project/cmake-build-debug
+CMAKE_BINARY_DIR = /home/amin/Desktop/project
 
 # Include any dependencies generated for this target.
 include CMakeFiles/project.dir/depend.make
@@ -58,8 +58,8 @@ include CMakeFiles/project.dir/progress.make
 include CMakeFiles/project.dir/flags.make
 
 CMakeFiles/project.dir/src/init.c.o: CMakeFiles/project.dir/flags.make
-CMakeFiles/project.dir/src/init.c.o: ../src/init.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/amin/Desktop/project/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/project.dir/src/init.c.o"
+CMakeFiles/project.dir/src/init.c.o: src/init.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/amin/Desktop/project/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/project.dir/src/init.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/project.dir/src/init.c.o   -c /home/amin/Desktop/project/src/init.c
 
 CMakeFiles/project.dir/src/init.c.i: cmake_force
@@ -71,8 +71,8 @@ CMakeFiles/project.dir/src/init.c.s: cmake_force
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/amin/Desktop/project/src/init.c -o CMakeFiles/project.dir/src/init.c.s
 
 CMakeFiles/project.dir/src/logic.c.o: CMakeFiles/project.dir/flags.make
-CMakeFiles/project.dir/src/logic.c.o: ../src/logic.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/amin/Desktop/project/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/project.dir/src/logic.c.o"
+CMakeFiles/project.dir/src/logic.c.o: src/logic.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/amin/Desktop/project/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/project.dir/src/logic.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/project.dir/src/logic.c.o   -c /home/amin/Desktop/project/src/logic.c
 
 CMakeFiles/project.dir/src/logic.c.i: cmake_force
@@ -84,8 +84,8 @@ CMakeFiles/project.dir/src/logic.c.s: cmake_force
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/amin/Desktop/project/src/logic.c -o CMakeFiles/project.dir/src/logic.c.s
 
 CMakeFiles/project.dir/src/main.c.o: CMakeFiles/project.dir/flags.make
-CMakeFiles/project.dir/src/main.c.o: ../src/main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/amin/Desktop/project/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/project.dir/src/main.c.o"
+CMakeFiles/project.dir/src/main.c.o: src/main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/amin/Desktop/project/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/project.dir/src/main.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/project.dir/src/main.c.o   -c /home/amin/Desktop/project/src/main.c
 
 CMakeFiles/project.dir/src/main.c.i: cmake_force
@@ -97,8 +97,8 @@ CMakeFiles/project.dir/src/main.c.s: cmake_force
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/amin/Desktop/project/src/main.c -o CMakeFiles/project.dir/src/main.c.s
 
 CMakeFiles/project.dir/src/physics.c.o: CMakeFiles/project.dir/flags.make
-CMakeFiles/project.dir/src/physics.c.o: ../src/physics.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/amin/Desktop/project/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/project.dir/src/physics.c.o"
+CMakeFiles/project.dir/src/physics.c.o: src/physics.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/amin/Desktop/project/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/project.dir/src/physics.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/project.dir/src/physics.c.o   -c /home/amin/Desktop/project/src/physics.c
 
 CMakeFiles/project.dir/src/physics.c.i: cmake_force
@@ -110,8 +110,8 @@ CMakeFiles/project.dir/src/physics.c.s: cmake_force
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/amin/Desktop/project/src/physics.c -o CMakeFiles/project.dir/src/physics.c.s
 
 CMakeFiles/project.dir/src/simple_snake.c.o: CMakeFiles/project.dir/flags.make
-CMakeFiles/project.dir/src/simple_snake.c.o: ../src/simple_snake.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/amin/Desktop/project/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/project.dir/src/simple_snake.c.o"
+CMakeFiles/project.dir/src/simple_snake.c.o: src/simple_snake.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/amin/Desktop/project/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/project.dir/src/simple_snake.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/project.dir/src/simple_snake.c.o   -c /home/amin/Desktop/project/src/simple_snake.c
 
 CMakeFiles/project.dir/src/simple_snake.c.i: cmake_force
@@ -123,8 +123,8 @@ CMakeFiles/project.dir/src/simple_snake.c.s: cmake_force
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/amin/Desktop/project/src/simple_snake.c -o CMakeFiles/project.dir/src/simple_snake.c.s
 
 CMakeFiles/project.dir/src/view.c.o: CMakeFiles/project.dir/flags.make
-CMakeFiles/project.dir/src/view.c.o: ../src/view.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/amin/Desktop/project/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/project.dir/src/view.c.o"
+CMakeFiles/project.dir/src/view.c.o: src/view.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/amin/Desktop/project/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/project.dir/src/view.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/project.dir/src/view.c.o   -c /home/amin/Desktop/project/src/view.c
 
 CMakeFiles/project.dir/src/view.c.i: cmake_force
@@ -155,7 +155,7 @@ project: CMakeFiles/project.dir/src/simple_snake.c.o
 project: CMakeFiles/project.dir/src/view.c.o
 project: CMakeFiles/project.dir/build.make
 project: CMakeFiles/project.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/amin/Desktop/project/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking C executable project"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/amin/Desktop/project/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking C executable project"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/project.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -168,6 +168,6 @@ CMakeFiles/project.dir/clean:
 .PHONY : CMakeFiles/project.dir/clean
 
 CMakeFiles/project.dir/depend:
-	cd /home/amin/Desktop/project/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/amin/Desktop/project /home/amin/Desktop/project /home/amin/Desktop/project/cmake-build-debug /home/amin/Desktop/project/cmake-build-debug /home/amin/Desktop/project/cmake-build-debug/CMakeFiles/project.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/amin/Desktop/project && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/amin/Desktop/project /home/amin/Desktop/project /home/amin/Desktop/project /home/amin/Desktop/project /home/amin/Desktop/project/CMakeFiles/project.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/project.dir/depend
 

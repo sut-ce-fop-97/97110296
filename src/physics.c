@@ -5,6 +5,7 @@
 #include <SDL_events.h>
 #include <time.h>
 #include "physics.h"
+#include "logic.h"
 
 
 void move_tank() {
@@ -27,7 +28,7 @@ Bullet* init_bullet(Tank *t) {
     b->y = t->y - 40*sin(t->angle);
     b->angle = -t->angle;
     b->radius = 3;
-    b->life_time = 1000;
+    b->life_time = 10000;
     return b;
 }
 
@@ -40,81 +41,83 @@ void fire(Tank *t, Bullet_Node **bullets) {
     add_bullet(init_bullet(t), bullets);
 }
 
-void handle_keys(Tank **tanks, int players/*, int **walls, int number_of_walls*/) {
 
-    const Uint8* keyboard = SDL_GetKeyboardState(NULL);
-    if(keyboard[SDL_SCANCODE_RIGHT]){
-//        if(can_turn(tanks[0], 1, walls, number_of_walls))
-        tanks[0]->angle -= 2.0*(0.5-keyboard[SDL_SCANCODE_DOWN])*0.0034 * sqrt(players);
-    }
-    if(keyboard[SDL_SCANCODE_LEFT]){
-        tanks[0]->angle += 2.0*(0.5-keyboard[SDL_SCANCODE_DOWN])*0.0034 * sqrt(players);
-    };
-    if(keyboard[SDL_SCANCODE_UP]){
-        tanks[0]->x += sqrt(players) * 0.3 * cos(-tanks[0]->angle);
-        tanks[0]->y += sqrt(players) * 0.3 * sin(-tanks[0]->angle);
-    }
-    if(keyboard[SDL_SCANCODE_DOWN]){
-        tanks[0]->x -= sqrt(players) * 0.3 * cos(-tanks[0]->angle);
-        tanks[0]->y -= sqrt(players) * 0.3 * sin(-tanks[0]->angle);
-    }
 
-    if(players > 1){
-        if(keyboard[SDL_SCANCODE_D]){
-            tanks[1]->angle -= 2.0*(0.5-keyboard[SDL_SCANCODE_S])*0.0034 * sqrt(players);
-        }
-        if(keyboard[SDL_SCANCODE_A]){
-            tanks[1]->angle += 2.0*(0.5-keyboard[SDL_SCANCODE_S])*0.0034 * sqrt(players);
-        };
-        if(keyboard[SDL_SCANCODE_W]){
-            tanks[1]->x += sqrt(players) *  0.3 * cos(-tanks[1]->angle);
-            tanks[1]->y += sqrt(players) *  0.3 * sin(-tanks[1]->angle);
-        }
-        if(keyboard[SDL_SCANCODE_S]){
-            tanks[1]->x -= sqrt(players) * 0.3 * cos(-tanks[1]->angle);
-            tanks[1]->y -= sqrt(players) * 0.3 * sin(-tanks[1]->angle);
-        }
+
+
+
+void handle_keys(Tank **tanks, int players, Wall **walls, int number_of_walls) {
+    bool keys[4][5] = {};
+    const Uint8 *keyboard = SDL_GetKeyboardState(NULL);
+    if (keyboard[SDL_SCANCODE_RIGHT])
+        keys[0][0] = 1;
+    if (keyboard[SDL_SCANCODE_LEFT])
+        keys[0][1] = 1;
+    if (keyboard[SDL_SCANCODE_UP])
+        keys[0][2] = 1;
+    if (keyboard[SDL_SCANCODE_DOWN])
+        keys[0][3] = 1;
+
+
+    if (players > 1) {
+        if (keyboard[SDL_SCANCODE_D])
+            keys[1][0] = 1;
+        if (keyboard[SDL_SCANCODE_A])
+            keys[1][1] = 1;
+        if (keyboard[SDL_SCANCODE_W])
+            keys[1][2] = 1;
+        if (keyboard[SDL_SCANCODE_S])
+            keys[1][3] = 1;
     }
 
-    if(players > 2){
-        if(keyboard[SDL_SCANCODE_H]){
-            tanks[2]->angle -= 2.0*(0.5-keyboard[SDL_SCANCODE_G])*0.0034 * sqrt(players);
-        }
-        if(keyboard[SDL_SCANCODE_F]){
-            tanks[2]->angle += 2.0*(0.5-keyboard[SDL_SCANCODE_G])*0.0034 * sqrt(players);
-        };
-        if(keyboard[SDL_SCANCODE_T]){
-            tanks[2]->x += sqrt(players) * 0.3 * cos(-tanks[2]->angle);
-            tanks[2]->y += sqrt(players) * 0.3 * sin(-tanks[2]->angle);
-        }
-        if(keyboard[SDL_SCANCODE_G]){
-            tanks[2]->x -= sqrt(players) * 0.3 * cos(-tanks[2]->angle);
-            tanks[2]->y -= sqrt(players) * 0.3 * sin(-tanks[2]->angle);
+    if (players > 2) {
+        if (players > 1) {
+            if (keyboard[SDL_SCANCODE_H])
+                keys[2][0] = 1;
+            if (keyboard[SDL_SCANCODE_F])
+                keys[2][1] = 1;
+            if (keyboard[SDL_SCANCODE_T])
+                keys[2][2] = 1;
+            if (keyboard[SDL_SCANCODE_G])
+                keys[2][3] = 1;
         }
     }
 
-    if(players > 3){
-        if(keyboard[SDL_SCANCODE_L]){
-            tanks[3]->angle -= 2.0*(0.5-keyboard[SDL_SCANCODE_K])*0.0034 * sqrt(players);
-        }
-        if(keyboard[SDL_SCANCODE_J]){
-            tanks[3]->angle += 2.0*(0.5-keyboard[SDL_SCANCODE_K])*0.0034 * sqrt(players);
-        };
-        if(keyboard[SDL_SCANCODE_I]){
-            tanks[3]->x += sqrt(players) * 0.3 * cos(-tanks[3]->angle);
-            tanks[3]->y += sqrt(players) * 0.3 * sin(-tanks[3]->angle);
-        }
-        if(keyboard[SDL_SCANCODE_K]){
-            tanks[3]->x -= sqrt(players) * 0.3 * cos(-tanks[3]->angle);
-            tanks[3]->y -= sqrt(players) * 0.3 * sin(-tanks[3]->angle);
+    if (players > 3) {
+        if (players > 1) {
+            if (keyboard[SDL_SCANCODE_L])
+                keys[3][0] = 1;
+            if (keyboard[SDL_SCANCODE_J])
+                keys[3][1] = 1;
+            if (keyboard[SDL_SCANCODE_I])
+                keys[3][2] = 1;
+            if (keyboard[SDL_SCANCODE_K])
+                keys[3][3] = 1;
         }
     }
-//
-//    if(keyboard[SDL_SCANCODE_M]){
-//        fire(t, bullets);
-//    }
 
+    for (int i = 0; i < players; i++) {
+        for (int j = 0; j < 2; ++j) {
+            if (keys[i][j]) {
+                tanks[i]->angle += ((j & 1)-0.5) * 4.0 * (0.5 - keys[i][3]) * 0.0034 * sqrt(players);
+                if (!can_turn(tanks[i], walls, number_of_walls))
+                    tanks[i]->angle -= ((j & 1) - 0.5) * 4.0 * (0.5 - keys[i][3]) * 0.0034 * sqrt(players);
+            }
+
+        }
+        for (int j = 2; j < 4; ++j) {
+            if (keys[i][j]) {
+                tanks[i]->x += (0.5-(j & 1)) * 2.0 * sqrt(players) * 0.3 * cos(-tanks[i]->angle);
+                tanks[i]->y += (0.5-(j & 1)) * 2.0 * sqrt(players) * 0.3 * sin(-tanks[i]->angle);
+                if (!can_go(tanks[i], walls, number_of_walls, !(j & 1), players)) {
+                    tanks[i]->x -= (0.5-(j & 1)) * 2.0 *  sqrt(players) * 0.3 * cos(-tanks[i]->angle);
+                    tanks[i]->y -= (0.5-(j & 1)) * 2.0 *  sqrt(players) * 0.3 * sin(-tanks[i]->angle);
+                }
+            }
+        }
+    }
 }
+
 
 
 int handle_event(Tank** tanks, Bullet_Node** bullets, int n) {
@@ -151,13 +154,12 @@ void add_bullet(Bullet* b, Bullet_Node** bullets) {
     *bullets = new_bull;
 }
 
-
 Tank *init_tank(double ratio, int maxx, int maxy, int k) {
     Tank *t = malloc(sizeof(Tank));
     srand(time(NULL));
     t->x = ratio*(0.65+rand()%(maxx-1));
     t->y = ratio*(0.65+rand()%(maxy-1));
-    t->bullet = 500;
+    t->bullet = 5;
     t->angle = rand();
     t->lenght = 0.4*ratio;
     t->width = 0.35*ratio;

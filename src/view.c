@@ -12,7 +12,7 @@
 #include "view.h"
 #include "structs.h"
 #include "physics.h"
-
+#include "logic.h"
 
 #define black 0,0 ,0, 255
 
@@ -41,46 +41,45 @@ int to_int(char buff[5]) {
     return res;
 }
 
-void show_walls(struct SDL_Renderer * renderer, long long int ** walls, int n){
+void show_walls(struct SDL_Renderer * renderer, Wall ** walls, int n){
     for(int i = 0 ; i<n ; i++)
-        thickLineRGBA(renderer, walls[i][0], walls[i][1], walls[i][2], walls[i][3], 5, black);
+        thickLineRGBA(renderer, walls[i]->pos[0], walls[i]->pos[1], walls[i]->pos[2], walls[i]->pos[3], 5, black);
 }
 
-int max(int a, int b){
-    if(a>b)
-        return a;
-    return b;
-}
 
-double generate_walls(long long int ***walls, int *n, int *maxx, int *maxy) {
+double generate_walls(Wall ***walls, int *n, int *maxx, int *maxy) {
     FILE *file = fopen("/home/amin/Desktop/project/src/mapmap.txt", "r");
     char buff[5] ;
     for(int i = 0 ; i<5 ; i++)
         buff[i] = '\0';
     fscanf(file, "%s", buff);
     *n = to_int(buff);
-    (*walls) = malloc(*n* sizeof(long long*));
+    (*walls) = malloc(*n* sizeof(Wall*));
     for(int i = 0 ; i<*n ; i++)
-        (*walls)[i] = malloc(4*sizeof(long long));
+        (*walls)[i] = malloc(sizeof(Wall));
     for(int i = 0 ; i<*n ; i++){
         for(int j = 0 ; j<4 ;j++){
             for(int k = 0 ; k<5 ; k++)
                 buff[k] = '\0';
             fscanf(file, "%s", buff);
-            (*walls)[i][j] = to_int(buff);
+            (*walls)[i]->pos[j] = to_int(buff);
             if(j & 1)
-                *maxy = max(*maxy, (*walls)[i][j]);
+                *maxy = max(*maxy, (*walls)[i]->pos[j]);
             else
-                *maxx = max(*maxx, (*walls)[i][j]);
+                *maxx = max(*maxx, (*walls)[i]->pos[j]);
 
         }
+        if((*walls)[i]->pos[0] == (*walls)[i]->pos[2])
+            (*walls)[i]->dir = VERTICAL;
+        else
+            (*walls)[i]->dir = HORIZONTAL;
     }
     int max_of_max = max(*maxx, *maxy);
     double ratio = 960.0 / max_of_max;
     for(int i = 0 ; i<*n ; i++)
         for(int j = 0 ; j<4 ; j++){
-            (*walls)[i][j] *= ratio;
-            (*walls)[i][j] += 20;
+            (*walls)[i]->pos[j] *= ratio;
+            (*walls)[i]->pos[j] += 20;
         }
     fclose(file);
     return  ratio;

@@ -51,7 +51,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/amin/Desktop/project
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/amin/Desktop/project/cmake-build-debug
+CMAKE_BINARY_DIR = /home/amin/Desktop/project
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/amin/Desktop/project/cmake-build-debug/CMakeFiles /home/amin/Desktop/project/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/amin/Desktop/project/CMakeFiles /home/amin/Desktop/project/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/amin/Desktop/project/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/amin/Desktop/project/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -122,33 +122,6 @@ project: cmake_check_build_system
 project/fast:
 	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/build
 .PHONY : project/fast
-
-src/alaki.o: src/alaki.c.o
-
-.PHONY : src/alaki.o
-
-# target to build an object file
-src/alaki.c.o:
-	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/src/alaki.c.o
-.PHONY : src/alaki.c.o
-
-src/alaki.i: src/alaki.c.i
-
-.PHONY : src/alaki.i
-
-# target to preprocess a source file
-src/alaki.c.i:
-	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/src/alaki.c.i
-.PHONY : src/alaki.c.i
-
-src/alaki.s: src/alaki.c.s
-
-.PHONY : src/alaki.s
-
-# target to generate assembly for a file
-src/alaki.c.s:
-	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/src/alaki.c.s
-.PHONY : src/alaki.c.s
 
 src/init.o: src/init.c.o
 
@@ -203,60 +176,6 @@ src/logic.s: src/logic.c.s
 src/logic.c.s:
 	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/src/logic.c.s
 .PHONY : src/logic.c.s
-
-src/logical.o: src/logical.c.o
-
-.PHONY : src/logical.o
-
-# target to build an object file
-src/logical.c.o:
-	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/src/logical.c.o
-.PHONY : src/logical.c.o
-
-src/logical.i: src/logical.c.i
-
-.PHONY : src/logical.i
-
-# target to preprocess a source file
-src/logical.c.i:
-	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/src/logical.c.i
-.PHONY : src/logical.c.i
-
-src/logical.s: src/logical.c.s
-
-.PHONY : src/logical.s
-
-# target to generate assembly for a file
-src/logical.c.s:
-	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/src/logical.c.s
-.PHONY : src/logical.c.s
-
-src/logics.o: src/logics.c.o
-
-.PHONY : src/logics.o
-
-# target to build an object file
-src/logics.c.o:
-	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/src/logics.c.o
-.PHONY : src/logics.c.o
-
-src/logics.i: src/logics.c.i
-
-.PHONY : src/logics.i
-
-# target to preprocess a source file
-src/logics.c.i:
-	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/src/logics.c.i
-.PHONY : src/logics.c.i
-
-src/logics.s: src/logics.c.s
-
-.PHONY : src/logics.s
-
-# target to generate assembly for a file
-src/logics.c.s:
-	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/src/logics.c.s
-.PHONY : src/logics.c.s
 
 src/main.o: src/main.c.o
 
@@ -375,21 +294,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... project"
 	@echo "... edit_cache"
-	@echo "... src/alaki.o"
-	@echo "... src/alaki.i"
-	@echo "... src/alaki.s"
 	@echo "... src/init.o"
 	@echo "... src/init.i"
 	@echo "... src/init.s"
 	@echo "... src/logic.o"
 	@echo "... src/logic.i"
 	@echo "... src/logic.s"
-	@echo "... src/logical.o"
-	@echo "... src/logical.i"
-	@echo "... src/logical.s"
-	@echo "... src/logics.o"
-	@echo "... src/logics.i"
-	@echo "... src/logics.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

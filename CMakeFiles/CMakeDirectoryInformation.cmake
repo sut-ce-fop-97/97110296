@@ -3,7 +3,7 @@
 
 # Relative path conversion top directories.
 set(CMAKE_RELATIVE_PATH_TOP_SOURCE "/home/amin/Desktop/project")
-set(CMAKE_RELATIVE_PATH_TOP_BINARY "/home/amin/Desktop/project/cmake-build-debug")
+set(CMAKE_RELATIVE_PATH_TOP_BINARY "/home/amin/Desktop/project")
 
 # Force unix paths in dependencies.
 set(CMAKE_FORCE_UNIX_PATHS 1)

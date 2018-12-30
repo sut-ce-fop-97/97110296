@@ -80,6 +80,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/amin/Desktop/project/src/alaki.c">
+			<Option target="project"/>
+		</Unit>
+		<Unit filename="/home/amin/Desktop/project/src/alaki.h">
+			<Option target="project"/>
+		</Unit>
 		<Unit filename="/home/amin/Desktop/project/src/init.c">
 			<Option target="project"/>
 		</Unit>
@@ -90,6 +96,18 @@
 			<Option target="project"/>
 		</Unit>
 		<Unit filename="/home/amin/Desktop/project/src/logic.h">
+			<Option target="project"/>
+		</Unit>
+		<Unit filename="/home/amin/Desktop/project/src/logical.c">
+			<Option target="project"/>
+		</Unit>
+		<Unit filename="/home/amin/Desktop/project/src/logical.h">
+			<Option target="project"/>
+		</Unit>
+		<Unit filename="/home/amin/Desktop/project/src/logics.c">
+			<Option target="project"/>
+		</Unit>
+		<Unit filename="/home/amin/Desktop/project/src/logics.h">
 			<Option target="project"/>
 		</Unit>
 		<Unit filename="/home/amin/Desktop/project/src/main.c">
