@@ -123,6 +123,33 @@ project/fast:
 	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/build
 .PHONY : project/fast
 
+src/effects.o: src/effects.c.o
+
+.PHONY : src/effects.o
+
+# target to build an object file
+src/effects.c.o:
+	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/src/effects.c.o
+.PHONY : src/effects.c.o
+
+src/effects.i: src/effects.c.i
+
+.PHONY : src/effects.i
+
+# target to preprocess a source file
+src/effects.c.i:
+	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/src/effects.c.i
+.PHONY : src/effects.c.i
+
+src/effects.s: src/effects.c.s
+
+.PHONY : src/effects.s
+
+# target to generate assembly for a file
+src/effects.c.s:
+	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/src/effects.c.s
+.PHONY : src/effects.c.s
+
 src/init.o: src/init.c.o
 
 .PHONY : src/init.o
@@ -294,6 +321,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... project"
 	@echo "... edit_cache"
+	@echo "... src/effects.o"
+	@echo "... src/effects.i"
+	@echo "... src/effects.s"
 	@echo "... src/init.o"
 	@echo "... src/init.i"
 	@echo "... src/init.s"

@@ -59,11 +59,17 @@ typedef struct {
     int count_of_walls;
     int count_of_bullets;
     double maxx, maxy, ratio;
+    int end_time;
 
 }Map;
 
 typedef struct {
     Point p[2];
 }Line;
+
+typedef struct {
+    Uint8* position;
+    Uint32 length;
+}AudioData;
 
 #endif //PROJECT_STRUCTS_H

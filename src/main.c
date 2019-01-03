@@ -9,35 +9,34 @@
 #include <math.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL2_gfxPrimitives.h>
-#include <zconf.h>
 #include "physics.h"
 #include "structs.h"
 #include "view.h"
 #include "init.h"
-
-
+#include "logic.h"
 
 
 int main() {
 
+
+    ///initializing
     Map *map = malloc(sizeof(Map));
     map->players = determine_player_number();
     if(!map->players)
         return 0;
     const float FPS =4/sqrt(map->players);
-    generate_walls(map);
-    map->bullets = NULL;
     map->tanks = malloc(sizeof(Tank*));
     for(int i = 0 ; i<map->players ; i++){
-        map->tanks[i] = init_tank(map, i);
-        sleep(1);
+        map->tanks[i] = malloc(sizeof(Tank));
+        map->tanks[i]->score = 0;
     }
+    start_game(map);
 
 
+    /// SDL startings
     SDL_Init(SDL_INIT_VIDEO);
     SDL_Window* window = SDL_CreateWindow("Alter Tank", SDL_WINDOWPOS_CENTERED , SDL_WINDOWPOS_CENTERED,map->maxx*map->ratio+350, map->maxy*map->ratio+40, SDL_WINDOW_OPENGL);
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    SDL_Surface *s ;
 
     while (handle_event(map)) {
 
@@ -48,6 +47,9 @@ int main() {
 
         ///hamdling keys
         handle_keys(map);
+
+        ///End time
+        check_end(map);
 
 
         ///showings
@@ -64,7 +66,7 @@ int main() {
         while (SDL_GetTicks() - start_ticks < FPS);
     }
 
-    ///terminate windows
+    /// SDL endings
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
 

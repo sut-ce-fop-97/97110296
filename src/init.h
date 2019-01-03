@@ -8,11 +8,10 @@
 #include "structs.h"
 
 static void button_process_event(button_t *btn, const SDL_Event *ev);
-
 static bool button(SDL_Renderer *r, button_t *btn);
-
 int determine_player_number();
-
+Bullet* init_bullet(Tank *t);
+void start_game(Map *map) ;
 
 
 #endif //PROJECT_INIT_H

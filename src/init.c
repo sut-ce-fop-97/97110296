@@ -8,8 +8,12 @@
 #include <SDL_system.h>
 #include <SDL.h>
 #include <SDL2_gfxPrimitives.h>
+#include <zconf.h>
+#include <time.h>
 #include "init.h"
 #include "structs.h"
+#include "view.h"
+#include "physics.h"
 
 
 #define black 0,0 ,0, 255
@@ -157,10 +161,12 @@ int determine_player_number(){
         } else if(state == STATE_IN_GAME) {
             quit = 1;
         }
+        /// TODO error while decommenting this!!
 //        stringRGBA(renderer, 110, 50, "One Player", black);
 //        stringRGBA(renderer, 110, 117, "Two Player", black);
 //        stringRGBA(renderer, 106, 182, "Three Player", black);
 //        stringRGBA(renderer, 108, 250, "Four Player", black);
+
 
         SDL_RenderPresent(renderer);
     }
@@ -171,3 +177,62 @@ int determine_player_number(){
     return res;
 
 }
+
+Bullet* init_bullet(Tank *t) {
+    Bullet* b = malloc(sizeof(Bullet));
+    b->x = t->x + t->barrel_lenght*cos(t->angle);
+    b->y = t->y - t->barrel_lenght*sin(t->angle);
+    b->angle = -t->angle;
+    b->radius = 3;
+    b->life_time = 5000;
+    return b;
+}
+
+Tank *init_tank(Map *map, int k) {
+    Tank *t = map->tanks[k];
+    srand(time(NULL));
+    t->is_alive = true;
+    t->bullet = 5;
+    t->x = map->ratio*(0.65+rand()%((int)map->maxx-1));
+    t->y = map->ratio*(0.65+rand()%((int)map->maxy-1));
+    t->angle = rand();
+    t->lenght = 0.4*map->ratio;
+    t->width = 0.35*map->ratio;
+    t->barrel_lenght = 0.3*map->ratio;
+    t->barrel_thickness = 0.08*map->ratio;
+
+    switch(k){
+        case 0:
+            t->light_color =  255 | (95 << 8) | (66 << 16) | (230 << 24);
+            t->dark_color = 255 | (255 << 24);
+            break;
+        case 1:
+            t->light_color =  66 | (134 << 8) | (244<< 16) | (230 << 24);
+            t->dark_color = 0 | (80 << 8) | (255<< 16) | (230 << 24);
+            break;
+        case 2:
+            t->light_color =  243 | (112 << 8) | (255 << 16) | (230 << 24);
+            t->dark_color = 187 | (0 << 8) | (255 << 16) | (230 << 24);
+            break;
+        case 3:
+            t->light_color =  155 | (255 << 8) | (106 << 16) | (230 << 24);
+            t->dark_color = 0 | (255 << 8) | (38<< 16) | (230 << 24);
+            break;
+    }
+
+    return t;
+}
+
+void start_game(Map *map) {
+    map->end_time = -1;
+    generate_walls(map);
+    map->bullets = NULL;
+    for(int i = 0 ; i<map->players ; i++){
+        map->tanks[i] = init_tank(map, i);
+        sleep(1);
+        ///TODO another random number because of time!
+    }
+
+}
+
+

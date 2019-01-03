@@ -51,6 +51,8 @@
 //}
 
 
+#define red 255, 0, 0 , 255
+
 void show_tank(Tank *t, SDL_Renderer *renderer) {
     double a = t->angle, x = t->x, y = t->y;
     thickLineColor(renderer, x + t->lenght/2 * cos(a), y - t->lenght/2 * sin(a), x - t->lenght/2 * cos(a), y + t->lenght/2 * sin(a), t->width, t->light_color);                                                                         //shasi
@@ -120,8 +122,9 @@ void show_bullet(Map *map, SDL_Renderer *renderer) {
     srand(time(NULL));
     while(b_node != NULL){
         if(b_node->b.life_time == 0){
-            b_node = NULL;
-            return;
+            b_node = b_node->next;
+            /// TODO cut the linked list
+            continue;
         }
         switch (meet_wall(map, b_node->b)){
             case 1:
@@ -138,7 +141,7 @@ void show_bullet(Map *map, SDL_Renderer *renderer) {
         b_node->b.x += 1.2 *cos(b_node->b.angle);
         b_node->b.y += 1.2 *sin(b_node->b.angle);
         if(meet_tank(map, b_node->b)){
-//            b_node->b.life_time = 0;
+            b_node->b.life_time = 0;
             ///todo terminate this bullet
         }
         b_node = b_node->next;
@@ -182,11 +185,17 @@ void show_scores(Map *map, SDL_Renderer *renderer) {
         sprintf(s,"%d",map->tanks[i]->score);
         char ss[30] = "Score: ";
         strcat(ss, s);
-        stringRGBA(renderer, x+80, y-15, ss ,black);
+        if(map->tanks[i]->is_alive)
+            stringRGBA(renderer, x+80, y-15, ss ,black);
+        else
+            stringRGBA(renderer, x+80, y-15, ss ,red);
         char sss[30] = "Bullets: ";
         sprintf(s,"%d",map->tanks[i]->bullet);
         strcat(sss, s);
-        stringRGBA(renderer, x+80, y+10, sss ,black);
+        if(map->tanks[i]->is_alive)
+            stringRGBA(renderer, x+80, y+10, sss ,black);
+        else
+            stringRGBA(renderer, x+80, y+10, sss ,red);
         y += 50+tmp_tank->lenght/2 + tmp_tank->barrel_lenght;
     }
 

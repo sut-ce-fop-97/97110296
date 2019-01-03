@@ -6,6 +6,12 @@
 
 #IncludeRegexTransform: 
 
+/home/amin/Desktop/project/src/effects.h
+
+/home/amin/Desktop/project/src/init.h
+structs.h
+/home/amin/Desktop/project/src/structs.h
+
 /home/amin/Desktop/project/src/logic.c
 logic.h
 /home/amin/Desktop/project/src/logic.h
@@ -13,6 +19,10 @@ structs.h
 /home/amin/Desktop/project/src/structs.h
 physics.h
 /home/amin/Desktop/project/src/physics.h
+init.h
+/home/amin/Desktop/project/src/init.h
+effects.h
+/home/amin/Desktop/project/src/effects.h
 
 /home/amin/Desktop/project/src/logic.h
 stdbool.h

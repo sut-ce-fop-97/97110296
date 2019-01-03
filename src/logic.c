@@ -10,16 +10,9 @@
 
 #include "structs.h"
 #include "physics.h"
+#include "init.h"
+#include "effects.h"
 
-
-//
-//thickLineColor(renderer, x + t->lenght/2 * cos(a), y - t->lenght/2 * sin(a), x - t->lenght/2 * cos(a), y + t->lenght/2 * sin(a), t->width, t->light_color);                                                                         //shasi
-//thickLineColor(renderer, x, y, x + t->barrel_lenght * cos(a), y - t->barrel_lenght * sin(a), t->barrel_thickness, t->dark_color);                                                                                                                 //barrel
-//thickLineColor(renderer, x+t->lenght/2*cos(a)+0.4*t->width*sin(a) , y - t->lenght/2 * sin(a) + 0.4*t->width * cos(a), x - t->lenght/2 * cos(a) + 0.4*t->width * sin(a), y + t->lenght/2 * sin(a) + 0.4*t->width * cos(a), 0.25*t->width, t->dark_color);      //sheni 1
-//thickLineColor(renderer, x+t->lenght/2*cos(a)-0.4*t->width*sin(a) , y - t->lenght/2 * sin(a) - 0.4*t->width * cos(a), x - t->lenght/2 * cos(a) - 0.4*t->width * sin(a), y + t->lenght/2 * sin(a) - 0.4*t->width * cos(a), 0.25*t->width, t->dark_color);      //sheni 2
-//filledCircleColor(renderer, x, y, 0.4*t->width, t->dark_color);                                                                                                                                                                 //circle
-//circleRGBA(renderer, x, y, 0.4*t->width, black);                                                                                                                                                                     //circle border
-//
 
 double min(double a, double b) {
     if(a<b)
@@ -117,9 +110,22 @@ bool is_lefthand(Point p, Line l) {
     return ((l.p[1].x - l.p[0].x)*(p.y-l.p[0].y) - (l.p[1].y-l.p[0].y)*(p.x-l.p[0].x) < 0);
 }
 
+void check_end(Map *map) {
+    if(map->end_time > -1){
+        map->end_time--;
+        if(map->end_time == 0){
+            for(int i = 0 ; i<map->players; i++)
+                if(map->tanks[i]->is_alive)
+                    map->tanks[i]->score++;
+            start_game(map);
+        }
+    }
+}
+
 bool meet_tank(Map *map, Bullet b){
     for(int i = 0 ; i<map->players ; i++){
         Tank *t = map->tanks[i];
+        if(!t->is_alive) continue;
         update_corners(t);
         bool flag = true ;
         for(int j = 0 ; j<5 ; j++){
@@ -138,7 +144,15 @@ bool meet_tank(Map *map, Bullet b){
         }
         if(flag){
             map->tanks[i]->is_alive = false;
-            printf("tank %d murdered!!\n", i+1);
+//            play_sound_effect();
+            /// TODO play sound without delay
+            int c = 0 ;
+            for(int i= 0 ; i<map->players ; i++){
+                if(map->tanks[i]->is_alive)
+                    c++;
+            }
+            if(c  == 1)
+                map->end_time = 1000;
             return 1;
         }
     }
