@@ -6,6 +6,7 @@ CMakeFiles/project.dir/src/init.c.o
  /home/amin/Desktop/project/src/init.h
  /home/amin/Desktop/project/src/structs.h
  /usr/include/SDL2/SDL.h
+ /usr/include/SDL2/SDL2_gfxPrimitives.h
  /usr/include/SDL2/SDL_assert.h
  /usr/include/SDL2/SDL_atomic.h
  /usr/include/SDL2/SDL_audio.h
@@ -52,6 +53,7 @@ CMakeFiles/project.dir/src/init.c.o
 CMakeFiles/project.dir/src/logic.c.o
  /home/amin/Desktop/project/src/logic.c
  /home/amin/Desktop/project/src/logic.h
+ /home/amin/Desktop/project/src/physics.h
  /home/amin/Desktop/project/src/structs.h
 CMakeFiles/project.dir/src/main.c.o
  /home/amin/Desktop/project/src/init.h

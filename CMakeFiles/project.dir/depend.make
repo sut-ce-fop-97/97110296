@@ -5,6 +5,7 @@ CMakeFiles/project.dir/src/init.c.o: src/init.c
 CMakeFiles/project.dir/src/init.c.o: src/init.h
 CMakeFiles/project.dir/src/init.c.o: src/structs.h
 CMakeFiles/project.dir/src/init.c.o: /usr/include/SDL2/SDL.h
+CMakeFiles/project.dir/src/init.c.o: /usr/include/SDL2/SDL2_gfxPrimitives.h
 CMakeFiles/project.dir/src/init.c.o: /usr/include/SDL2/SDL_assert.h
 CMakeFiles/project.dir/src/init.c.o: /usr/include/SDL2/SDL_atomic.h
 CMakeFiles/project.dir/src/init.c.o: /usr/include/SDL2/SDL_audio.h
@@ -51,6 +52,7 @@ CMakeFiles/project.dir/src/init.c.o: /usr/include/SDL2/close_code.h
 
 CMakeFiles/project.dir/src/logic.c.o: src/logic.c
 CMakeFiles/project.dir/src/logic.c.o: src/logic.h
+CMakeFiles/project.dir/src/logic.c.o: src/physics.h
 CMakeFiles/project.dir/src/logic.c.o: src/structs.h
 
 CMakeFiles/project.dir/src/main.c.o: src/init.h

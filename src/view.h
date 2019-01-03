@@ -8,9 +8,9 @@
 #define PROJECT_VIEW_H
 
 void show_tank(Tank *t, SDL_Renderer *pRenderer);
-void show_walls(struct SDL_Renderer * renderer, Wall **walls, int n);
-double generate_walls(Wall ***walls, int *n, int *maxx, int *maxy);
-void show_bullet(Bullet_Node **bullets, SDL_Renderer *renderer, double players);
-void show_scores(Tank **tanks, int n, SDL_Renderer *renderer, double d);
+void show_walls(Map *map, struct SDL_Renderer * renderer);
+void generate_walls(Map *map);
+void show_bullet(Map *map, SDL_Renderer *renderer);
+void show_scores(Map *map, SDL_Renderer *renderer);
 
 #endif //PROJECT_VIEW_H

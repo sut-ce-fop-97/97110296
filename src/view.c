@@ -9,6 +9,8 @@
 #include <math.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL2_gfxPrimitives.h>
+#include <time.h>
+#include <zconf.h>
 #include "view.h"
 #include "structs.h"
 #include "physics.h"
@@ -17,6 +19,36 @@
 #define black 0,0 ,0, 255
 
 
+//Uint32 getpixel(SDL_Surface *surface, int x, int y)
+//{
+//    int bpp = surface->format->BytesPerPixel;
+//    /* Here p is the address to the pixel we want to retrieve */
+//    Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
+//
+//    switch(bpp) {
+//        case 1:
+//            return *p;
+//            break;
+//
+//        case 2:
+//            return *(Uint16 *)p;
+//            break;
+//
+//        case 3:
+//            if(SDL_BYTEORDER == SDL_BIG_ENDIAN)
+//                return p[0] << 16 | p[1] << 8 | p[2];
+//            else
+//                return p[0] | p[1] << 8 | p[2] << 16;
+//            break;
+//
+//        case 4:
+//            return *(Uint32 *)p;
+//            break;
+//
+//        default:
+//            return 0;       /* shouldn't happen, but avoids warnings */
+//    }
+//}
 
 
 void show_tank(Tank *t, SDL_Renderer *renderer) {
@@ -30,7 +62,6 @@ void show_tank(Tank *t, SDL_Renderer *renderer) {
 
 }
 
-
 int to_int(char buff[5]) {
     int res = 0;
     char* it = buff;
@@ -41,71 +72,85 @@ int to_int(char buff[5]) {
     return res;
 }
 
-void show_walls(struct SDL_Renderer * renderer, Wall ** walls, int n){
-    for(int i = 0 ; i<n ; i++)
-        thickLineRGBA(renderer, walls[i]->pos[0], walls[i]->pos[1], walls[i]->pos[2], walls[i]->pos[3], 5, black);
+void show_walls(Map *map, struct SDL_Renderer * renderer){
+    for(int i = 0 ; i<map->count_of_walls ; i++)
+        thickLineRGBA(renderer, map->walls[i]->pos[0], map->walls[i]->pos[1], map->walls[i]->pos[2], map->walls[i]->pos[3], 5, black);
 }
 
-
-double generate_walls(Wall ***walls, int *n, int *maxx, int *maxy) {
+void generate_walls(Map *map) {
     FILE *file = fopen("/home/amin/Desktop/project/src/mapmap.txt", "r");
     char buff[5] ;
     for(int i = 0 ; i<5 ; i++)
         buff[i] = '\0';
     fscanf(file, "%s", buff);
-    *n = to_int(buff);
-    (*walls) = malloc(*n* sizeof(Wall*));
-    for(int i = 0 ; i<*n ; i++)
-        (*walls)[i] = malloc(sizeof(Wall));
-    for(int i = 0 ; i<*n ; i++){
+    map->count_of_walls = to_int(buff);
+    map->walls = malloc(map->count_of_walls* sizeof(Wall*));
+    for(int i = 0 ; i<map->count_of_walls ; i++)
+        map->walls[i] = malloc(sizeof(Wall));
+    for(int i = 0 ; i<map->count_of_walls ; i++){
         for(int j = 0 ; j<4 ;j++){
             for(int k = 0 ; k<5 ; k++)
                 buff[k] = '\0';
             fscanf(file, "%s", buff);
-            (*walls)[i]->pos[j] = to_int(buff);
+            map->walls[i]->pos[j] = to_int(buff);
             if(j & 1)
-                *maxy = max(*maxy, (*walls)[i]->pos[j]);
+                map->maxy = max(map->maxy, map->walls[i]->pos[j]);
             else
-                *maxx = max(*maxx, (*walls)[i]->pos[j]);
+                map->maxx = max(map->maxx, map->walls[i]->pos[j]);
 
         }
-        if((*walls)[i]->pos[0] == (*walls)[i]->pos[2])
-            (*walls)[i]->dir = VERTICAL;
+        if(map->walls[i]->pos[0] == map->walls[i]->pos[2])
+            map->walls[i]->dir = VERTICAL;
         else
-            (*walls)[i]->dir = HORIZONTAL;
+            map->walls[i]->dir = HORIZONTAL;
     }
-    int max_of_max = max(*maxx, *maxy);
+    int max_of_max = max(map->maxx, map->maxy);
     double ratio = 960.0 / max_of_max;
-    for(int i = 0 ; i<*n ; i++)
+    for(int i = 0 ; i<map->count_of_walls ; i++)
         for(int j = 0 ; j<4 ; j++){
-            (*walls)[i]->pos[j] *= ratio;
-            (*walls)[i]->pos[j] += 20;
+            map->walls[i]->pos[j] *= ratio;
+            map->walls[i]->pos[j] += 20;
         }
     fclose(file);
-    return  ratio;
+    map->ratio = ratio;
 }
 
-void show_bullet(Bullet_Node **bullets, SDL_Renderer *renderer, double players) {
-    Bullet_Node *b_node = *bullets;
+void show_bullet(Map *map, SDL_Renderer *renderer) {
+    Bullet_Node *b_node = map->bullets;
+    srand(time(NULL));
     while(b_node != NULL){
         if(b_node->b.life_time == 0){
             b_node = NULL;
             return;
         }
+        switch (meet_wall(map, b_node->b)){
+            case 1:
+                b_node->b.angle *= -1;
+                break;
+            case 2:
+                b_node->b.angle = M_PI - b_node->b.angle;
+                break;
+            default:
+                break;
+        }
         filledCircleRGBA(renderer, (Sint16) b_node->b.x, (Sint16) b_node->b.y, (Sint16) b_node->b.radius, black);
         b_node->b.life_time--;
-        b_node->b.x += sqrt(players) * 0.4*cos(b_node->b.angle);
-        b_node->b.y += sqrt(players) * 0.4*sin(b_node->b.angle);
+        b_node->b.x += 1.2 *cos(b_node->b.angle);
+        b_node->b.y += 1.2 *sin(b_node->b.angle);
+        if(meet_tank(map, b_node->b)){
+//            b_node->b.life_time = 0;
+            ///todo terminate this bullet
+        }
         b_node = b_node->next;
     }
 }
 
-
-void show_scores(Tank **tanks, int n, SDL_Renderer *renderer, double d) {
-    int x = d + 20, y = 160;
-    for(int i = 0 ; i<n ; i++){
+void show_scores(Map *map, SDL_Renderer *renderer) {
+    double d = map->ratio*(map->maxx+1);
+    double x = d + 20, y = 160;
+    for(int i = 0 ; i<map->players ; i++){
         Tank* tmp_tank = malloc(sizeof(Tank));
-        tmp_tank->bullet = tanks[i]->bullet;
+        tmp_tank->bullet = map->tanks[i]->bullet;
         tmp_tank->lenght = 150;
         tmp_tank->width = 125;
         tmp_tank->barrel_lenght = 100;
@@ -132,7 +177,42 @@ void show_scores(Tank **tanks, int n, SDL_Renderer *renderer, double d) {
         tmp_tank->x = x;
         tmp_tank->y = y;
         tmp_tank->angle = M_PI/2;
-        y += 50+tmp_tank->lenght/2 + tmp_tank->barrel_lenght;
         show_tank(tmp_tank, renderer);
+        char s[20] ;
+        sprintf(s,"%d",map->tanks[i]->score);
+        char ss[30] = "Score: ";
+        strcat(ss, s);
+        stringRGBA(renderer, x+80, y-15, ss ,black);
+        char sss[30] = "Bullets: ";
+        sprintf(s,"%d",map->tanks[i]->bullet);
+        strcat(sss, s);
+        stringRGBA(renderer, x+80, y+10, sss ,black);
+        y += 50+tmp_tank->lenght/2 + tmp_tank->barrel_lenght;
+    }
+
+    x = d + 18, y = 158;
+    stringRGBA(renderer, x-3, y-20, "/\\", black);
+    stringRGBA(renderer, x-24,y, "<- / ->", black);
+    stringRGBA(renderer, x-3, y+20, "\\/", black);
+
+    if(map->players>1){
+        y += 225;
+        stringRGBA(renderer, x, y-20, "W", black);
+        stringRGBA(renderer, x-16,y, "A Q D", black);
+        stringRGBA(renderer, x, y+20, "S", black);
+    }
+
+    if(map->players>2){
+        y += 225;
+        stringRGBA(renderer, x, y-20, "T", black);
+        stringRGBA(renderer, x-16,y, "F R H", black);
+        stringRGBA(renderer, x, y+20, "G", black);
+    }
+
+    if(map->players>3){
+        y += 225;
+        stringRGBA(renderer, x, y-20, "I", black);
+        stringRGBA(renderer, x-16,y, "J U L", black);
+        stringRGBA(renderer, x, y+20, "K", black);
     }
 }

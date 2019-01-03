@@ -7,8 +7,12 @@
 #include <stdbool.h>
 #include <SDL_system.h>
 #include <SDL.h>
+#include <SDL2_gfxPrimitives.h>
 #include "init.h"
 #include "structs.h"
+
+
+#define black 0,0 ,0, 255
 
 static void button_process_event(button_t *btn, const SDL_Event *ev) {
     // react on mouse click within button rectangle by setting 'pressed'
@@ -101,10 +105,13 @@ int determine_player_number(){
             button_process_event(&two_player, &evt);
             button_process_event(&three_player, &evt);
             button_process_event(&four_player, &evt);
+
         }
+
 
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
         SDL_RenderClear(renderer);
+
 
 /*//        TTF_Font* Sans = TTF_OpenFont("Sans.ttf", 24); //this opens a font style and sets a size
 
@@ -150,12 +157,17 @@ int determine_player_number(){
         } else if(state == STATE_IN_GAME) {
             quit = 1;
         }
+//        stringRGBA(renderer, 110, 50, "One Player", black);
+//        stringRGBA(renderer, 110, 117, "Two Player", black);
+//        stringRGBA(renderer, 106, 182, "Three Player", black);
+//        stringRGBA(renderer, 108, 250, "Four Player", black);
 
         SDL_RenderPresent(renderer);
     }
 
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
+
     return res;
 
 }
