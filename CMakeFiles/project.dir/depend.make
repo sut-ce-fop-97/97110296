@@ -7,7 +7,9 @@ CMakeFiles/project.dir/src/effects.c.o: src/structs.h
 
 CMakeFiles/project.dir/src/init.c.o: src/init.c
 CMakeFiles/project.dir/src/init.c.o: src/init.h
+CMakeFiles/project.dir/src/init.c.o: src/logic.h
 CMakeFiles/project.dir/src/init.c.o: src/physics.h
+CMakeFiles/project.dir/src/init.c.o: src/stack.h
 CMakeFiles/project.dir/src/init.c.o: src/structs.h
 CMakeFiles/project.dir/src/init.c.o: src/view.h
 CMakeFiles/project.dir/src/init.c.o: /usr/include/SDL2/SDL.h
@@ -62,6 +64,52 @@ CMakeFiles/project.dir/src/logic.c.o: src/logic.c
 CMakeFiles/project.dir/src/logic.c.o: src/logic.h
 CMakeFiles/project.dir/src/logic.c.o: src/physics.h
 CMakeFiles/project.dir/src/logic.c.o: src/structs.h
+CMakeFiles/project.dir/src/logic.c.o: src/view.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL2_gfxPrimitives.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_assert.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_atomic.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_audio.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_blendmode.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_clipboard.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_config.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_cpuinfo.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_endian.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_error.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_events.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_filesystem.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_gamecontroller.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_gesture.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_haptic.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_hints.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_joystick.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_keyboard.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_keycode.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_loadso.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_log.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_main.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_messagebox.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_mouse.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_mutex.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_pixels.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_platform.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_power.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_quit.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_rect.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_render.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_rwops.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_scancode.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_shape.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_stdinc.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_surface.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_system.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_thread.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_timer.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_touch.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_version.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/SDL_video.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/begin_code.h
+CMakeFiles/project.dir/src/logic.c.o: /usr/include/SDL2/close_code.h
 
 CMakeFiles/project.dir/src/main.c.o: src/init.h
 CMakeFiles/project.dir/src/main.c.o: src/logic.h
@@ -100,6 +148,10 @@ CMakeFiles/project.dir/src/physics.c.o: /usr/include/SDL2/begin_code.h
 CMakeFiles/project.dir/src/physics.c.o: /usr/include/SDL2/close_code.h
 
 
+CMakeFiles/project.dir/src/stack.c.o: src/stack.c
+CMakeFiles/project.dir/src/stack.c.o: src/stack.h
+
+CMakeFiles/project.dir/src/view.c.o: src/init.h
 CMakeFiles/project.dir/src/view.c.o: src/logic.h
 CMakeFiles/project.dir/src/view.c.o: src/physics.h
 CMakeFiles/project.dir/src/view.c.o: src/structs.h

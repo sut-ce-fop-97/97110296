@@ -15,6 +15,7 @@
 #include "structs.h"
 #include "physics.h"
 #include "logic.h"
+#include "init.h"
 
 #define black 0,0 ,0, 255
 
@@ -75,46 +76,59 @@ int to_int(char buff[5]) {
 }
 
 void show_walls(Map *map, struct SDL_Renderer * renderer){
+    SDL_Rect rect ;
+    rect.x = 1.*(960-map->ratio*map->maxx)/2 + 20;
+    rect.y = 1.*(960-map->ratio*map->maxy)/2 + 20;
+    rect.h = map->ratio*map->maxy;
+    rect.w = map->ratio*map->maxx;
+    SDL_SetRenderDrawColor(renderer, 230, 230, 230, 255);
+    SDL_RenderFillRect(renderer,&rect);
     for(int i = 0 ; i<map->count_of_walls ; i++)
-        thickLineRGBA(renderer, map->walls[i]->pos[0], map->walls[i]->pos[1], map->walls[i]->pos[2], map->walls[i]->pos[3], 5, black);
+        thickLineRGBA(renderer, map->walls[i]->pos[0], map->walls[i]->pos[1], map->walls[i]->pos[2], map->walls[i]->pos[3], 0.03*map->ratio, black);
 }
 
-void generate_walls(Map *map) {
-    FILE *file = fopen("/home/amin/Desktop/project/src/mapmap.txt", "r");
-    char buff[5] ;
-    for(int i = 0 ; i<5 ; i++)
-        buff[i] = '\0';
-    fscanf(file, "%s", buff);
-    map->count_of_walls = to_int(buff);
-    map->walls = malloc(map->count_of_walls* sizeof(Wall*));
-    for(int i = 0 ; i<map->count_of_walls ; i++)
-        map->walls[i] = malloc(sizeof(Wall));
-    for(int i = 0 ; i<map->count_of_walls ; i++){
-        for(int j = 0 ; j<4 ;j++){
-            for(int k = 0 ; k<5 ; k++)
-                buff[k] = '\0';
-            fscanf(file, "%s", buff);
-            map->walls[i]->pos[j] = to_int(buff);
-            if(j & 1)
-                map->maxy = max(map->maxy, map->walls[i]->pos[j]);
-            else
-                map->maxx = max(map->maxx, map->walls[i]->pos[j]);
-
+void write_to_file(Cell **cells, int n, int m) {
+    FILE *map_prim = fopen("/home/amin/Desktop/project/src/map_prim.txt", "w");
+    int counter = 2;
+    for (int i = 0; i < m; ++i) {
+        int j = 0 ;
+        while(j<n){
+            while(j<n && cells[j][i].access[3])
+                j++;
+            int tmp = j;
+            while(j<n && !cells[j][i].access[3])
+                j++;
+            counter++;
+            if(tmp!=j)
+                fprintf(map_prim, "%d %d %d %d\n", i, tmp, i, j);
         }
-        if(map->walls[i]->pos[0] == map->walls[i]->pos[2])
-            map->walls[i]->dir = VERTICAL;
-        else
-            map->walls[i]->dir = HORIZONTAL;
     }
-    int max_of_max = max(map->maxx, map->maxy);
-    double ratio = 960.0 / max_of_max;
-    for(int i = 0 ; i<map->count_of_walls ; i++)
-        for(int j = 0 ; j<4 ; j++){
-            map->walls[i]->pos[j] *= ratio;
-            map->walls[i]->pos[j] += 20;
+    for (int i = 0; i < n; ++i) {
+        int j = 0;
+        while (j < m) {
+            while (j < m && cells[i][j].access[0])
+                j++;
+            int tmp = j;
+            while (j < m && !cells[i][j].access[0])
+                j++;
+            counter++;
+            if(tmp!=j)
+                fprintf(map_prim, "%d %d %d %d\n", tmp, i, j, i);
         }
-    fclose(file);
-    map->ratio = ratio;
+    }
+    fprintf(map_prim, "%d 0 %d %d\n",  m,m,n );
+    fprintf(map_prim, "0 %d %d %d\n",  n,m,n );
+
+    char ch;
+    FILE *map = fopen("/home/amin/Desktop/project/src/map.txt", "w");
+    fprintf(map, "%d\n", counter);
+    fclose(map_prim);
+    map_prim = fopen("/home/amin/Desktop/project/src/map_prim.txt", "r");
+    while( ( ch = fgetc(map_prim) ) != EOF )
+        fputc(ch, map);
+    remove("/home/amin/Desktop/project/src/map_prim.txt");
+    fclose(map);
+    fclose(map_prim);
 }
 
 void show_bullet(Map *map, SDL_Renderer *renderer) {
@@ -149,16 +163,21 @@ void show_bullet(Map *map, SDL_Renderer *renderer) {
 }
 
 void show_scores(Map *map, SDL_Renderer *renderer) {
-    double d = map->ratio*(map->maxx+1);
-    double x = d + 20, y = 160;
+    SDL_Rect rect;
+    rect.x = 1000;
+    rect.y = 0;
+    rect.h = 1040;
+    rect.w = 2000;
+    SDL_SetRenderDrawColor(renderer, 89, 190, 255, 255);
+    SDL_RenderFillRect(renderer,&rect);
+    double x = 1120, y = 160;
     for(int i = 0 ; i<map->players ; i++){
         Tank* tmp_tank = malloc(sizeof(Tank));
         tmp_tank->bullet = map->tanks[i]->bullet;
         tmp_tank->lenght = 150;
         tmp_tank->width = 125;
         tmp_tank->barrel_lenght = 100;
-        tmp_tank->barrel_thickness = 20;
-
+        tmp_tank->barrel_thickness = 25;
         switch(i){
             case 0:
                 tmp_tank->light_color =  255 | (95 << 8) | (66 << 16) | (255 << 24);
@@ -199,7 +218,7 @@ void show_scores(Map *map, SDL_Renderer *renderer) {
         y += 50+tmp_tank->lenght/2 + tmp_tank->barrel_lenght;
     }
 
-    x = d + 18, y = 158;
+    x = 1118, y = 158;
     stringRGBA(renderer, x-3, y-20, "/\\", black);
     stringRGBA(renderer, x-24,y, "<- / ->", black);
     stringRGBA(renderer, x-3, y+20, "\\/", black);

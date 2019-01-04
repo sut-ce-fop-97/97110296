@@ -9,6 +9,7 @@
 #include <math.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL2_gfxPrimitives.h>
+#include <time.h>
 #include "physics.h"
 #include "structs.h"
 #include "view.h"
@@ -17,7 +18,6 @@
 
 
 int main() {
-
 
     ///initializing
     Map *map = malloc(sizeof(Map));
@@ -30,36 +30,41 @@ int main() {
         map->tanks[i] = malloc(sizeof(Tank));
         map->tanks[i]->score = 0;
     }
-    start_game(map);
 
 
     /// SDL startings
     SDL_Init(SDL_INIT_VIDEO);
-    SDL_Window* window = SDL_CreateWindow("Alter Tank", SDL_WINDOWPOS_CENTERED , SDL_WINDOWPOS_CENTERED,map->maxx*map->ratio+350, map->maxy*map->ratio+40, SDL_WINDOW_OPENGL);
-    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+
+    SDL_Window *window = SDL_CreateWindow("Alter Tank", SDL_WINDOWPOS_CENTERED , SDL_WINDOWPOS_CENTERED, 1325, 1000, SDL_WINDOW_OPENGL);
+    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+
+
+    start_game(map, window, &renderer);
 
     while (handle_event(map)) {
 
         ///seting renderer
         int start_ticks = SDL_GetTicks();
-        SDL_SetRenderDrawColor(renderer, 255 , 255, 255, 255);
+        SDL_SetRenderDrawColor(renderer, 206, 239, 255, 255);
         SDL_RenderClear(renderer);
 
         ///hamdling keys
         handle_keys(map);
 
         ///End time
-        check_end(map);
+        check_end(map, &renderer, window);
 
 
         ///showings
+        show_walls(map, renderer);
         for(int i = 0 ; i<map->players ; i++)
             if(map->tanks[i]->is_alive)
                 show_tank(map->tanks[i], renderer);
-        show_walls(map, renderer);
         show_scores(map , renderer);
         if(map->bullets != NULL)
             show_bullet(map, renderer);
+
+
 
         ///present render
         SDL_RenderPresent(renderer);
@@ -69,6 +74,7 @@ int main() {
     /// SDL endings
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
+    SDL_Quit();
 
     return 0;
 }

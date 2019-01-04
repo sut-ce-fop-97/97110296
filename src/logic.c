@@ -2,6 +2,8 @@
 // Created by amin on 12/25/18.
 //
 
+#include <SDL2_gfxPrimitives.h>
+#include <zconf.h>
 #include "logic.h"
 
 
@@ -12,7 +14,10 @@
 #include "physics.h"
 #include "init.h"
 #include "effects.h"
+#include "view.h"
 
+
+#define black 0, 0, 0, 255
 
 double min(double a, double b) {
     if(a<b)
@@ -27,58 +32,77 @@ double max(double a, double b){
     return b;
 }
 
-bool collide(Wall *wall, double x, double y, double radius, double tank_width) {
+bool is_lefthand(Point p, Line l) {
+    return ((l.p[1].x - l.p[0].x)*(p.y-l.p[0].y) - (l.p[1].y-l.p[0].y)*(p.x-l.p[0].x) < 0);
+}
+
+bool is_inside(Point p, Tank *t) {
+    for(int i = 0 ; i<5 ; i++){
+        Line l;
+        l.p[0].x = t->corners[i].x;
+        l.p[0].y = t->corners[i].y;
+        l.p[1].x = t->corners[(i+1)%5].x;
+        l.p[1].y = t->corners[(i+1)%5].y;
+        if(is_lefthand(p, l))
+            return false;
+    }
+    return true;
+}
+
+bool collide(Wall *wall, double x, double y, double radius, Tank *t) {
+    Point p1,p2;
+    p1.x = wall->pos[0];
+    p1.y = wall->pos[1];
+    p2.x = wall->pos[2];
+    p2.y = wall->pos[3];
     if (wall->dir == HORIZONTAL) {
-        if (x > min(wall->pos[0], wall->pos[2]) && x < max(wall->pos[0], wall->pos[2]) &&
-            abs(y - wall->pos[3]) < radius)
+        if (x > min(wall->pos[0], wall->pos[2]) && x < max(wall->pos[0], wall->pos[2]) && abs(y - wall->pos[3]) < radius)
             return 1;
-        if (abs(wall->pos[3] - y) < tank_width / 8 &&
-            min(abs(wall->pos[0] - x), abs(wall->pos[2] - x)) < tank_width / 32)
+        if(is_inside(p1, t) || is_inside(p2, t))
             return 1;
     } else {
-        if (y > min(wall->pos[1], wall->pos[3]) && y < max(wall->pos[1], wall->pos[3]) &&
-               abs(x - wall->pos[0]) < radius)
-        return 1;
-
-    if (abs(wall->pos[0] - x) < tank_width / 2 && min(abs(wall->pos[1] - y), abs(wall->pos[3] - y)) < tank_width / 32)
-        return 1;
+        if (y > min(wall->pos[1], wall->pos[3]) && y < max(wall->pos[1], wall->pos[3]) && abs(x - wall->pos[0]) < radius)
+            return 1;
+        if(is_inside(p1, t) || is_inside(p2, t))
+            return 1;
     }
-
 
     return 0;
 }
 
 bool can_go(Map *map, int player_number, int dir) {
-    double x = map->tanks[player_number]->x, y = map->tanks[player_number]->y, radius = 1.5;
-    update_corners(map->tanks[player_number]);
+    double radius = 0.01;
+    for(int i = 0 ; i<map->players ;i++)
+        update_corners(map->tanks[i]);
     for(int i = 0 ; i<map->count_of_walls ; i++){
-        if(dir) {
-            if (collide(map->walls[i],map->tanks[player_number]->corners[1].x ,map->tanks[player_number]->corners[1].y, radius, map->tanks[player_number]->width)          //head-right
-                || collide(map->walls[i], map->tanks[player_number]->corners[4].x, map->tanks[player_number]->corners[4].y, 5, map->tanks[player_number]->width)           //head-left
-                || collide(map->walls[i], map->tanks[player_number]->corners[0].x, map->tanks[player_number]->corners[0].y, radius, map->tanks[player_number]->width)      //barrel
-                || collide(map->walls[i], x, y, map->tanks[player_number]->width * 0.65, map->tanks[player_number]->width))                                                 //center                                       //center
+        for(int j = dir ; j<3+2*(dir&1) ;j++) {
+            Point p;
+            p.x = map->tanks[player_number]->corners[j].x;
+            p.y = map->tanks[player_number]->corners[j].y;
+            if (collide(map->walls[i], p.x, p.y, radius, map->tanks[player_number]))
                 return 0;
+            for (int k = 0; k < map->players; k++)
+                if (k != player_number && map->tanks[k]->is_alive && is_inside(p, map->tanks[k]))
+                    return 0;
         }
-        else if(collide(map->walls[i], map->tanks[player_number]->corners[2].x , map->tanks[player_number]->corners[2].y, radius, map->tanks[player_number]->width)   //tail-right
-           || collide(map->walls[i], map->tanks[player_number]->corners[3].x, map->tanks[player_number]->corners[3].y, radius, map->tanks[player_number]->width)      //tail-left
-              || collide(map->walls[i], x, y, map->tanks[player_number]->width * 0.65, map->tanks[player_number]->width))                                             //center
-                return 0;
-
     }
     return 1;
 }
 
 bool can_turn(Map *map , int player_number) {
     update_corners(map->tanks[player_number]);
-    double x = map->tanks[player_number]->x, y = map->tanks[player_number]->y, a = map->tanks[player_number]->angle, radius = 0.5;
+    double x = map->tanks[player_number]->x, y = map->tanks[player_number]->y, a = map->tanks[player_number]->angle, radius = 0.01;
     for(int i = 0 ; i<map->count_of_walls ; i++){
-        if (collide(map->walls[i], map->tanks[player_number]->corners[1].x, map->tanks[player_number]->corners[1].y, radius, 0)                         //head-right
-            || collide(map->walls[i], map->tanks[player_number]->corners[4].x, map->tanks[player_number]->corners[4].y, radius, 0)                      //head-left
-            || collide(map->walls[i], x + map->tanks[player_number]->barrel_lenght * cos(a), y - map->tanks[player_number]->barrel_lenght * sin(a), 1, 0)
-            || collide(map->walls[i], map->tanks[player_number]->corners[2].x, map->tanks[player_number]->corners[2].y, radius, 0)   //tail-right
-            || collide(map->walls[i], map->tanks[player_number]->corners[3].x, map->tanks[player_number]->corners[3].y, radius, 0) //tail-left
-            || collide(map->walls[i], x, y, map->tanks[player_number]->lenght / 2, 0))
+        for(int j = 0 ; j<5 ;j++) {
+            Point p;
+            p.x = map->tanks[player_number]->corners[j].x;
+            p.y = map->tanks[player_number]->corners[j].y;
+            if (collide(map->walls[i], p.x, p.y, radius, map->tanks[player_number]))
                 return 0;
+            for (int k = 0; k < map->players; k++)
+                if (k != player_number && map->tanks[k]->is_alive && is_inside(p, map->tanks[k]))
+                    return 0;
+        }
     }
     return 1;
 }
@@ -106,45 +130,73 @@ int meet_wall(Map *map, Bullet b) {
     return  0;
 }
 
-bool is_lefthand(Point p, Line l) {
-    return ((l.p[1].x - l.p[0].x)*(p.y-l.p[0].y) - (l.p[1].y-l.p[0].y)*(p.x-l.p[0].x) < 0);
-}
 
-void check_end(Map *map) {
-    if(map->end_time > -1){
-        map->end_time--;
-        if(map->end_time == 0){
-            for(int i = 0 ; i<map->players; i++)
-                if(map->tanks[i]->is_alive)
-                    map->tanks[i]->score++;
-            start_game(map);
-        }
+
+int check_end(Map *map, SDL_Renderer **renderer, SDL_Window *window) {
+    if(map->end_time != 0){
+        if(map->end_time > 0)
+            map->end_time--;
+        return 0;
     }
+    int winner = -1;
+    for(int i = 0 ; i<map->players; i++)
+        if(map->tanks[i]->is_alive){
+            winner = i;
+            map->tanks[i]->score++;
+        }
+
+
+    double midx = 1325/2 ,midy =500;
+
+    if(winner>-1){
+        for (int i = 0; i < 2; ++i) {
+            SDL_SetRenderDrawColor(*renderer, 163, 255, 201, 255);
+            SDL_RenderClear(*renderer);
+            Tank *tmp_tank = map->tanks[winner];
+            tmp_tank->angle = M_PI/2;
+            tmp_tank->lenght = 300;
+            tmp_tank->width = 250;
+            tmp_tank->barrel_lenght = 200;
+            tmp_tank->barrel_thickness = 40;
+            tmp_tank-> y = midy;
+            tmp_tank->x = midx-20;
+            show_tank(tmp_tank, *renderer);
+            stringRGBA(*renderer, midx+tmp_tank->width/2, midy-10, "You won.", black);
+            char s[20] ;
+            sprintf(s,"%d",tmp_tank->score+i-1);
+            char ss[30] = "Score: ";
+            strcat(ss, s);
+            stringRGBA(*renderer, midx+tmp_tank->width/2, midy + 10, ss, black);
+            SDL_RenderPresent(*renderer);
+            SDL_Delay(1000+500*i);
+        }
+    } else {
+        SDL_SetRenderDrawColor(*renderer, 255, 175, 175, 255);
+        SDL_RenderClear(*renderer);
+        stringRGBA(*renderer, midx, midy, "Nobody won.", black);
+        SDL_RenderPresent(*renderer);
+        SDL_Delay(1500);
+    }
+
+//
+//    SDL_DestroyRenderer(*renderer);
+//    SDL_DestroyWindow(window);
+//    SDL_Quit();
+    
+    start_game(map,window, renderer);
 }
 
 bool meet_tank(Map *map, Bullet b){
+    Point p;
+    p.x = b.x;
+    p.y = b.y;
     for(int i = 0 ; i<map->players ; i++){
         Tank *t = map->tanks[i];
         if(!t->is_alive) continue;
         update_corners(t);
-        bool flag = true ;
-        for(int j = 0 ; j<5 ; j++){
-            Point p;
-            p.x = b.x;
-            p.y = b.y;
-            Line l;
-            l.p[0].x = t->corners[j].x;
-            l.p[0].y = t->corners[j].y;
-            l.p[1].x = t->corners[(j+1)%5].x;
-            l.p[1].y = t->corners[(j+1)%5].y;
-            if(is_lefthand(p, l)){
-                flag = false;
-                break;
-            }
-        }
-        if(flag){
+        if(is_inside(p, t)){
             map->tanks[i]->is_alive = false;
-//            play_sound_effect();
+            play_sound_effect();
             /// TODO play sound without delay
             int c = 0 ;
             for(int i= 0 ; i<map->players ; i++){

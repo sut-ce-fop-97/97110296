@@ -10,13 +10,13 @@
 #include "init.h"
 
 
-void fire(Tank *t, Bullet_Node **bullets) {
+void fire(Tank *t, Bullet_Node **bullets, double ratio) {
     if (!t->bullet) {
         printf("%d bullet available.\n", t->bullet);
         return;
     }
     t->bullet--;
-    add_bullet(init_bullet(t), bullets);
+    add_bullet(init_bullet(t , ratio), bullets);
 }
 
 void handle_keys(Map *map) {
@@ -79,7 +79,8 @@ void handle_keys(Map *map) {
                 if (keys[i][j]) {
                     map->tanks[i]->x += (0.5-(j & 1)) * 2.0 * cos(-map->tanks[i]->angle);
                     map->tanks[i]->y += (0.5-(j & 1)) * 2.0 * sin(-map->tanks[i]->angle);
-                    if (!can_go(map , i , !(j & 1))) {
+                    int tmp = (!(j & 1) ? 0 : 3);
+                    if (!can_go(map , i , tmp)) {
                         map->tanks[i]->x -= (0.5-(j & 1)) * 2.0 * cos(-map->tanks[i]->angle);
                         map->tanks[i]->y -= (0.5-(j & 1)) * 2.0 * sin(-map->tanks[i]->angle);
                     }
@@ -97,13 +98,13 @@ int handle_event(Map *map) {
         }
         if(event.type == SDL_KEYUP ){
             if(event.key.keysym.sym == SDLK_SLASH && map->tanks[0]->is_alive)
-                fire(map->tanks[0], &map->bullets);
+                fire(map->tanks[0], &map->bullets, map->ratio);
             if(map->players>1 && event.key.keysym.scancode == SDL_SCANCODE_Q && map->tanks[1]->is_alive)
-                fire(map->tanks[1], &map->bullets);
+                fire(map->tanks[1], &map->bullets, map->ratio);
             if(map->players>2 && event.key.keysym.scancode == SDL_SCANCODE_R && map->tanks[2]->is_alive)
-                fire(map->tanks[2], &map->bullets);
+                fire(map->tanks[2], &map->bullets, map->ratio);
             if(map->players>3 && event.key.keysym.scancode == SDL_SCANCODE_U && map->tanks[3]->is_alive)
-                fire(map->tanks[3], &map->bullets);
+                fire(map->tanks[3], &map->bullets, map->ratio);
 
 
 
@@ -127,15 +128,15 @@ void add_bullet(Bullet *b, Bullet_Node **bullets) {
 
 void update_corners(Tank *t){
     double a = t->angle, y = t->y , x = t->x;
-    t->corners[0].x = x + t->barrel_lenght * cos(a);
-    t->corners[0].y = y - t->barrel_lenght * sin(a);
-    t->corners[1].x =  x + (t->lenght / 2) * cos(a) + (t->width / 2) * sin(a);
-    t->corners[1].y = y - (t->lenght / 2) * sin(a) + (t->width / 2) * cos(a);
-    t->corners[2].x = x - t->lenght / 2 * cos(a) + t->width / 2 * sin(a);
-    t->corners[2].y = y + t->lenght / 2 * sin(a) + t->width / 2 * cos(a);
-    t->corners[3].x = x - t->lenght / 2 * cos(a) - t->width / 2 * sin(a);
-    t->corners[3].y = y + t->lenght / 2 * sin(a) - t->width / 2 * cos(a);
-    t->corners[4].x = x + (t->lenght / 2) * cos(a) - (t->width / 2) * sin(a);
-    t->corners[4].y = y - (t->lenght / 2) * sin(a) - (t->width / 2) * cos(a);
+    t->corners[0].x = x + (t->lenght / 2) * cos(a) - (t->width / 2) * sin(a);
+    t->corners[0].y = y - (t->lenght / 2) * sin(a) - (t->width / 2) * cos(a);
+    t->corners[1].x = x + t->barrel_lenght * cos(a);
+    t->corners[1].y = y - t->barrel_lenght * sin(a);
+    t->corners[2].x =  x + (t->lenght / 2) * cos(a) + (t->width / 2) * sin(a);
+    t->corners[2].y = y - (t->lenght / 2) * sin(a) + (t->width / 2) * cos(a);
+    t->corners[3].x = x - t->lenght / 2 * cos(a) + t->width / 2 * sin(a);
+    t->corners[3].y = y + t->lenght / 2 * sin(a) + t->width / 2 * cos(a);
+    t->corners[4].x = x - t->lenght / 2 * cos(a) - t->width / 2 * sin(a);
+    t->corners[4].y = y + t->lenght / 2 * sin(a) - t->width / 2 * cos(a);
 }
 

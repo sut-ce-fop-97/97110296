@@ -14,6 +14,6 @@ bool can_go(Map *map, int player_number, int dir);
 bool can_turn(Map *map, int player_number);
 int meet_wall(Map *map, Bullet b);
 bool meet_tank(Map *map, Bullet b);
-void check_end(Map *map);
+int check_end(Map *map, SDL_Renderer **renderer, SDL_Window *window);
 
 #endif //PROJECT_LOGIC_H

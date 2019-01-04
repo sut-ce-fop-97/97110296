@@ -72,4 +72,9 @@ typedef struct {
     Uint32 length;
 }AudioData;
 
+typedef struct {
+    bool checked;
+    int access[4];
+} Cell;
+
 #endif //PROJECT_STRUCTS_H
