@@ -55,12 +55,13 @@ typedef struct {
     Tank **tanks;
     Wall **walls;
     Bullet_Node *bullets;
+    int round;
     int players;
     int count_of_walls;
     int count_of_bullets;
     double maxx, maxy, ratio;
     int end_time;
-
+    bool ai_mode;
 }Map;
 
 typedef struct {

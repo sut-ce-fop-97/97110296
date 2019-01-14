@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/clion/57/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /snap/clion/58/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /snap/clion/57/bin/cmake/linux/bin/cmake -E remove -f
+RM = /snap/clion/58/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/amin/Desktop/project
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/snap/clion/57/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/snap/clion/58/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/snap/clion/57/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/snap/clion/58/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -122,6 +122,33 @@ project: cmake_check_build_system
 project/fast:
 	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/build
 .PHONY : project/fast
+
+src/AI.o: src/AI.c.o
+
+.PHONY : src/AI.o
+
+# target to build an object file
+src/AI.c.o:
+	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/src/AI.c.o
+.PHONY : src/AI.c.o
+
+src/AI.i: src/AI.c.i
+
+.PHONY : src/AI.i
+
+# target to preprocess a source file
+src/AI.c.i:
+	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/src/AI.c.i
+.PHONY : src/AI.c.i
+
+src/AI.s: src/AI.c.s
+
+.PHONY : src/AI.s
+
+# target to generate assembly for a file
+src/AI.c.s:
+	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/src/AI.c.s
+.PHONY : src/AI.c.s
 
 src/effects.o: src/effects.c.o
 
@@ -348,6 +375,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... project"
 	@echo "... edit_cache"
+	@echo "... src/AI.o"
+	@echo "... src/AI.i"
+	@echo "... src/AI.s"
 	@echo "... src/effects.o"
 	@echo "... src/effects.i"
 	@echo "... src/effects.s"

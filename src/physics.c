@@ -93,7 +93,9 @@ void handle_keys(Map *map) {
 int handle_event(Map *map) {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
-        if (event.type == SDL_QUIT) {
+        if(event.type == SDL_QUIT ||
+           (event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_CLOSE) ||
+           (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)) {
             return 0;
         }
         if(event.type == SDL_KEYUP ){
@@ -139,4 +141,6 @@ void update_corners(Tank *t){
     t->corners[4].x = x - t->lenght / 2 * cos(a) - t->width / 2 * sin(a);
     t->corners[4].y = y + t->lenght / 2 * sin(a) - t->width / 2 * cos(a);
 }
+
+
 

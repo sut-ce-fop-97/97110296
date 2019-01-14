@@ -81,10 +81,10 @@ void show_walls(Map *map, struct SDL_Renderer * renderer){
     rect.y = 1.*(960-map->ratio*map->maxy)/2 + 20;
     rect.h = map->ratio*map->maxy;
     rect.w = map->ratio*map->maxx;
-    SDL_SetRenderDrawColor(renderer, 230, 230, 230, 255);
+    SDL_SetRenderDrawColor(renderer, 160, 207, 255, 255);
     SDL_RenderFillRect(renderer,&rect);
     for(int i = 0 ; i<map->count_of_walls ; i++)
-        thickLineRGBA(renderer, map->walls[i]->pos[0], map->walls[i]->pos[1], map->walls[i]->pos[2], map->walls[i]->pos[3], 0.03*map->ratio, black);
+        thickLineRGBA(renderer, map->walls[i]->pos[0], map->walls[i]->pos[1], map->walls[i]->pos[2], map->walls[i]->pos[3], 0.03*map->ratio, 0, 41, 102, 255);
 }
 
 void write_to_file(Cell **cells, int n, int m) {
@@ -170,6 +170,9 @@ void show_scores(Map *map, SDL_Renderer *renderer) {
     rect.w = 2000;
     SDL_SetRenderDrawColor(renderer, 89, 190, 255, 255);
     SDL_RenderFillRect(renderer,&rect);
+    char s[20] ;
+    sprintf(s, "Round noumber: %d", map->round);
+    stringRGBA(renderer, 1105, 20, s, 0, 33, 168, 255);
     double x = 1120, y = 160;
     for(int i = 0 ; i<map->players ; i++){
         Tank* tmp_tank = malloc(sizeof(Tank));
@@ -184,8 +187,13 @@ void show_scores(Map *map, SDL_Renderer *renderer) {
                 tmp_tank->dark_color = 255 | (255 << 24);
                 break;
             case 1:
-                tmp_tank->light_color =  66 | (134 << 8) | (244<< 16) | (255 << 24);
-                tmp_tank->dark_color = 0 | (80 << 8) | (255<< 16) | (255 << 24);
+                if(map->ai_mode){
+                    tmp_tank->light_color =  100 | (100 << 8) | (100<< 16) | (255 << 24);
+                    tmp_tank->dark_color = 50 | (50 << 8) | (50<< 16) | (255 << 24);
+                } else{
+                    tmp_tank->light_color =  66 | (134 << 8) | (244<< 16) | (255 << 24);
+                    tmp_tank->dark_color = 0 | (80 << 8) | (255<< 16) | (255 << 24);
+                }
                 break;
             case 2:
                 tmp_tank->light_color =  243 | (112 << 8) | (255 << 16) | (255 << 24);
@@ -200,21 +208,18 @@ void show_scores(Map *map, SDL_Renderer *renderer) {
         tmp_tank->y = y;
         tmp_tank->angle = M_PI/2;
         show_tank(tmp_tank, renderer);
-        char s[20] ;
-        sprintf(s,"%d",map->tanks[i]->score);
-        char ss[30] = "Score: ";
-        strcat(ss, s);
+        *s = '\0';
+        sprintf(s,"%s%d","Score: ",map->tanks[i]->score);
         if(map->tanks[i]->is_alive)
-            stringRGBA(renderer, x+80, y-15, ss ,black);
+            stringRGBA(renderer, x+80, y-15, s ,black);
         else
-            stringRGBA(renderer, x+80, y-15, ss ,red);
-        char sss[30] = "Bullets: ";
-        sprintf(s,"%d",map->tanks[i]->bullet);
-        strcat(sss, s);
+            stringRGBA(renderer, x+80, y-15, s ,red);
+        *s = '\0';
+        sprintf(s,"%s%d","Bullets: ",map->tanks[i]->bullet);
         if(map->tanks[i]->is_alive)
-            stringRGBA(renderer, x+80, y+10, sss ,black);
+            stringRGBA(renderer, x+80, y+10, s ,black);
         else
-            stringRGBA(renderer, x+80, y+10, sss ,red);
+            stringRGBA(renderer, x+80, y+10, s ,red);
         y += 50+tmp_tank->lenght/2 + tmp_tank->barrel_lenght;
     }
 
@@ -223,7 +228,7 @@ void show_scores(Map *map, SDL_Renderer *renderer) {
     stringRGBA(renderer, x-24,y, "<- / ->", black);
     stringRGBA(renderer, x-3, y+20, "\\/", black);
 
-    if(map->players>1){
+    if(!map->ai_mode && map->players>1){
         y += 225;
         stringRGBA(renderer, x, y-20, "W", black);
         stringRGBA(renderer, x-16,y, "A Q D", black);

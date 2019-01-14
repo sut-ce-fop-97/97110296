@@ -17,26 +17,35 @@
 #include "logic.h"
 
 
+
+
 int main() {
+
+
+
+    /// SDL startings
+    SDL_Init(SDL_INIT_VIDEO);
+    SDL_Window *window = SDL_CreateWindow("Alter Tank", SDL_WINDOWPOS_CENTERED , SDL_WINDOWPOS_CENTERED, 1325, 1000, SDL_WINDOW_OPENGL);
+    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+
 
     ///initializing
     Map *map = malloc(sizeof(Map));
-    map->players = determine_player_number();
+    map->players = determine_player_number(window, renderer);
+    map->round = 0;
     if(!map->players)
         return 0;
-    const float FPS =4/sqrt(map->players);
+    if(map->ai_mode = map->players == 1)
+        map->players = 2;
     map->tanks = malloc(sizeof(Tank*));
     for(int i = 0 ; i<map->players ; i++){
         map->tanks[i] = malloc(sizeof(Tank));
         map->tanks[i]->score = 0;
     }
+    const float FPS =4/sqrt(map->players);
 
 
-    /// SDL startings
-    SDL_Init(SDL_INIT_VIDEO);
 
-    SDL_Window *window = SDL_CreateWindow("Alter Tank", SDL_WINDOWPOS_CENTERED , SDL_WINDOWPOS_CENTERED, 1325, 1000, SDL_WINDOW_OPENGL);
-    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
 
     start_game(map, window, &renderer);
@@ -48,8 +57,10 @@ int main() {
         SDL_SetRenderDrawColor(renderer, 206, 239, 255, 255);
         SDL_RenderClear(renderer);
 
-        ///hamdling keys
+        ///handling keys
         handle_keys(map);
+        if(map->ai_mode && map->tanks[1]->is_alive)
+            go_ai(map);
 
         ///End time
         check_end(map, &renderer, window);

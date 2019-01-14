@@ -38,6 +38,8 @@ static bool button(SDL_Renderer *r, button_t *btn) {
     // draw button
     SDL_SetRenderDrawColor(r, btn->colour.r, btn->colour.g, btn->colour.b, btn->colour.a);
     SDL_RenderFillRect(r, &btn->draw_rect);
+    SDL_SetRenderDrawColor(r, 0, 0, 0, 255);
+    SDL_RenderDrawRect(r, &btn->draw_rect);
 
     // if button press detected - reset it so it wouldn't trigger twice
     if(btn->pressed) {
@@ -47,60 +49,60 @@ static bool button(SDL_Renderer *r, button_t *btn) {
     return false;
 }
 
-int determine_player_number(){
+int determine_player_number(SDL_Window *pWindow, SDL_Renderer *pRenderer) {
+
+    // varriables
     int res = 0;
     int quit = 0;
-    SDL_Init(SDL_INIT_VIDEO);
-    SDL_Window* window = SDL_CreateWindow("Choose number of players",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED, 300, 300,SDL_WINDOW_OPENGL);
-
-    if (window == NULL){
-        fprintf(stderr, "create window failed: %s\n", SDL_GetError());
-        return 1;   // 'error' return status is !0. 1 is good enough
-    }
-
-    SDL_Renderer* renderer = NULL;
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    if(!renderer) {   // renderer creation may fail too
-        fprintf(stderr, "create renderer failed: %s\n", SDL_GetError());
-        return 1;
-    }
-
-    SDL_Rect rct;
-    rct.x = 0 ;
-    rct.y = 0;
-    rct.h = 500;
-    rct.w = 800;
-
-    // button state - colour and rectangle
-    button_t one_player = {
-            .colour = { .r = 251, .g = 255, .b = 25, .a = 255 },
-            .draw_rect = { .x = 20, .y = 20, .w = 260, .h = 63 },
-    };
-
-    button_t two_player = {
-            .colour = { .r = 255, .g = 192, .b = 35, .a = 255 },
-            .draw_rect = { .x = 20, .y = 87, .w = 260, .h = 63 },
-    };
-    button_t three_player = {
-            .colour = { .r = 255, .g = 145, .b = 34, .a = 255 },
-            .draw_rect = { .x = 20, .y = 154, .w = 260, .h = 63 },
-    };
-    button_t four_player = {
-            .colour = { .r = 255, .g = 85, .b = 33, .a = 255 },
-            .draw_rect = { .x = 20, .y = 221, .w = 260, .h = 63 },
-    };
-
     enum {
         STATE_IN_MENU,
         STATE_IN_GAME,
     } state = 0;
 
-    while(!quit) {
-        SDL_Event evt;    // no need for new/delete, stack is fine
+    // checking renderer
+    if (pWindow == NULL){
+        fprintf(stderr, "create pWindow failed: %s\n", SDL_GetError());
+        return 1;   // 'error' return status is !0. 1 is good enough
+    }
+    if(!pRenderer) {   // pRenderer creation may fail too
+        fprintf(stderr, "create pRenderer failed: %s\n", SDL_GetError());
+        return 1;
+    }
 
-        // event loop and draw loop are separate things, don't mix them
+
+    // buttons initing
+    int mainx = 662, mainy = 300;
+    button_t buttons[4];
+    for(int i = 0 ; i<4 ; i++){
+
+        buttons[i].pressed = 0;
+
+        buttons[i].colour.r = 255;
+        buttons[i].colour.g = 255 - i*60;
+        buttons[i].colour.b = 30;
+        buttons[i].colour.a = 255;
+
+        buttons[i].draw_rect.x = mainx - 200;
+        buttons[i].draw_rect.y = mainy + i*120;
+        buttons[i].draw_rect.h = 100;
+        buttons[i].draw_rect.w = 400;
+
+
+    }
+
+
+
+    mainy += 45;
+    mainx -= 37;
+
+    // main while
+    while(!quit) {
+
+        SDL_Event evt;
+
+
         while(SDL_PollEvent(&evt)) {
-            // quit on close, window close, or 'escape' key hit
+            // quit on close, pWindow close, or 'escape' key hit
             if(evt.type == SDL_QUIT ||
                (evt.type == SDL_WINDOWEVENT && evt.window.event == SDL_WINDOWEVENT_CLOSE) ||
                (evt.type == SDL_KEYDOWN && evt.key.keysym.sym == SDLK_ESCAPE)) {
@@ -108,16 +110,15 @@ int determine_player_number(){
             }
 
             // pass event to button
-            button_process_event(&one_player, &evt);
-            button_process_event(&two_player, &evt);
-            button_process_event(&three_player, &evt);
-            button_process_event(&four_player, &evt);
+            for(int i = 0 ; i<4 ; i++)
+                button_process_event(buttons+i, &evt);
+
 
         }
 
 
-        SDL_SetRenderDrawColor(renderer, 255, 225, 175, 255);
-        SDL_RenderClear(renderer);
+        SDL_SetRenderDrawColor(pRenderer, 255, 225, 175, 255);
+        SDL_RenderClear(pRenderer);
 
 
 /*//        TTF_Font* Sans = TTF_OpenFont("Sans.ttf", 24); //this opens a font style and sets a size
@@ -126,7 +127,7 @@ int determine_player_number(){
 
 //        SDL_Surface* surfaceMessage = TTF_RenderText_Solid(, "put your text here", White); // as TTF_RenderText_Solid could only be used on SDL_Surface then you have to create the surface first
 
-        SDL_Texture* Message = SDL_CreateTextureFromSurface(renderer, "amin"); //now you can convert it into a texture
+        SDL_Texture* Message = SDL_CreateTextureFromSurface(pRenderer, "amin"); //now you can convert it into a texture
 
         SDL_Rect Message_rect; //create a rect
         Message_rect.x = 20;  //controls the rect's x coordinate
@@ -134,48 +135,34 @@ int determine_player_number(){
         Message_rect.w = 100; // controls the width of the rect
         Message_rect.h = 100; // controls the height of the rect
 
-//Mind you that (0,0) is on the top left of the window/screen, think a rect as the text's box, that way it would be very simple to understance
+//Mind you that (0,0) is on the top left of the pWindow/screen, think a rect as the text's box, that way it would be very simple to understance
 
 //Now since it's a texture, you have to put RenderCopy in your game loop area, the area where the whole code executes
 
-        SDL_RenderCopy(renderer, Message, NULL, &Message_rect); //you put the renderer's name first, the Message, the crop size(you can ignore this if you don't want to dabble with cropping), and the rect which is the size and coordinate of your texture
+        SDL_RenderCopy(pRenderer, Message, NULL, &Message_rect); //you put the pRenderer's name first, the Message, the crop size(you can ignore this if you don't want to dabble with cropping), and the rect which is the size and coordinate of your texture
 
 //Don't forget too free your surface and texture*/
 
         if(state == STATE_IN_MENU) {
-            if(button(renderer, &one_player)) {
-//                printf("one_player button pressed\n");
-                res = 1;
-                printf("This feature will be added as soon as possible.\n");
-//                state = STATE_IN_GAME;   // state change - button will not be drawn anymore
-            } else if(button(renderer, &two_player)) {
-                printf("two_player button pressed\n");
-                res = 2;
-                state = STATE_IN_GAME;   // state change - button will not be drawn anymore
-            } else if(button(renderer, &three_player)) {
-                printf("three_player button pressed\n");
-                res = 3;
-                state = STATE_IN_GAME;   // state change - button will not be drawn anymore
-            } else if(button(renderer, &four_player)) {
-                printf("four_player button pressed\n");
-                res = 4;
-                state = STATE_IN_GAME;   // state change - button will not be drawn anymore
+            for(int i = 0 ; i<4 ; i++){
+                if(button(pRenderer, buttons+i)){
+                    res = i+1;
+                    state = STATE_IN_GAME;
+                }
             }
-        } else if(state == STATE_IN_GAME) {
-            quit = 1;
-        }
-        /// TODO error while decommenting this!!
-//        stringRGBA(renderer, 110, 50, "One Player", black);
-//        stringRGBA(renderer, 110, 117, "Two Player", black);
-//        stringRGBA(renderer, 106, 182, "Three Player", black);
-//        stringRGBA(renderer, 108, 250, "Four Player", black);
+
+        } else if(state == STATE_IN_GAME) quit = 1;
 
 
-        SDL_RenderPresent(renderer);
+        stringRGBA(pRenderer, mainx, mainy, "One Player", black);
+        stringRGBA(pRenderer, mainx, mainy + 120, "Two Player", black);
+        stringRGBA(pRenderer, mainx-4, mainy + 240, "Three Player", black);
+        stringRGBA(pRenderer, mainx-2, mainy + 360, "Four Player", black);
+
+
+        SDL_RenderPresent(pRenderer);
     }
 
-    SDL_DestroyWindow(window);
-    SDL_DestroyRenderer(renderer);
 
     return res;
 
@@ -214,8 +201,13 @@ Tank *init_tank(Map *map, int k, bool *** ocupied) {
             t->dark_color = 255 | (255 << 24);
             break;
         case 1:
-            t->light_color =  66 | (134 << 8) | (244<< 16) | (255 << 24);
-            t->dark_color = 0 | (80 << 8) | (255<< 16) | (255 << 24);
+            if(map->ai_mode){
+                t->light_color =  100 | (100 << 8) | (100<< 16) | (255 << 24);
+                t->dark_color = 50 | (50 << 8) | (50<< 16) | (255 << 24);
+            } else{
+                t->light_color =  66 | (134 << 8) | (244<< 16) | (255 << 24);
+                t->dark_color = 0 | (80 << 8) | (255<< 16) | (255 << 24);
+            }
             break;
         case 2:
             t->light_color =  243 | (112 << 8) | (255 << 16) | (255 << 24);
@@ -231,6 +223,7 @@ Tank *init_tank(Map *map, int k, bool *** ocupied) {
 }
 
 void start_game(Map *map, SDL_Window *window, SDL_Renderer **renderer) {
+    map->round++;
     map->end_time = -1;
     map->maxx = map->maxy = 0;
     updlode_walls(map);
@@ -339,9 +332,9 @@ void updlode_walls(Map *map) {
             map->walls[i]->pos[j] *= ratio;
             map->walls[i]->pos[j] += 20;
             if(j&1)
-                map->walls[i]->pos[j] += (1000-ratio*(map->maxy))/2 - 20;
+                map->walls[i]->pos[j] += (960-ratio*(map->maxy))/2 ;
             else
-                map->walls[i]->pos[j] += (1000-ratio*(map->maxx))/2 - 20;
+                map->walls[i]->pos[j] += (960-ratio*(map->maxx))/2 ;
         }
     fclose(file);
     map->ratio = ratio;

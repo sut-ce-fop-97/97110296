@@ -70,6 +70,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/amin/Desktop/project/src/AI.c">
+			<Option target="project"/>
+		</Unit>
+		<Unit filename="/home/amin/Desktop/project/src/AI.h">
+			<Option target="project"/>
+		</Unit>
 		<Unit filename="/home/amin/Desktop/project/src/effects.c">
 			<Option target="project"/>
 		</Unit>

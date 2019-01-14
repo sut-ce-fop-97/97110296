@@ -161,7 +161,10 @@ int check_end(Map *map, SDL_Renderer **renderer, SDL_Window *window) {
             tmp_tank-> y = midy;
             tmp_tank->x = midx-20;
             show_tank(tmp_tank, *renderer);
-            stringRGBA(*renderer, midx+tmp_tank->width/2, midy-10, "You won.", black);
+            if(map->ai_mode && winner == 1)
+                stringRGBA(*renderer, midx+tmp_tank->width/2, midy-10, "I won.", black);
+            else
+                stringRGBA(*renderer, midx+tmp_tank->width/2, midy-10, "You won.", black);
             char s[20] ;
             sprintf(s,"%d",tmp_tank->score+i-1);
             char ss[30] = "Score: ";
