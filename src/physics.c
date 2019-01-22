@@ -8,6 +8,7 @@
 #include "physics.h"
 #include "logic.h"
 #include "init.h"
+#include "UI.h"
 
 
 void fire(Tank *t, Bullet_Node **bullets, double ratio) {
@@ -94,9 +95,11 @@ int handle_event(Map *map) {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         if(event.type == SDL_QUIT ||
-           (event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_CLOSE) ||
-           (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)) {
+           (event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_CLOSE)) {
             return 0;
+        }
+        if(event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE){
+            return pause_UI(map);
         }
         if(event.type == SDL_KEYUP ){
             if(event.key.keysym.sym == SDLK_SLASH && map->tanks[0]->is_alive)

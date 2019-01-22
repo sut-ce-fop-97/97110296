@@ -38,7 +38,7 @@ typedef struct {
     struct {
         Uint8 r, g, b, a;
     } colour;
-
+    bool focused;
     int pressed;
 } button_t;
 
@@ -62,6 +62,8 @@ typedef struct {
     double maxx, maxy, ratio;
     int end_time;
     bool ai_mode;
+    SDL_Window *window;
+    SDL_Renderer *renderer;
 }Map;
 
 typedef struct {

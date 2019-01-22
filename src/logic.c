@@ -176,7 +176,7 @@ int check_end(Map *map, SDL_Renderer **renderer, SDL_Window *window) {
     } else {
         SDL_SetRenderDrawColor(*renderer, 255, 175, 175, 255);
         SDL_RenderClear(*renderer);
-        stringRGBA(*renderer, midx, midy, "Nobody won.", black);
+        stringRGBA(*renderer, midx-40, midy, "Nobody won.", black);
         SDL_RenderPresent(*renderer);
         SDL_Delay(1500);
     }
@@ -186,7 +186,7 @@ int check_end(Map *map, SDL_Renderer **renderer, SDL_Window *window) {
 //    SDL_DestroyWindow(window);
 //    SDL_Quit();
     
-    start_game(map,window, renderer);
+    start_game(map);
 }
 
 bool meet_tank(Map *map, Bullet b){

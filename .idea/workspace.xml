@@ -12,10 +12,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ba8ca5a-09a3-444b-9a4c-62a7fdc81da9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/CMakeFiles/project.dir/src/AI.c.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/UI.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/UI.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeCache.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/Makefile.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/Makefile2" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/progress.marks" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/C.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/project.dir/C.includecache" afterDir="false" />
@@ -26,28 +25,27 @@
       <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/project.dir/depend.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/project.dir/link.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/project.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/src/AI.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/project.dir/src/AI.c.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/src/effects.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/project.dir/src/effects.c.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/src/init.c.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/src/init.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/project.dir/src/init.c.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/src/logic.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/project.dir/src/logic.c.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/src/main.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/project.dir/src/main.c.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/src/main.c.o" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/src/physics.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/project.dir/src/physics.c.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/src/view.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/project.dir/src/view.c.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project" beforeDir="false" afterPath="$PROJECT_DIR$/project" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/project.cbp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AI.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AI.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/init.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/init.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/init.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/init.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/logic.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/map.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mapmap.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/physics.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/physics.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/physics.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/physics.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/structs.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/structs.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/view.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/view.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/CMakeFiles/" />
@@ -80,58 +78,45 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/init.c">
+        <entry file="file://$PROJECT_DIR$/src/view.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="51" column="74" selection-start-line="51" selection-start-column="74" selection-end-line="51" selection-end-column="74" />
+            <state relative-caret-position="5060">
+              <caret line="253" column="48" selection-start-line="253" selection-start-column="48" selection-end-line="253" selection-end-column="48" />
               <folding>
                 <element signature="e#0#2#0" />
-                <element signature="e#372#889#0" />
-                <element signature="e#891#1270#0" />
-                <element signature="e#1361#5263#0" />
-                <element signature="e#1504#1562#1" />
-                <element signature="e#3481#4933#0" />
-                <element signature="e#6428#6707#0" />
-                <element signature="e#6709#8300#0" />
-                <element signature="e#8302#9201#0" />
-                <element signature="e#9203#10154#0" />
-                <element signature="e#10156#10787#0" />
-                <element signature="e#10789#12526#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/logic.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="202" column="16" selection-start-line="202" selection-start-column="16" selection-end-line="202" selection-end-column="16" />
-              <folding>
-                <element signature="e#0#2#0" />
-                <element signature="e#243#321#0" />
-                <element signature="e#324#401#0" />
-                <element signature="e#407#532#0" />
-                <element signature="e#538#853#0" />
-                <element signature="e#859#1543#0" />
-                <element signature="e#2267#3034#0" />
-                <element signature="e#3036#4235#0" />
+                <element signature="e#340#393#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/view.c">
+        <entry file="file://$PROJECT_DIR$/src/main.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="329">
-              <caret line="141" column="9" lean-forward="true" selection-start-line="141" selection-start-column="9" selection-end-line="141" selection-end-column="9" />
+            <state relative-caret-position="514">
+              <caret line="85" column="34" lean-forward="true" selection-start-line="85" selection-start-column="34" selection-end-line="85" selection-end-column="34" />
               <folding>
                 <element signature="e#0#2#0" />
-                <element signature="e#340#393#0" />
-                <element signature="e#1190#2788#0" />
-                <element signature="e#2790#2950#0" />
+                <element signature="e#40#58#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CMakeFiles/project.dir/build.make">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4340">
+              <caret line="217" selection-start-line="217" selection-end-line="217" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CMakeFiles/Makefile2">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1420">
+              <caret line="71" selection-start-line="71" selection-end-line="71" />
             </state>
           </provider>
         </entry>
@@ -139,53 +124,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/init.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file:///usr/include/SDL2/SDL_opengles2_gl2.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="25" selection-start-line="25" selection-end-line="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="174">
-              <caret line="52" column="16" selection-start-line="52" selection-start-column="16" selection-end-line="52" selection-end-column="16" />
-              <folding>
-                <element signature="e#0#2#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/structs.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="53" column="15" selection-start-line="53" selection-start-column="15" selection-end-line="53" selection-end-column="15" />
-              <folding>
-                <element signature="e#0#2#0" />
-                <element signature="e#145#172#0" />
-                <element signature="e#188#395#0" />
-                <element signature="e#410#471#0" />
-                <element signature="e#488#553#0" />
-                <element signature="e#575#707#0" />
-                <element signature="e#639#679#1" />
-                <element signature="e#727#759#0" />
-                <element signature="e#779#827#0" />
-                <element signature="e#842#1062#0" />
-                <element signature="e#1076#1102#0" />
-                <element signature="e#1117#1167#0" />
-                <element signature="e#1187#1234#0" />
-              </folding>
+            <state relative-caret-position="160">
+              <caret line="8" selection-start-line="8" selection-end-line="8" />
             </state>
           </provider>
         </entry>
@@ -193,22 +133,46 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/physics.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-146">
-              <caret line="101" column="19" selection-start-line="101" selection-start-column="19" selection-end-line="101" selection-end-column="19" />
+            <state relative-caret-position="1940">
+              <caret line="97" selection-start-line="97" selection-end-line="97" />
               <folding>
                 <element signature="e#0#2#0" />
                 <element signature="e#160#382#0" />
                 <element signature="e#384#2683#0" />
+                <element signature="e#3737#4058#0" />
+                <element signature="e#4060#4852#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/AI.h">
+        <entry file="file://$PROJECT_DIR$/src/init.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="12" column="31" selection-start-line="12" selection-start-column="31" selection-end-line="12" selection-end-column="31" />
+            <state relative-caret-position="-2252">
+              <caret line="84" column="29" selection-start-line="84" selection-start-column="29" selection-end-line="84" selection-end-column="29" />
+              <folding>
+                <element signature="e#0#2#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/UI.c">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="460">
+              <caret line="314" column="26" selection-start-line="314" selection-start-column="26" selection-end-line="314" selection-end-column="26" />
+              <folding>
+                <element signature="e#0#2#0" />
+                <element signature="e#135#2902#0" />
+                <element signature="e#2904#3372#0" />
+                <element signature="e#2182#3322#0" />
+                <element signature="e#2182#7429#0" />
+                <element signature="e#3491#3549#1" />
+                <element signature="e#6494#7943#0" />
+                <element signature="e#8777#8835#1" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -216,8 +180,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/physics.h">
           <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/UI.h">
+          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="260">
-              <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+              <caret line="13" column="43" selection-start-line="13" selection-start-column="43" selection-end-line="13" selection-end-column="43" />
+              <folding>
+                <element signature="e#38#61#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -226,15 +202,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>event</find>
-      <find>e</find>
-      <find>25</find>
-      <find>RGBA</find>
-      <find>l</find>
-      <find>init_bullet</find>
-      <find>i</find>
-      <find>init_bullet|init_bullet|init_bullet|init_bullet|init_bullet|init_bullet</find>
-      <find>result</find>
       <find>handle_event</find>
       <find>generate_walls</find>
       <find>to_int</find>
@@ -256,12 +223,17 @@
       <find>rct</find>
       <find>map-&gt;tanks[1]</find>
       <find>renderer</find>
+      <find>delay</find>
+      <find>window</find>
+      <find>”</find>
+      <find>btn-&gt;</find>
+      <find>.</find>
+      <find>buttons[*focus]</find>
+      <find>buttons[k]</find>
+      <find>*</find>
+      <find>focus</find>
     </findStrings>
     <replaceStrings>
-      <replace>project</replace>
-      <replace>e</replace>
-      <replace>event</replace>
-      <replace>50</replace>
       <replace>20</replace>
       <replace>Color</replace>
       <replace>b</replace>
@@ -284,6 +256,14 @@
       <replace>ratio</replace>
       <replace>tmp</replace>
       <replace>pRenderer</replace>
+      <replace>map-&gt;renderer</replace>
+      <replace>map-&gt;window</replace>
+      <replace>&quot;</replace>
+      <replace>buttons[k].</replace>
+      <replace>-&gt;</replace>
+      <replace>(*buttons)[*focus]</replace>
+      <replace>(*buttons)[k]</replace>
+      <replace>*focus</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -313,22 +293,24 @@
         <option value="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/project.dir/DependInfo.cmake" />
         <option value="$PROJECT_DIR$/CMakeFiles/Makefile2" />
         <option value="$PROJECT_DIR$/src/effects.h" />
-        <option value="$PROJECT_DIR$/src/effects.c" />
         <option value="$PROJECT_DIR$/src/stack.h" />
         <option value="$PROJECT_DIR$/src/stack.c" />
         <option value="$PROJECT_DIR$/src/mapmap.txt" />
         <option value="$PROJECT_DIR$/src/logic.h" />
         <option value="$PROJECT_DIR$/src/view.h" />
-        <option value="$PROJECT_DIR$/src/init.h" />
         <option value="$PROJECT_DIR$/src/physics.h" />
-        <option value="$PROJECT_DIR$/src/structs.h" />
-        <option value="$PROJECT_DIR$/src/view.c" />
-        <option value="$PROJECT_DIR$/src/logic.c" />
         <option value="$PROJECT_DIR$/src/AI.h" />
         <option value="$PROJECT_DIR$/src/AI.c" />
-        <option value="$PROJECT_DIR$/src/main.c" />
+        <option value="$PROJECT_DIR$/src/logic.c" />
+        <option value="$PROJECT_DIR$/src/effects.c" />
+        <option value="$PROJECT_DIR$/src/structs.h" />
         <option value="$PROJECT_DIR$/src/physics.c" />
+        <option value="$PROJECT_DIR$/src/view.c" />
+        <option value="$PROJECT_DIR$/src/init.h" />
+        <option value="$PROJECT_DIR$/src/UI.h" />
+        <option value="$PROJECT_DIR$/src/UI.c" />
         <option value="$PROJECT_DIR$/src/init.c" />
+        <option value="$PROJECT_DIR$/src/main.c" />
       </list>
     </option>
   </component>
@@ -338,9 +320,10 @@
     </layout>
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="y" value="291" />
-    <option name="width" value="1900" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="30" />
+    <option name="y" value="27" />
+    <option name="width" value="1890" />
     <option name="height" value="789" />
   </component>
   <component name="ProjectLevelVcsManager">
@@ -351,27 +334,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="cmake-build-debug" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="Scope">
         <subPane subId="Scope 'Project Non-Source Files'; set:Project Non-Source Files; class com.jetbrains.cidr.lang.search.scopes.ProjectSourcesScopeProvider$NonSourceFilesScope">
           <expand>
@@ -396,6 +358,22 @@
             <path>
               <item name="project" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="project" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="project" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -501,7 +479,20 @@
       <workItem from="1547371930670" duration="2143000" />
       <workItem from="1547391367441" duration="94000" />
       <workItem from="1547454871874" duration="1562000" />
-      <workItem from="1547456451379" duration="2778000" />
+      <workItem from="1547456451379" duration="3872000" />
+      <workItem from="1547476401262" duration="1268000" />
+      <workItem from="1547479241870" duration="176000" />
+      <workItem from="1547479434675" duration="1155000" />
+      <workItem from="1547480605808" duration="767000" />
+      <workItem from="1547494773309" duration="622000" />
+      <workItem from="1547580608966" duration="167000" />
+      <workItem from="1547801599413" duration="2433000" />
+      <workItem from="1547894218763" duration="353000" />
+      <workItem from="1547908641495" duration="1245000" />
+      <workItem from="1547985050117" duration="2767000" />
+      <workItem from="1548156301662" duration="3369000" />
+      <workItem from="1548171530910" duration="14366000" />
+      <workItem from="1548186435319" duration="4991000" />
     </task>
     <task id="LOCAL-00001" summary="multi player modified">
       <created>1545684881135</created>
@@ -514,7 +505,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="262457000" />
+    <option name="totallyTimeSpent" value="297230000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -529,17 +520,17 @@
     <frame x="0" y="25" width="1920" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5550756" visible="true" weight="0.18996799" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5550756" visible="true" weight="0.16115262" />
       <window_info id="Structure" order="1" sideWeight="0.4449244" side_tool="true" weight="0.15688367" />
       <window_info id="Favorites" order="2" sideWeight="0.4449244" side_tool="true" weight="0.15645514" />
       <window_info anchor="bottom" id="Inspection Results" order="0" weight="0.32937366" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.32937366" />
-      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.36872998" weight="0.3650108" />
+      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.36872998" weight="0.22894168" />
       <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.4994664" weight="0.39848813" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
-      <window_info active="true" anchor="bottom" id="TODO" order="7" sideWeight="0.4994664" visible="true" weight="0.32937366" />
+      <window_info anchor="bottom" id="TODO" order="7" sideWeight="0.4994664" weight="0.32937366" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Messages" order="9" sideWeight="0.36766276" weight="0.31425485" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49839914" weight="0.36825055" />
@@ -609,12 +600,6 @@
         </breakpoint>
       </default-breakpoints>
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="CMakeRunConfiguration">
-        <watch expression="n" language="ObjectiveC" />
-        <watch expression="m" language="ObjectiveC" />
-      </configuration>
-    </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
@@ -636,21 +621,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///usr/include/SDL2/SDL_events.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="59" column="4" selection-start-line="59" selection-start-column="4" selection-end-line="59" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/include/SDL2/SDL_opengles2_gl2ext.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-18">
-          <caret line="22" column="24" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/project/src/init.c" />
     <entry file="file://$USER_HOME$/project/src/main.c" />
     <entry file="file:///usr/include/x86_64-linux-gnu/bits/mathcalls.h">
       <provider selected="true" editor-type-id="text-editor">
@@ -725,34 +695,10 @@
     <entry file="file://$PROJECT_DIR$/cmake-build-debug/mapmap.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeFiles/project.dir/build.make">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3440">
-          <caret line="172" selection-start-line="172" selection-end-line="172" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeFiles/Makefile2">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1420">
-          <caret line="71" selection-start-line="71" selection-end-line="71" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Makefile">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2340">
           <caret line="117" selection-start-line="117" selection-end-line="117" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/effects.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="52" column="14" selection-start-line="52" selection-start-column="14" selection-end-line="52" selection-end-column="14" />
-          <folding>
-            <element signature="e#37#57#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -807,113 +753,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AI.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="640">
-          <caret line="32" column="38" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
-          <folding>
-            <element signature="e#37#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AI.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="12" column="31" selection-start-line="12" selection-start-column="31" selection-end-line="12" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/physics.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/physics.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-146">
-          <caret line="101" column="19" selection-start-line="101" selection-start-column="19" selection-end-line="101" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#2#0" />
-            <element signature="e#160#382#0" />
-            <element signature="e#384#2683#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="52" column="16" selection-start-line="52" selection-start-column="16" selection-end-line="52" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#2#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/structs.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="53" column="15" selection-start-line="53" selection-start-column="15" selection-end-line="53" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#2#0" />
-            <element signature="e#145#172#0" />
-            <element signature="e#188#395#0" />
-            <element signature="e#410#471#0" />
-            <element signature="e#488#553#0" />
-            <element signature="e#575#707#0" />
-            <element signature="e#639#679#1" />
-            <element signature="e#727#759#0" />
-            <element signature="e#779#827#0" />
-            <element signature="e#842#1062#0" />
-            <element signature="e#1076#1102#0" />
-            <element signature="e#1117#1167#0" />
-            <element signature="e#1187#1234#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/include/SDL2/SDL_opengles2_gl2.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
+        <state relative-caret-position="500">
           <caret line="25" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/init.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/init.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="51" column="74" selection-start-line="51" selection-start-column="74" selection-end-line="51" selection-end-column="74" />
-          <folding>
-            <element signature="e#0#2#0" />
-            <element signature="e#372#889#0" />
-            <element signature="e#891#1270#0" />
-            <element signature="e#1361#5263#0" />
-            <element signature="e#1504#1562#1" />
-            <element signature="e#3481#4933#0" />
-            <element signature="e#6428#6707#0" />
-            <element signature="e#6709#8300#0" />
-            <element signature="e#8302#9201#0" />
-            <element signature="e#9203#10154#0" />
-            <element signature="e#10156#10787#0" />
-            <element signature="e#10789#12526#0" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/logic.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="202" column="16" selection-start-line="202" selection-start-column="16" selection-end-line="202" selection-end-column="16" />
+        <state relative-caret-position="2920">
+          <caret line="146" selection-start-line="146" selection-end-line="146" />
           <folding>
             <element signature="e#0#2#0" />
             <element signature="e#243#321#0" />
@@ -927,15 +777,160 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/AI.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="12" column="31" selection-start-line="12" selection-start-column="31" selection-end-line="12" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/effects.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
+          <folding>
+            <element signature="e#0#2#0" />
+            <element signature="e#81#473#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AI.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="620">
+          <caret line="32" column="38" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
+          <folding>
+            <element signature="e#37#52#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/map.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/structs.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="53" column="15" selection-start-line="53" selection-start-column="15" selection-end-line="53" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#2#0" />
+            <element signature="e#145#172#0" />
+            <element signature="e#188#395#0" />
+            <element signature="e#410#471#0" />
+            <element signature="e#488#553#0" />
+            <element signature="e#575#724#0" />
+            <element signature="e#639#679#1" />
+            <element signature="e#744#776#0" />
+            <element signature="e#796#844#0" />
+            <element signature="e#859#1079#0" />
+            <element signature="e#1093#1119#0" />
+            <element signature="e#1134#1184#0" />
+            <element signature="e#1204#1251#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/view.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="141" column="9" lean-forward="true" selection-start-line="141" selection-start-column="9" selection-end-line="141" selection-end-column="9" />
+        <state relative-caret-position="5060">
+          <caret line="253" column="48" selection-start-line="253" selection-start-column="48" selection-end-line="253" selection-end-column="48" />
           <folding>
             <element signature="e#0#2#0" />
             <element signature="e#340#393#0" />
-            <element signature="e#1190#2788#0" />
-            <element signature="e#2790#2950#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeFiles/project.dir/build.make">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4340">
+          <caret line="217" selection-start-line="217" selection-end-line="217" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeFiles/Makefile2">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1420">
+          <caret line="71" selection-start-line="71" selection-end-line="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/init.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/physics.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1940">
+          <caret line="97" selection-start-line="97" selection-end-line="97" />
+          <folding>
+            <element signature="e#0#2#0" />
+            <element signature="e#160#382#0" />
+            <element signature="e#384#2683#0" />
+            <element signature="e#3737#4058#0" />
+            <element signature="e#4060#4852#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/physics.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="13" column="43" selection-start-line="13" selection-start-column="43" selection-end-line="13" selection-end-column="43" />
+          <folding>
+            <element signature="e#38#61#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="314" column="26" selection-start-line="314" selection-start-column="26" selection-end-line="314" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#2#0" />
+            <element signature="e#135#2902#0" />
+            <element signature="e#2904#3372#0" />
+            <element signature="e#2182#3322#0" />
+            <element signature="e#2182#7429#0" />
+            <element signature="e#3491#3549#1" />
+            <element signature="e#6494#7943#0" />
+            <element signature="e#8777#8835#1" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/init.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2252">
+          <caret line="84" column="29" selection-start-line="84" selection-start-column="29" selection-end-line="84" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#2#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="514">
+          <caret line="85" column="34" lean-forward="true" selection-start-line="85" selection-start-column="34" selection-end-line="85" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#2#0" />
+            <element signature="e#40#58#0" expanded="true" />
           </folding>
         </state>
       </provider>

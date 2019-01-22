@@ -21,153 +21,6 @@
 
 #define black 0,0 ,0, 255
 
-static void button_process_event(button_t *btn, const SDL_Event *ev) {
-    // react on mouse click within button rectangle by setting 'pressed'
-    if(ev->type == SDL_MOUSEBUTTONDOWN) {
-        if(ev->button.button == SDL_BUTTON_LEFT &&
-           ev->button.x >= btn->draw_rect.x &&
-           ev->button.x <= (btn->draw_rect.x + btn->draw_rect.w) &&
-           ev->button.y >= btn->draw_rect.y &&
-           ev->button.y <= (btn->draw_rect.y + btn->draw_rect.h)) {
-            btn->pressed = true;
-        }
-    }
-}
-
-static bool button(SDL_Renderer *r, button_t *btn) {
-    // draw button
-    SDL_SetRenderDrawColor(r, btn->colour.r, btn->colour.g, btn->colour.b, btn->colour.a);
-    SDL_RenderFillRect(r, &btn->draw_rect);
-    SDL_SetRenderDrawColor(r, 0, 0, 0, 255);
-    SDL_RenderDrawRect(r, &btn->draw_rect);
-
-    // if button press detected - reset it so it wouldn't trigger twice
-    if(btn->pressed) {
-        btn->pressed = false;
-        return true;
-    }
-    return false;
-}
-
-int determine_player_number(SDL_Window *pWindow, SDL_Renderer *pRenderer) {
-
-    // varriables
-    int res = 0;
-    int quit = 0;
-    enum {
-        STATE_IN_MENU,
-        STATE_IN_GAME,
-    } state = 0;
-
-    // checking renderer
-    if (pWindow == NULL){
-        fprintf(stderr, "create pWindow failed: %s\n", SDL_GetError());
-        return 1;   // 'error' return status is !0. 1 is good enough
-    }
-    if(!pRenderer) {   // pRenderer creation may fail too
-        fprintf(stderr, "create pRenderer failed: %s\n", SDL_GetError());
-        return 1;
-    }
-
-
-    // buttons initing
-    int mainx = 662, mainy = 300;
-    button_t buttons[4];
-    for(int i = 0 ; i<4 ; i++){
-
-        buttons[i].pressed = 0;
-
-        buttons[i].colour.r = 255;
-        buttons[i].colour.g = 255 - i*60;
-        buttons[i].colour.b = 30;
-        buttons[i].colour.a = 255;
-
-        buttons[i].draw_rect.x = mainx - 200;
-        buttons[i].draw_rect.y = mainy + i*120;
-        buttons[i].draw_rect.h = 100;
-        buttons[i].draw_rect.w = 400;
-
-
-    }
-
-
-
-    mainy += 45;
-    mainx -= 37;
-
-    // main while
-    while(!quit) {
-
-        SDL_Event evt;
-
-
-        while(SDL_PollEvent(&evt)) {
-            // quit on close, pWindow close, or 'escape' key hit
-            if(evt.type == SDL_QUIT ||
-               (evt.type == SDL_WINDOWEVENT && evt.window.event == SDL_WINDOWEVENT_CLOSE) ||
-               (evt.type == SDL_KEYDOWN && evt.key.keysym.sym == SDLK_ESCAPE)) {
-                return 0;
-            }
-
-            // pass event to button
-            for(int i = 0 ; i<4 ; i++)
-                button_process_event(buttons+i, &evt);
-
-
-        }
-
-
-        SDL_SetRenderDrawColor(pRenderer, 255, 225, 175, 255);
-        SDL_RenderClear(pRenderer);
-
-
-/*//        TTF_Font* Sans = TTF_OpenFont("Sans.ttf", 24); //this opens a font style and sets a size
-
-        SDL_Color White = {0, 0, 0};  // this is the color in rgb format, maxing out all would give you the color white, and it will be your text's color
-
-//        SDL_Surface* surfaceMessage = TTF_RenderText_Solid(, "put your text here", White); // as TTF_RenderText_Solid could only be used on SDL_Surface then you have to create the surface first
-
-        SDL_Texture* Message = SDL_CreateTextureFromSurface(pRenderer, "amin"); //now you can convert it into a texture
-
-        SDL_Rect Message_rect; //create a rect
-        Message_rect.x = 20;  //controls the rect's x coordinate
-        Message_rect.y = 20; // controls the rect's y coordinte
-        Message_rect.w = 100; // controls the width of the rect
-        Message_rect.h = 100; // controls the height of the rect
-
-//Mind you that (0,0) is on the top left of the pWindow/screen, think a rect as the text's box, that way it would be very simple to understance
-
-//Now since it's a texture, you have to put RenderCopy in your game loop area, the area where the whole code executes
-
-        SDL_RenderCopy(pRenderer, Message, NULL, &Message_rect); //you put the pRenderer's name first, the Message, the crop size(you can ignore this if you don't want to dabble with cropping), and the rect which is the size and coordinate of your texture
-
-//Don't forget too free your surface and texture*/
-
-        if(state == STATE_IN_MENU) {
-            for(int i = 0 ; i<4 ; i++){
-                if(button(pRenderer, buttons+i)){
-                    res = i+1;
-                    state = STATE_IN_GAME;
-                }
-            }
-
-        } else if(state == STATE_IN_GAME) quit = 1;
-
-
-        stringRGBA(pRenderer, mainx, mainy, "One Player", black);
-        stringRGBA(pRenderer, mainx, mainy + 120, "Two Player", black);
-        stringRGBA(pRenderer, mainx-4, mainy + 240, "Three Player", black);
-        stringRGBA(pRenderer, mainx-2, mainy + 360, "Four Player", black);
-
-
-        SDL_RenderPresent(pRenderer);
-    }
-
-
-    return res;
-
-}
-
 Bullet* init_bullet(Tank *t, double ratio) {
     Bullet* b = malloc(sizeof(Bullet));
     b->x = t->x + t->barrel_lenght*cos(t->angle);
@@ -222,7 +75,14 @@ Tank *init_tank(Map *map, int k, bool *** ocupied) {
     return t;
 }
 
-void start_game(Map *map, SDL_Window *window, SDL_Renderer **renderer) {
+bool start_game(Map *map) {
+    if(!map->players)
+        return false;
+    if(map->players == 1){
+        map->players = 2;
+        map->ai_mode = true;
+    } else
+        map->ai_mode = false;
     map->round++;
     map->end_time = -1;
     map->maxx = map->maxy = 0;
@@ -240,6 +100,7 @@ void start_game(Map *map, SDL_Window *window, SDL_Renderer **renderer) {
         map->tanks[i] = init_tank(map, i, &ocupied);
 //        printf("Score of tank %d: %d\n", i+1, map->tanks[i]->score);
     }
+    return 1;
 //    window = SDL_CreateWindow("Alter Tank", SDL_WINDOWPOS_CENTERED , SDL_WINDOWPOS_CENTERED,map->maxx*map->ratio + 325, 1000, SDL_WINDOW_OPENGL);
 //    *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 }
@@ -298,8 +159,8 @@ void updlode_walls(Map *map) {
     for(int i = 0 ; i<n ; i++)
         cells[i] = calloc(m , sizeof(Cell));
     generate_walls(&cells, n, m);
-    write_to_file(cells, n, m);
-    FILE *file = fopen("/home/amin/Desktop/project/src/map.txt", "r");
+    walls_to_file(cells, n, m);
+    FILE *file = fopen("map.txt", "r");
     char buff[5] ;
     for(int i = 0 ; i<5 ; i++)
         buff[i] = '\0';
@@ -338,6 +199,24 @@ void updlode_walls(Map *map) {
         }
     fclose(file);
     map->ratio = ratio;
+}
+
+int load_last_game(Map *map) {
+    FILE *f ;
+    if(!(f = fopen("lastGame.txt", "r"))){
+
+        printf("\033[0;31m"); //Set the text to the color red
+        printf("Last game not saved.\n"); //Display Hello in red
+        printf("\033[0m");
+        return 0;
+
+    }
+
+    fscanf(f, "%d %d %d\n%d %d %d %d",&map->round, &map->players , &map->ai_mode,
+            &map->tanks[0]->score, &map->tanks[1]->score, &map->tanks[2]->score, &map->tanks[3]->score);
+    fclose(f);
+    return 1;
+
 }
 
 

@@ -31,25 +31,23 @@ int main() {
 
     ///initializing
     Map *map = malloc(sizeof(Map));
-    map->players = determine_player_number(window, renderer);
+    map->players = start_UI(window, renderer);
     map->round = 0;
-    if(!map->players)
-        return 0;
-    if(map->ai_mode = map->players == 1)
-        map->players = 2;
     map->tanks = malloc(sizeof(Tank*));
-    for(int i = 0 ; i<map->players ; i++){
+    for(int i = 0 ; i<4 ; i++){
         map->tanks[i] = malloc(sizeof(Tank));
         map->tanks[i]->score = 0;
     }
     const float FPS =4/sqrt(map->players);
+    map->window = window;
+    map->renderer = renderer;
 
 
 
 
-
-    start_game(map, window, &renderer);
-
+    if(!start_game(map))
+        return 0;
+    
     while (handle_event(map)) {
 
         ///seting renderer
@@ -81,6 +79,12 @@ int main() {
         SDL_RenderPresent(renderer);
         while (SDL_GetTicks() - start_ticks < FPS);
     }
+
+    ///Save game
+    FILE *f = fopen("lastGame.txt", "w");
+    fprintf(f, "%d %d %d\n%d %d %d %d",map->round-1, map->players , map->ai_mode,
+           map->tanks[0]->score, map->tanks[1]->score, map->tanks[2]->score, map->tanks[3]->score);
+    fclose(f);
 
     /// SDL endings
     SDL_DestroyRenderer(renderer);

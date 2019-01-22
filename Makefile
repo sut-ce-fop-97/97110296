@@ -150,6 +150,33 @@ src/AI.c.s:
 	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/src/AI.c.s
 .PHONY : src/AI.c.s
 
+src/UI.o: src/UI.c.o
+
+.PHONY : src/UI.o
+
+# target to build an object file
+src/UI.c.o:
+	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/src/UI.c.o
+.PHONY : src/UI.c.o
+
+src/UI.i: src/UI.c.i
+
+.PHONY : src/UI.i
+
+# target to preprocess a source file
+src/UI.c.i:
+	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/src/UI.c.i
+.PHONY : src/UI.c.i
+
+src/UI.s: src/UI.c.s
+
+.PHONY : src/UI.s
+
+# target to generate assembly for a file
+src/UI.c.s:
+	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/src/UI.c.s
+.PHONY : src/UI.c.s
+
 src/effects.o: src/effects.c.o
 
 .PHONY : src/effects.o
@@ -378,6 +405,9 @@ help:
 	@echo "... src/AI.o"
 	@echo "... src/AI.i"
 	@echo "... src/AI.s"
+	@echo "... src/UI.o"
+	@echo "... src/UI.i"
+	@echo "... src/UI.s"
 	@echo "... src/effects.o"
 	@echo "... src/effects.i"
 	@echo "... src/effects.s"

@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/project.dir/src/AI.c.o"
+  "CMakeFiles/project.dir/src/UI.c.o"
   "CMakeFiles/project.dir/src/effects.c.o"
   "CMakeFiles/project.dir/src/init.c.o"
   "CMakeFiles/project.dir/src/logic.c.o"

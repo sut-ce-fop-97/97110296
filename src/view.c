@@ -56,12 +56,18 @@
 
 void show_tank(Tank *t, SDL_Renderer *renderer) {
     double a = t->angle, x = t->x, y = t->y;
-    thickLineColor(renderer, x + t->lenght/2 * cos(a), y - t->lenght/2 * sin(a), x - t->lenght/2 * cos(a), y + t->lenght/2 * sin(a), t->width, t->light_color);                                                                         //shasi
-    thickLineColor(renderer, x, y, x + t->barrel_lenght * cos(a), y - t->barrel_lenght * sin(a), t->barrel_thickness, t->dark_color);                                                                                                                 //barrel
-    thickLineColor(renderer, x+t->lenght/2*cos(a)+0.4*t->width*sin(a) , y - t->lenght/2 * sin(a) + 0.4*t->width * cos(a), x - t->lenght/2 * cos(a) + 0.4*t->width * sin(a), y + t->lenght/2 * sin(a) + 0.4*t->width * cos(a), 0.25*t->width, t->dark_color);      //sheni 1
-    thickLineColor(renderer, x+t->lenght/2*cos(a)-0.4*t->width*sin(a) , y - t->lenght/2 * sin(a) - 0.4*t->width * cos(a), x - t->lenght/2 * cos(a) - 0.4*t->width * sin(a), y + t->lenght/2 * sin(a) - 0.4*t->width * cos(a), 0.25*t->width, t->dark_color);      //sheni 2
-    filledCircleColor(renderer, x, y, 0.4*t->width, t->dark_color);                                                                                                                                                                 //circle
-    circleRGBA(renderer, x, y, 0.4*t->width, black);                                                                                                                                                                     //circle border
+    thickLineColor(renderer, x + t->lenght/2 * cos(a), y - t->lenght/2 * sin(a), x - t->lenght/2 * cos(a),
+            y + t->lenght/2 * sin(a), t->width, t->light_color);                                                    //shasi
+    thickLineColor(renderer, x, y, x + t->barrel_lenght * cos(a), y - t->barrel_lenght * sin(a),
+                   t->barrel_thickness, t->dark_color);                                                                    //barrel
+    thickLineColor(renderer, x+t->lenght/2*cos(a)+0.4*t->width*sin(a) ,
+                   y - t->lenght/2 * sin(a) + 0.4*t->width * cos(a), x - t->lenght/2 * cos(a) + 0.4*t->width * sin(a),
+                   y + t->lenght/2 * sin(a) + 0.4*t->width * cos(a), 0.25*t->width, t->dark_color);                        //sheni 1
+    thickLineColor(renderer, x+t->lenght/2*cos(a)-0.4*t->width*sin(a) ,
+                   y - t->lenght/2 * sin(a) - 0.4*t->width * cos(a), x - t->lenght/2 * cos(a) - 0.4*t->width * sin(a),
+                   y + t->lenght/2 * sin(a) - 0.4*t->width * cos(a), 0.25*t->width, t->dark_color);                        //sheni 2
+    filledCircleColor(renderer, x, y, 0.4*t->width, t->dark_color);                                                 //circle
+    circleRGBA(renderer, x, y, 0.4*t->width, black);                                                                //circle border
 
 }
 
@@ -87,8 +93,8 @@ void show_walls(Map *map, struct SDL_Renderer * renderer){
         thickLineRGBA(renderer, map->walls[i]->pos[0], map->walls[i]->pos[1], map->walls[i]->pos[2], map->walls[i]->pos[3], 0.03*map->ratio, 0, 41, 102, 255);
 }
 
-void write_to_file(Cell **cells, int n, int m) {
-    FILE *map_prim = fopen("/home/amin/Desktop/project/src/map_prim.txt", "w");
+void walls_to_file(Cell **cells, int n, int m) {
+    FILE *map_prim = fopen("map_prim.txt", "w");
     int counter = 2;
     for (int i = 0; i < m; ++i) {
         int j = 0 ;
@@ -120,13 +126,13 @@ void write_to_file(Cell **cells, int n, int m) {
     fprintf(map_prim, "0 %d %d %d\n",  n,m,n );
 
     char ch;
-    FILE *map = fopen("/home/amin/Desktop/project/src/map.txt", "w");
+    FILE *map = fopen("map.txt", "w");
     fprintf(map, "%d\n", counter);
     fclose(map_prim);
-    map_prim = fopen("/home/amin/Desktop/project/src/map_prim.txt", "r");
+    map_prim = fopen("map_prim.txt", "r");
     while( ( ch = fgetc(map_prim) ) != EOF )
         fputc(ch, map);
-    remove("/home/amin/Desktop/project/src/map_prim.txt");
+    remove("map_prim.txt");
     fclose(map);
     fclose(map_prim);
 }
