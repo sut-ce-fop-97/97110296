@@ -320,8 +320,14 @@ int pause_UI(Map *map){
                 if(load_last_game(map)){
                     start_game(map);
                     state = STATE_IN_GAME;
-                }else
+                }else{
+                    buttons[2].focused = false;
+                    buttons[2].pressed = false;
                     SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR , "Error","Last game is not Saved.",map->window);
+                    buttons[2].colour.g += 50;
+                    buttons[2].colour.r += 50;
+                    buttons[2].colour.b += 30;
+                }
             }
             if(button(map->renderer, buttons+3))
                 return 0;

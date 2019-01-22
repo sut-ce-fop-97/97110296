@@ -12,40 +12,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ba8ca5a-09a3-444b-9a4c-62a7fdc81da9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/UI.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/UI.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/Makefile2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/progress.marks" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/C.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/project.dir/C.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/project.dir/DependInfo.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/project.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/project.dir/cmake_clean.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/project.dir/depend.internal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/project.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/project.dir/link.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/project.dir/progress.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/src/AI.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/project.dir/src/AI.c.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/src/effects.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/project.dir/src/effects.c.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/src/init.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/project.dir/src/init.c.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/src/logic.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/project.dir/src/logic.c.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/src/main.c.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/src/physics.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/project.dir/src/physics.c.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/src/view.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/project.dir/src/view.c.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/project.dir/src/UI.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/project.dir/src/UI.c.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lastGame.txt" beforeDir="false" afterPath="$PROJECT_DIR$/lastGame.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/map.txt" beforeDir="false" afterPath="$PROJECT_DIR$/map.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project" beforeDir="false" afterPath="$PROJECT_DIR$/project" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/project.cbp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/init.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/init.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/init.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/init.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logic.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/logic.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mapmap.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/physics.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/physics.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/structs.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/structs.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/view.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/view.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI.c" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/CMakeFiles/" />
@@ -90,11 +62,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="514">
-              <caret line="85" column="34" lean-forward="true" selection-start-line="85" selection-start-column="34" selection-end-line="85" selection-end-column="34" />
+            <state relative-caret-position="962">
+              <caret line="85" column="34" selection-start-line="85" selection-start-column="34" selection-end-line="85" selection-end-column="34" />
               <folding>
                 <element signature="e#0#2#0" />
                 <element signature="e#40#58#0" expanded="true" />
@@ -149,7 +121,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/init.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2252">
+            <state relative-caret-position="1680">
               <caret line="84" column="29" selection-start-line="84" selection-start-column="29" selection-end-line="84" selection-end-column="29" />
               <folding>
                 <element signature="e#0#2#0" />
@@ -158,20 +130,19 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/UI.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="314" column="26" selection-start-line="314" selection-start-column="26" selection-end-line="314" selection-end-column="26" />
+            <state relative-caret-position="334">
+              <caret line="334" lean-forward="true" selection-start-line="334" selection-end-line="334" />
               <folding>
                 <element signature="e#0#2#0" />
-                <element signature="e#135#2902#0" />
-                <element signature="e#2904#3372#0" />
-                <element signature="e#2182#3322#0" />
-                <element signature="e#2182#7429#0" />
-                <element signature="e#3491#3549#1" />
-                <element signature="e#6494#7943#0" />
-                <element signature="e#8777#8835#1" />
+                <element signature="e#1712#2180#0" />
+                <element signature="e#2182#3336#0" />
+                <element signature="e#3338#7399#0" />
+                <element signature="e#3455#3513#1" />
+                <element signature="e#5166#6615#0" />
+                <element signature="e#7449#7507#1" />
               </folding>
             </state>
           </provider>
@@ -308,9 +279,9 @@
         <option value="$PROJECT_DIR$/src/view.c" />
         <option value="$PROJECT_DIR$/src/init.h" />
         <option value="$PROJECT_DIR$/src/UI.h" />
-        <option value="$PROJECT_DIR$/src/UI.c" />
         <option value="$PROJECT_DIR$/src/init.c" />
         <option value="$PROJECT_DIR$/src/main.c" />
+        <option value="$PROJECT_DIR$/src/UI.c" />
       </list>
     </option>
   </component>
@@ -334,6 +305,22 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="project" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="project" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="Scope">
         <subPane subId="Scope 'Project Non-Source Files'; set:Project Non-Source Files; class com.jetbrains.cidr.lang.search.scopes.ProjectSourcesScopeProvider$NonSourceFilesScope">
           <expand>
@@ -358,22 +345,6 @@
             <path>
               <item name="project" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -493,6 +464,7 @@
       <workItem from="1548156301662" duration="3369000" />
       <workItem from="1548171530910" duration="14366000" />
       <workItem from="1548186435319" duration="4991000" />
+      <workItem from="1548192804767" duration="521000" />
     </task>
     <task id="LOCAL-00001" summary="multi player modified">
       <created>1545684881135</created>
@@ -505,7 +477,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="297230000" />
+    <option name="totallyTimeSpent" value="297751000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -520,7 +492,7 @@
     <frame x="0" y="25" width="1920" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5550756" visible="true" weight="0.16115262" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5550756" visible="true" weight="0.16275346" />
       <window_info id="Structure" order="1" sideWeight="0.4449244" side_tool="true" weight="0.15688367" />
       <window_info id="Favorites" order="2" sideWeight="0.4449244" side_tool="true" weight="0.15645514" />
       <window_info anchor="bottom" id="Inspection Results" order="0" weight="0.32937366" />
@@ -719,13 +691,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mapmap.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="62" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mapmap.txt" />
     <entry file="file://$PROJECT_DIR$/src/logic.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
@@ -805,13 +771,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/map.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/map.txt" />
     <entry file="file://$PROJECT_DIR$/src/structs.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="283">
@@ -880,6 +840,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/init.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1680">
+          <caret line="84" column="29" selection-start-line="84" selection-start-column="29" selection-end-line="84" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#2#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/physics.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -897,40 +867,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/UI.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="314" column="26" selection-start-line="314" selection-start-column="26" selection-end-line="314" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#2#0" />
-            <element signature="e#135#2902#0" />
-            <element signature="e#2904#3372#0" />
-            <element signature="e#2182#3322#0" />
-            <element signature="e#2182#7429#0" />
-            <element signature="e#3491#3549#1" />
-            <element signature="e#6494#7943#0" />
-            <element signature="e#8777#8835#1" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/init.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2252">
-          <caret line="84" column="29" selection-start-line="84" selection-start-column="29" selection-end-line="84" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#2#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="514">
-          <caret line="85" column="34" lean-forward="true" selection-start-line="85" selection-start-column="34" selection-end-line="85" selection-end-column="34" />
+        <state relative-caret-position="962">
+          <caret line="85" column="34" selection-start-line="85" selection-start-column="34" selection-end-line="85" selection-end-column="34" />
           <folding>
             <element signature="e#0#2#0" />
             <element signature="e#40#58#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="334" lean-forward="true" selection-start-line="334" selection-end-line="334" />
+          <folding>
+            <element signature="e#0#2#0" />
+            <element signature="e#1712#2180#0" />
+            <element signature="e#2182#3336#0" />
+            <element signature="e#3338#7399#0" />
+            <element signature="e#3455#3513#1" />
+            <element signature="e#5166#6615#0" />
+            <element signature="e#7449#7507#1" />
           </folding>
         </state>
       </provider>
