@@ -94,7 +94,9 @@ void show_walls(Map *map, struct SDL_Renderer * renderer){
 }
 
 void walls_to_file(Cell **cells, int n, int m) {
-    FILE *map_prim = fopen("map_prim.txt", "w");
+    FILE *map_prim ;
+    if(!(map_prim = fopen("map_prim.txt", "w")))
+        perror("map_prim not created.\n");
     int counter = 2;
     for (int i = 0; i < m; ++i) {
         int j = 0 ;

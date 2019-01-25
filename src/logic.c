@@ -185,7 +185,8 @@ int check_end(Map *map, SDL_Renderer **renderer, SDL_Window *window) {
 //    SDL_DestroyRenderer(*renderer);
 //    SDL_DestroyWindow(window);
 //    SDL_Quit();
-    
+    if(map->ai_mode)
+        map->players = 1;
     start_game(map);
 }
 

@@ -21,6 +21,7 @@ typedef struct {
     int score;
     Point corners[5];
     bool is_alive;
+    char *keys[5];
 }Tank;
 
 typedef struct {
@@ -40,6 +41,7 @@ typedef struct {
     } colour;
     bool focused;
     int pressed;
+    char text[100];
 } button_t;
 
 typedef enum{
@@ -59,6 +61,7 @@ typedef struct {
     int players;
     int count_of_walls;
     int count_of_bullets;
+    int target;
     double maxx, maxy, ratio;
     int end_time;
     bool ai_mode;

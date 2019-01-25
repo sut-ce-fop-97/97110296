@@ -15,39 +15,39 @@
 #include "view.h"
 #include "init.h"
 #include "logic.h"
+#include "UI.h"
+#include "effects.h"
 
 
 
 
 int main() {
 
-
-
     /// SDL startings
     SDL_Init(SDL_INIT_VIDEO);
     SDL_Window *window = SDL_CreateWindow("Alter Tank", SDL_WINDOWPOS_CENTERED , SDL_WINDOWPOS_CENTERED, 1325, 1000, SDL_WINDOW_OPENGL);
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
+    int tmp = SDL_SCANCODE_TO_KEYCODE(SDLK_DOWN);
+    printf("%d\n", tmp);
 
     ///initializing
     Map *map = malloc(sizeof(Map));
-    map->players = start_UI(window, renderer);
-    map->round = 0;
-    map->tanks = malloc(sizeof(Tank*));
-    for(int i = 0 ; i<4 ; i++){
-        map->tanks[i] = malloc(sizeof(Tank));
-        map->tanks[i]->score = 0;
-    }
-    const float FPS =4/sqrt(map->players);
     map->window = window;
     map->renderer = renderer;
-
-
+    map->players = starting_UI(map);
+    map->round = 0;
+    map->target = 10;
+    create_tanks(map);
+    const float FPS =4/sqrt(map->players);
 
 
     if(!start_game(map))
         return 0;
-    
+
+    settings_UI(map);
+
+
     while (handle_event(map)) {
 
         ///seting renderer
@@ -82,6 +82,8 @@ int main() {
 
     ///Save game
     FILE *f = fopen("lastGame.txt", "w");
+    if(map->ai_mode && map->players == 2)
+        map->players--;
     fprintf(f, "%d %d %d\n%d %d %d %d",map->round-1, map->players , map->ai_mode,
            map->tanks[0]->score, map->tanks[1]->score, map->tanks[2]->score, map->tanks[3]->score);
     fclose(f);

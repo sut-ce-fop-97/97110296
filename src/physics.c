@@ -23,6 +23,7 @@ void fire(Tank *t, Bullet_Node **bullets, double ratio) {
 void handle_keys(Map *map) {
     bool keys[4][5] = {};
     const Uint8 *keyboard = SDL_GetKeyboardState(NULL);
+
     if (keyboard[SDL_SCANCODE_RIGHT])
         keys[0][0] = 1;
     if (keyboard[SDL_SCANCODE_LEFT])

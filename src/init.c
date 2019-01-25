@@ -31,8 +31,11 @@ Bullet* init_bullet(Tank *t, double ratio) {
     return b;
 }
 
-Tank *init_tank(Map *map, int k, bool *** ocupied) {
+void init_tank(Map *map, int k, bool *** ocupied) {
     Tank *t = map->tanks[k];
+
+    for(int j = 0 ; j<5 ;j++)
+        t->keys[j] = malloc(100*sizeof(char));
     t->is_alive = true;
     t->bullet = 5;
     do{
@@ -52,6 +55,12 @@ Tank *init_tank(Map *map, int k, bool *** ocupied) {
         case 0:
             t->light_color =  255 | (95 << 8) | (66 << 16) | (255 << 24);
             t->dark_color = 255 | (255 << 24);
+
+            t->keys[0] = "/\\";
+            t->keys[1] = "<-";
+            t->keys[2] = "/";
+            t->keys[3] = "->";
+            t->keys[4] = "\\/";
             break;
         case 1:
             if(map->ai_mode){
@@ -60,19 +69,41 @@ Tank *init_tank(Map *map, int k, bool *** ocupied) {
             } else{
                 t->light_color =  66 | (134 << 8) | (244<< 16) | (255 << 24);
                 t->dark_color = 0 | (80 << 8) | (255<< 16) | (255 << 24);
+                t->keys[0] = "W";
+                t->keys[1] = "A";
+                t->keys[2] = "Q";
+                t->keys[3] = "D";
+                t->keys[4] = "S";
             }
             break;
         case 2:
             t->light_color =  243 | (112 << 8) | (255 << 16) | (255 << 24);
             t->dark_color = 187 | (0 << 8) | (255 << 16) | (255 << 24);
+            t->keys[0] = "T";
+            t->keys[1] = "F";
+            t->keys[2] = "R";
+            t->keys[3] = "H";
+            t->keys[4] = "G";
             break;
         case 3:
             t->light_color =  155 | (255 << 8) | (106 << 16) | (255 << 24);
             t->dark_color = 0 | (255 << 8) | (38<< 16) | (255 << 24);
+            t->keys[0] = "I";
+            t->keys[1] = "J";
+            t->keys[2] = "U";
+            t->keys[3] = "L";
+            t->keys[4] = "K";
             break;
     }
+    map->tanks[k] = t;
+}
 
-    return t;
+void create_tanks(Map *map) {
+    map->tanks = malloc(sizeof(Tank*));
+    for(int i = 0 ; i<4 ; i++){
+        map->tanks[i] = malloc(sizeof(Tank));
+        map->tanks[i]->score = 0;
+    }
 }
 
 bool start_game(Map *map) {
@@ -88,6 +119,7 @@ bool start_game(Map *map) {
     map->maxx = map->maxy = 0;
     updlode_walls(map);
     map->bullets = NULL;
+//    define_tanks(map);
     bool **ocupied = calloc((int)map->maxx ,sizeof(bool*));
     for(int i = 0 ; i<map->maxx ; i++){
         ocupied[i] = calloc((int)map->maxy ,sizeof(bool));
@@ -96,10 +128,10 @@ bool start_game(Map *map) {
         for(int j = 0 ; j<map->maxy  ; j++)
             ocupied[i][j] = false;
     srand(time(NULL));
-    for(int i = 0 ; i<map->players ; i++){
-        map->tanks[i] = init_tank(map, i, &ocupied);
-//        printf("Score of tank %d: %d\n", i+1, map->tanks[i]->score);
-    }
+
+    for(int i = 0 ; i<4 ; i++)
+        init_tank(map, i, &ocupied);
+
     return 1;
 //    window = SDL_CreateWindow("Alter Tank", SDL_WINDOWPOS_CENTERED , SDL_WINDOWPOS_CENTERED,map->maxx*map->ratio + 325, 1000, SDL_WINDOW_OPENGL);
 //    *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
