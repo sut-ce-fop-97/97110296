@@ -10,6 +10,7 @@ CMakeFiles/project.dir/src/UI.c.o: src/UI.c
 CMakeFiles/project.dir/src/UI.c.o: src/UI.h
 CMakeFiles/project.dir/src/UI.c.o: src/init.h
 CMakeFiles/project.dir/src/UI.c.o: src/structs.h
+CMakeFiles/project.dir/src/UI.c.o: src/view.h
 CMakeFiles/project.dir/src/UI.c.o: /usr/include/SDL2/SDL.h
 CMakeFiles/project.dir/src/UI.c.o: /usr/include/SDL2/SDL2_gfxPrimitives.h
 CMakeFiles/project.dir/src/UI.c.o: /usr/include/SDL2/SDL_assert.h

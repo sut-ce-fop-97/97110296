@@ -11,6 +11,7 @@ CMakeFiles/project.dir/src/UI.c.o
  /home/amin/Desktop/project/src/UI.h
  /home/amin/Desktop/project/src/init.h
  /home/amin/Desktop/project/src/structs.h
+ /home/amin/Desktop/project/src/view.h
  /usr/include/SDL2/SDL.h
  /usr/include/SDL2/SDL2_gfxPrimitives.h
  /usr/include/SDL2/SDL_assert.h

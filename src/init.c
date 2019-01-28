@@ -33,9 +33,6 @@ Bullet* init_bullet(Tank *t, double ratio) {
 
 void init_tank(Map *map, int k, bool *** ocupied) {
     Tank *t = map->tanks[k];
-
-    for(int j = 0 ; j<5 ;j++)
-        t->keys[j] = malloc(100*sizeof(char));
     t->is_alive = true;
     t->bullet = 5;
     do{
@@ -51,58 +48,62 @@ void init_tank(Map *map, int k, bool *** ocupied) {
     t->barrel_lenght = 0.3*map->ratio;
     t->barrel_thickness = 0.08*map->ratio;
 
-    switch(k){
-        case 0:
-            t->light_color =  255 | (95 << 8) | (66 << 16) | (255 << 24);
-            t->dark_color = 255 | (255 << 24);
 
-            t->keys[0] = "/\\";
-            t->keys[1] = "<-";
-            t->keys[2] = "/";
-            t->keys[3] = "->";
-            t->keys[4] = "\\/";
-            break;
-        case 1:
-            if(map->ai_mode){
-                t->light_color =  100 | (100 << 8) | (100<< 16) | (255 << 24);
-                t->dark_color = 50 | (50 << 8) | (50<< 16) | (255 << 24);
-            } else{
-                t->light_color =  66 | (134 << 8) | (244<< 16) | (255 << 24);
-                t->dark_color = 0 | (80 << 8) | (255<< 16) | (255 << 24);
-                t->keys[0] = "W";
-                t->keys[1] = "A";
-                t->keys[2] = "Q";
-                t->keys[3] = "D";
-                t->keys[4] = "S";
-            }
-            break;
-        case 2:
-            t->light_color =  243 | (112 << 8) | (255 << 16) | (255 << 24);
-            t->dark_color = 187 | (0 << 8) | (255 << 16) | (255 << 24);
-            t->keys[0] = "T";
-            t->keys[1] = "F";
-            t->keys[2] = "R";
-            t->keys[3] = "H";
-            t->keys[4] = "G";
-            break;
-        case 3:
-            t->light_color =  155 | (255 << 8) | (106 << 16) | (255 << 24);
-            t->dark_color = 0 | (255 << 8) | (38<< 16) | (255 << 24);
-            t->keys[0] = "I";
-            t->keys[1] = "J";
-            t->keys[2] = "U";
-            t->keys[3] = "L";
-            t->keys[4] = "K";
-            break;
-    }
     map->tanks[k] = t;
 }
 
 void create_tanks(Map *map) {
-    map->tanks = malloc(sizeof(Tank*));
+
+    map->tanks = malloc(4*sizeof(Tank*));
     for(int i = 0 ; i<4 ; i++){
         map->tanks[i] = malloc(sizeof(Tank));
         map->tanks[i]->score = 0;
+    }
+    for(int k = 0 ; k<4 ; k++){
+        switch(k){
+            case 0:
+                map->tanks[k]->light_color =  255 | (95 << 8) | (66 << 16) | (255 << 24);
+                map->tanks[k]->dark_color = 255 | (255 << 24);
+
+                map->tanks[k]->keys[0] = 79;
+                map->tanks[k]->keys[1] = 80;
+                map->tanks[k]->keys[2] = 82;
+                map->tanks[k]->keys[3] = 81;
+                map->tanks[k]->keys[4] = 56;
+                break;
+            case 1:
+                if(map->ai_mode){
+                    map->tanks[k]->light_color =  100 | (100 << 8) | (100<< 16) | (255 << 24);
+                    map->tanks[k]->dark_color = 50 | (50 << 8) | (50<< 16) | (255 << 24);
+                } else{
+                    map->tanks[k]->light_color =  66 | (134 << 8) | (244<< 16) | (255 << 24);
+                    map->tanks[k]->dark_color = 0 | (80 << 8) | (255<< 16) | (255 << 24);
+                    map->tanks[k]->keys[0] = 7;
+                    map->tanks[k]->keys[1] = 4;
+                    map->tanks[k]->keys[2] = 26;
+                    map->tanks[k]->keys[3] = 22;
+                    map->tanks[k]->keys[4] = 20;
+                }
+                break;
+            case 2:
+                map->tanks[k]->light_color =  243 | (112 << 8) | (255 << 16) | (255 << 24);
+                map->tanks[k]->dark_color = 187 | (0 << 8) | (255 << 16) | (255 << 24);
+                map->tanks[k]->keys[0] = 11;
+                map->tanks[k]->keys[1] = 9;
+                map->tanks[k]->keys[2] = 23;
+                map->tanks[k]->keys[3] = 10;
+                map->tanks[k]->keys[4] = 21;
+                break;
+            case 3:
+                map->tanks[k]->light_color =  155 | (255 << 8) | (106 << 16) | (255 << 24);
+                map->tanks[k]->dark_color = 0 | (255 << 8) | (38<< 16) | (255 << 24);
+                map->tanks[k]->keys[0] = 15;
+                map->tanks[k]->keys[1] = 13;
+                map->tanks[k]->keys[2] = 12;
+                map->tanks[k]->keys[3] = 14;
+                map->tanks[k]->keys[4] = 24;
+                break;
+        }
     }
 }
 
@@ -117,9 +118,8 @@ bool start_game(Map *map) {
     map->round++;
     map->end_time = -1;
     map->maxx = map->maxy = 0;
-    updlode_walls(map);
     map->bullets = NULL;
-//    define_tanks(map);
+    updlode_walls(map);
     bool **ocupied = calloc((int)map->maxx ,sizeof(bool*));
     for(int i = 0 ; i<map->maxx ; i++){
         ocupied[i] = calloc((int)map->maxy ,sizeof(bool));
@@ -131,6 +131,7 @@ bool start_game(Map *map) {
 
     for(int i = 0 ; i<4 ; i++)
         init_tank(map, i, &ocupied);
+
 
     return 1;
 //    window = SDL_CreateWindow("Alter Tank", SDL_WINDOWPOS_CENTERED , SDL_WINDOWPOS_CENTERED,map->maxx*map->ratio + 325, 1000, SDL_WINDOW_OPENGL);

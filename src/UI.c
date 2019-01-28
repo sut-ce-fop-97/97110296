@@ -6,14 +6,15 @@
 #include "UI.h"
 #include "init.h"
 #include "structs.h"
+#include "view.h"
 #include <stdlib.h>
 #include <stdio.h>
 
 
 #define black 0,0 ,0, 255
 
-int deltax[] = {  0  , -90 , 0 , +90 ,  0  }
-,deltay[] = { -90 ,  0  , 0 ,  0  , +90 };
+int deltax[] = { +90  , -90 ,  0   ,  0  , 0 }
+   ,deltay[] = {  0   ,  0  , -90  , +90 , 0 };
 
 
 void show_button(SDL_Renderer *r, button_t *btn, Map *map, bool error) {
@@ -46,13 +47,14 @@ static void button_process_event(button_t *buttons, int k, const SDL_Event *ev, 
             buttons[k].colour.g -= 30;
             buttons[k].colour.r -= 30;
             buttons[k].focused = true;
-            *focus = k;
+            if(*focus != -1)
+                *focus = k;
         }
         else if(!(ev->button.x >= buttons[k].draw_rect.x &&
                   ev->button.x <= (buttons[k].draw_rect.x + buttons[k].draw_rect.w) &&
                   ev->button.y >= buttons[k].draw_rect.y &&
                   ev->button.y <= (buttons[k].draw_rect.y + buttons[k].draw_rect.h)) &&
-                buttons[k].focused){
+                buttons[k].focused ){
             buttons[k].colour.b += 30;
             buttons[k].colour.g += 30;
             buttons[k].colour.r += 30;
@@ -61,7 +63,7 @@ static void button_process_event(button_t *buttons, int k, const SDL_Event *ev, 
         }
     }
     if((ev->type == SDL_MOUSEBUTTONDOWN && ev->button.button == SDL_BUTTON_LEFT && buttons[k].focused) ||
-            (ev->key.keysym.sym == SDLK_RETURN && buttons[k].focused && mode)) {
+            (ev->key.keysym.sym == SDLK_RETURN && buttons[k].focused && (*focus != -1||mode))) {
         buttons[k].pressed = true;
         buttons[k].colour.g -= 20;
         buttons[k].colour.r -= 20;
@@ -363,7 +365,7 @@ int pause_UI(Map *map){
             if(button(buttons + 1)){
                 map->round = 0;
                 map->players = starting_UI(map);
-                for(int i = 0 ; i<5 ; i++){
+                for(int i = 0 ; i<4 ; i++){
                     map->tanks[i]->score = 0;
                     map->tanks[i]->bullet = 5;
                 }
@@ -408,87 +410,8 @@ int pause_UI(Map *map){
     return 1;
 }
 
-const char *to_letter(int i) {
-    char result[5];
-
-//        SDLK_UNKNOWN = 0,
-//
-//        SDLK_SPACE = ' ',
-//        SDLK_QUOTE = '\'',
-//        SDLK_COMMA = ',',
-//        SDLK_MINUS = '-',
-//        SDLK_PERIOD = '.',
-//        SDLK_0 = '0',
-//        SDLK_1 = '1',
-//        SDLK_2 = '2',
-//        SDLK_3 = '3',
-//        SDLK_4 = '4',
-//        SDLK_5 = '5',
-//        SDLK_6 = '6',
-//        SDLK_7 = '7',
-//        SDLK_8 = '8',
-//        SDLK_9 = '9',
-//        SDLK_COLON = ':',
-//        SDLK_EQUALS = '=',
-//        /*
-//           Skip uppercase letters
-//         */
-//        SDLK_BACKSLASH = '\\',
-//        SDLK_BACKQUOTE = '`',
-//        SDLK_a = 'a',
-//        SDLK_b = 'b',
-//        SDLK_c = 'c',
-//        SDLK_d = 'd',
-//        SDLK_e = 'e',
-//        SDLK_f = 'f',
-//        SDLK_g = 'g',
-//        SDLK_h = 'h',
-//        SDLK_i = 'i',
-//        SDLK_j = 'j',
-//        SDLK_k = 'k',
-//        SDLK_l = 'l',
-//        SDLK_m = 'm',
-//        SDLK_n = 'n',
-//        SDLK_o = 'o',
-//        SDLK_p = 'p',
-//        SDLK_q = 'q',
-//        SDLK_r = 'r',
-//        SDLK_s = 's',
-//        SDLK_t = 't',
-//        SDLK_u = 'u',
-//        SDLK_v = 'v',
-//        SDLK_w = 'w',
-//        SDLK_x = 'x',
-//        SDLK_y = 'y',
-//        SDLK_z = 'z',
-
-//        SDLK_RIGHT = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_RIGHT),
-//        SDLK_LEFT = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_LEFT),
-//        SDLK_DOWN = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_DOWN),
-//        SDLK_UP = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_UP),
-//
-//        SDLK_KP_MINUS = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_MINUS),
-//        SDLK_KP_PLUS = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_PLUS),
-//        SDLK_KP_ENTER = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_ENTER),
-//        SDLK_KP_1 = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_1),
-//        SDLK_KP_2 = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_2),
-//        SDLK_KP_3 = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_3),
-//        SDLK_KP_4 = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_4),
-//        SDLK_KP_5 = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_5),
-//        SDLK_KP_6 = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_6),
-//        SDLK_KP_7 = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_7),
-//        SDLK_KP_8 = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_8),
-//        SDLK_KP_9 = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_9),
-//        SDLK_KP_0 = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_0),
-//        SDLK_KP_PERIOD = SDL_SCANCODE_TO_KEYCODE(SDL_SCANCODE_KP_PERIOD),
-
-        
-
-
-}
-
 int settings_UI(Map *map){
-    int focus = 3, mode = 0;
+    int focus = -1, mode = 0, changing = 0;
     bool is_valid[2] = {true, true};
     int quit = 0;
 
@@ -546,11 +469,9 @@ int settings_UI(Map *map){
 
     for(int i = 0 ; i<4 ; i++) {
         for (int j = 0; j < 5; j++) {
-
-            keys[i][j].pressed = 0;
             keys[i][j].focused = false;
-
-            strcpy(keys[i][j].text, map->tanks[i]->keys[j]);
+            keys[i][j].pressed = 0;
+            to_letter(keys[i][j].text, map->tanks[i]->keys[j]);
 
             keys[i][j].colour.r = 200;
             keys[i][j].colour.g = 200;
@@ -575,11 +496,11 @@ int settings_UI(Map *map){
 
         if(SDL_PollEvent(&evt)) {
             // quit on close, pWindow close, or 'escape' key hit
-            if(evt.type == SDL_QUIT ||
-               (evt.type == SDL_WINDOWEVENT && evt.window.event == SDL_WINDOWEVENT_CLOSE)) {
+            if((evt.type == SDL_QUIT ||
+               (evt.type == SDL_WINDOWEVENT && evt.window.event == SDL_WINDOWEVENT_CLOSE)) ) {
                 return 0;
             }
-            if(evt.type == SDL_KEYDOWN && evt.key.keysym.sym == SDLK_ESCAPE)
+            if(evt.type == SDL_KEYDOWN && evt.key.keysym.sym == SDLK_ESCAPE&& !mode)
                 return 1;
             if(evt.type == SDL_KEYDOWN && evt.key.keysym.sym == SDLK_RETURN ){
                 if(mode == 21 && is_valid[1]){
@@ -589,8 +510,7 @@ int settings_UI(Map *map){
                     mode = 0;
                     is_valid[1] = true;
                 } else if(0<mode && mode<21 && is_valid[0]){
-                    map->tanks[(mode-1)/5]->keys[(mode-1)%5] = keys[(mode-1)/5][(mode-1)%5].text;
-                    puts(map->tanks[(mode-1)/5]->keys[(mode-1)%5]);
+                    map->tanks[(mode-1)/5]->keys[(mode-1)%5] = changing;
                     keys[(mode-1)/5][(mode-1)%5].colour.r = 170;
                     keys[(mode-1)/5][(mode-1)%5].colour.g = 170;
                     keys[(mode-1)/5][(mode-1)%5].colour.b = 170;
@@ -598,9 +518,10 @@ int settings_UI(Map *map){
                     is_valid[0] = true;
                 }
             }
-
-            if(mode && evt.type == SDL_KEYDOWN){
-                char pressed = (char)evt.key.keysym.sym;
+            char tmp[100];
+            to_letter(tmp, changing);
+            if(mode && evt.type == SDL_KEYDOWN  && evt.key.keysym.scancode != SDL_SCANCODE_RETURN){
+                changing = evt.key.keysym.scancode;
                 if ( mode == 21) {
                     if(evt.key.keysym.sym == SDLK_UP)
                         map->target++;
@@ -615,32 +536,13 @@ int settings_UI(Map *map){
                     else
                         is_valid[1] = true;
 
-                } else if((/*isupper(pressed) &&*/ isalpha(pressed)) || isdigit(pressed) || pressed == 'O' || pressed == 'P' || pressed == 'Q' || pressed == 'R'){
-                    char tmp[5];
-                    switch(pressed){
-                        case 'O':
-                            strcpy(tmp, "->");
-                            break;
-                        case 'P':
-                            strcpy(tmp, "<-");
-                            break;
-                        case 'Q':
-                            strcpy(tmp, "\\/");
-                            break;
-                        case 'R':
-                            strcpy(tmp, "/\\");
-                            break;
-                        default:
-                             tmp[0] = toupper(pressed);
-                             tmp[1] = '\0';
-                            break;
-                    }
+                } else if(mode && strcmp(tmp,"\0") ){
                     bool flag = true;
                     for (int i = 0; i < 4; i++)
                         for (int j = 0; j < 5; j++)
-                            if (!strcmp(keys[i][j].text, tmp) && 5*i + j + 1 != mode)
+                            if (changing == map->tanks[i]->keys[j] && 5*i + j + 1 != mode)
                                 flag = false;
-                    strcpy(keys[(mode-1)/5][(mode-1)%5].text, tmp);
+                    to_letter(keys[(mode-1)/5][(mode-1)%5].text, changing);
                     if (flag)
                         is_valid[0] = true;
                     else

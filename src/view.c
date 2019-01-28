@@ -232,28 +232,190 @@ void show_scores(Map *map, SDL_Renderer *renderer) {
     }
 
     x = 1118, y = 158;
-    stringRGBA(renderer, x-3, y-20, "/\\", black);
-    stringRGBA(renderer, x-24,y, "<- / ->", black);
-    stringRGBA(renderer, x-3, y+20, "\\/", black);
-
-    if(!map->ai_mode && map->players>1){
+    for(int i = 0 ; i<map->players-map->ai_mode ; i++){
+        char tmp[100], tmp2[100], tmp3[100];
+        to_letter(tmp, map->tanks[i]->keys[2]);
+        stringRGBA(renderer, x-strlen(tmp), y-20, tmp, black);
+        to_letter(tmp, map->tanks[i]->keys[1]);
+        to_letter(tmp2, map->tanks[i]->keys[4]);
+        to_letter(tmp3, map->tanks[i]->keys[0]);
+        sprintf(tmp, "%s %s %s", tmp, tmp2, tmp3);
+        stringRGBA(renderer, x-3*strlen(tmp),y, tmp, black);
+        to_letter(tmp, map->tanks[i]->keys[3]);
+        stringRGBA(renderer, x-strlen(tmp), y+20, tmp, black);
         y += 225;
-        stringRGBA(renderer, x, y-20, "W", black);
-        stringRGBA(renderer, x-16,y, "A Q D", black);
-        stringRGBA(renderer, x, y+20, "S", black);
-    }
-
-    if(map->players>2){
-        y += 225;
-        stringRGBA(renderer, x, y-20, "T", black);
-        stringRGBA(renderer, x-16,y, "F R H", black);
-        stringRGBA(renderer, x, y+20, "G", black);
-    }
-
-    if(map->players>3){
-        y += 225;
-        stringRGBA(renderer, x, y-20, "I", black);
-        stringRGBA(renderer, x-16,y, "J U L", black);
-        stringRGBA(renderer, x, y+20, "K", black);
     }
 }
+
+void *to_letter(char *result,int i) {
+
+    switch (i){
+        case 4:
+            strcpy(result, "A");
+            break;
+        case 5:
+            strcpy(result, "B");
+            break;
+        case 6:
+            strcpy(result, "C");
+            break;
+        case 7:
+            strcpy(result, "D");
+            break;
+        case 8:
+            strcpy(result, "E");
+            break;
+        case 9:
+            strcpy(result, "F");
+            break;
+        case 10:
+            strcpy(result, "G");
+            break;
+        case 11:
+            strcpy(result, "H");
+            break;
+        case 12:
+            strcpy(result, "I");
+            break;
+        case 13:
+            strcpy(result, "J");
+            break;
+        case 14:
+            strcpy(result, "K");
+            break;
+        case 15:
+            strcpy(result, "L");
+            break;
+        case 16:
+            strcpy(result, "M");
+            break;
+        case 17:
+            strcpy(result, "N");
+            break;
+        case 18:
+            strcpy(result, "O");
+            break;
+        case 19:
+            strcpy(result, "P");
+            break;
+        case 20:
+            strcpy(result, "Q");
+            break;
+        case 21:
+            strcpy(result, "R");
+            break;
+        case 22:
+            strcpy(result, "S");
+            break;
+        case 23:
+            strcpy(result, "T");
+            break;
+        case 24:
+            strcpy(result, "U");
+            break;
+        case 25:
+            strcpy(result, "V");
+            break;
+        case 26:
+            strcpy(result, "W");
+            break;
+        case 27:
+            strcpy(result, "X");
+            break;
+        case 28:
+            strcpy(result, "Y");
+            break;
+        case 29:
+            strcpy(result, "Z");
+            break;
+        case 30:
+            strcpy(result, "1");
+            break;
+        case 31:
+            strcpy(result, "2");
+            break;
+        case 32:
+            strcpy(result, "3");
+            break;
+        case 33:
+            strcpy(result, "4");
+            break;
+        case 34:
+            strcpy(result, "5");
+            break;
+        case 35:
+            strcpy(result, "6");
+            break;
+        case 36:
+            strcpy(result, "7");
+            break;
+        case 37:
+            strcpy(result, "8");
+            break;
+        case 38:
+            strcpy(result, "9");
+            break;
+        case 39:
+            strcpy(result, "0");
+            break;
+        case 42:
+            strcpy(result, "BackSpace");
+            break;
+        case 43:
+            strcpy(result, "Tab");
+            break;
+        case 44:
+            strcpy(result, "Space");
+            break;
+        case 45:
+            strcpy(result, "-");
+            break;
+        case 46:
+            strcpy(result, "=");
+            break;
+        case 47:
+            strcpy(result, "[");
+            break;
+        case 48:
+            strcpy(result, "]");
+            break;
+        case 49:
+            strcpy(result, "\\");
+            break;
+        case 51:
+            strcpy(result, ";");
+            break;
+        case 52:
+            strcpy(result, "'");
+            break;
+        case 53:
+            strcpy(result, "`");
+            break;
+        case 54:
+            strcpy(result, ",");
+            break;
+        case 55:
+            strcpy(result, ".");
+            break;
+        case 56:
+            strcpy(result, "/");
+            break;
+        case 79:
+            strcpy(result, "->");
+            break;
+        case 80:
+            strcpy(result, "<-");
+            break;
+        case 81:
+            strcpy(result, "\\/");
+            break;
+        case 82:
+            strcpy(result, "/\\");
+            break;
+        default:
+            strcpy(result, "\0");
+            break;
+    }
+
+}
+

@@ -130,8 +130,6 @@ int meet_wall(Map *map, Bullet b) {
     return  0;
 }
 
-
-
 int check_end(Map *map, SDL_Renderer **renderer, SDL_Window *window) {
     if(map->end_time != 0){
         if(map->end_time > 0)
@@ -143,14 +141,19 @@ int check_end(Map *map, SDL_Renderer **renderer, SDL_Window *window) {
         if(map->tanks[i]->is_alive){
             winner = i;
             map->tanks[i]->score++;
+            if(map->max_point < map->tanks[i]->score)
+                map->max_point  = map->tanks[i]->score;
         }
 
 
     double midx = 1325/2 ,midy =500;
 
-    if(winner>-1){
+    bool finished = map->max_point == map->target;
+    if(winner > -1){
         for (int i = 0; i < 2; ++i) {
             SDL_SetRenderDrawColor(*renderer, 163, 255, 201, 255);
+            if(finished)
+                SDL_SetRenderDrawColor(*renderer, 0, 255, 0, 255);
             SDL_RenderClear(*renderer);
             Tank *tmp_tank = map->tanks[winner];
             tmp_tank->angle = M_PI/2;
@@ -170,8 +173,15 @@ int check_end(Map *map, SDL_Renderer **renderer, SDL_Window *window) {
             char ss[30] = "Score: ";
             strcat(ss, s);
             stringRGBA(*renderer, midx+tmp_tank->width/2, midy + 10, ss, black);
+
+            if( i == 1 && finished){
+                if(map->ai_mode && winner == 1)
+                    stringRGBA(*renderer, midx-110, midy + tmp_tank->lenght/2 +150, "I am the final winner !!!", black);
+                else
+                    stringRGBA(*renderer, midx-180, midy + tmp_tank->lenght/2 +150, "Congratulations,You are the final winner !!!", black);
+            }
             SDL_RenderPresent(*renderer);
-            SDL_Delay(1000+500*i);
+            SDL_Delay(1000+500*i + i * finished * 5000);
         }
     } else {
         SDL_SetRenderDrawColor(*renderer, 255, 175, 175, 255);
@@ -181,13 +191,12 @@ int check_end(Map *map, SDL_Renderer **renderer, SDL_Window *window) {
         SDL_Delay(1500);
     }
 
-//
-//    SDL_DestroyRenderer(*renderer);
-//    SDL_DestroyWindow(window);
-//    SDL_Quit();
+    if(finished)
+        return 1;
     if(map->ai_mode)
         map->players = 1;
     start_game(map);
+    return 0;
 }
 
 bool meet_tank(Map *map, Bullet b){

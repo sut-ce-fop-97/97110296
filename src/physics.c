@@ -21,64 +21,21 @@ void fire(Tank *t, Bullet_Node **bullets, double ratio) {
 }
 
 void handle_keys(Map *map) {
-    bool keys[4][5] = {};
     const Uint8 *keyboard = SDL_GetKeyboardState(NULL);
 
-    if (keyboard[SDL_SCANCODE_RIGHT])
-        keys[0][0] = 1;
-    if (keyboard[SDL_SCANCODE_LEFT])
-        keys[0][1] = 1;
-    if (keyboard[SDL_SCANCODE_UP])
-        keys[0][2] = 1;
-    if (keyboard[SDL_SCANCODE_DOWN])
-        keys[0][3] = 1;
 
-
-    if (map->players > 1) {
-        if (keyboard[SDL_SCANCODE_D])
-            keys[1][0] = 1;
-        if (keyboard[SDL_SCANCODE_A])
-            keys[1][1] = 1;
-        if (keyboard[SDL_SCANCODE_W])
-            keys[1][2] = 1;
-        if (keyboard[SDL_SCANCODE_S])
-            keys[1][3] = 1;
-    }
-
-    if (map->players > 2) {
-        if (keyboard[SDL_SCANCODE_H])
-            keys[2][0] = 1;
-        if (keyboard[SDL_SCANCODE_F])
-            keys[2][1] = 1;
-        if (keyboard[SDL_SCANCODE_T])
-            keys[2][2] = 1;
-        if (keyboard[SDL_SCANCODE_G])
-            keys[2][3] = 1;
-    }
-
-    if (map->players > 3) {
-        if (keyboard[SDL_SCANCODE_L])
-            keys[3][0] = 1;
-        if (keyboard[SDL_SCANCODE_J])
-            keys[3][1] = 1;
-        if (keyboard[SDL_SCANCODE_I])
-            keys[3][2] = 1;
-        if (keyboard[SDL_SCANCODE_K])
-            keys[3][3] = 1;
-    }
-
-    for (int i = 0; i < map->players; i++) {
+    for (int i = 0; i < map->players - map->ai_mode; i++) {
         if(map->tanks[i]->is_alive){
             for (int j = 0; j < 2; ++j) {
-                if (keys[i][j]) {
-                    map->tanks[i]->angle += ((j & 1)-0.5) * 4.0 * (0.5 - keys[i][3]) * 0.025 ;
+                if (keyboard[map->tanks[i]->keys[j]]) {
+                    map->tanks[i]->angle += ((j & 1)-0.5) * 4.0 * (0.5 - keyboard[map->tanks[i]->keys[3]]) * 0.025 ;
                     if (!can_turn(map , i))
-                        map->tanks[i]->angle -= ((j & 1) - 0.5) * 4.0 * (0.5 - keys[i][3]) * 0.025 ;
+                        map->tanks[i]->angle -= ((j & 1) - 0.5) * 4.0 * (0.5 - keyboard[map->tanks[i]->keys[3]]) * 0.025 ;
                 }
 
             }
             for (int j = 2; j < 4; ++j) {
-                if (keys[i][j]) {
+                if (keyboard[map->tanks[i]->keys[j]]) {
                     map->tanks[i]->x += (0.5-(j & 1)) * 2.0 * cos(-map->tanks[i]->angle);
                     map->tanks[i]->y += (0.5-(j & 1)) * 2.0 * sin(-map->tanks[i]->angle);
                     int tmp = (!(j & 1) ? 0 : 3);
@@ -103,17 +60,10 @@ int handle_event(Map *map) {
             return pause_UI(map);
         }
         if(event.type == SDL_KEYUP ){
-            if(event.key.keysym.sym == SDLK_SLASH && map->tanks[0]->is_alive)
-                fire(map->tanks[0], &map->bullets, map->ratio);
-            if(map->players>1 && event.key.keysym.scancode == SDL_SCANCODE_Q && map->tanks[1]->is_alive)
-                fire(map->tanks[1], &map->bullets, map->ratio);
-            if(map->players>2 && event.key.keysym.scancode == SDL_SCANCODE_R && map->tanks[2]->is_alive)
-                fire(map->tanks[2], &map->bullets, map->ratio);
-            if(map->players>3 && event.key.keysym.scancode == SDL_SCANCODE_U && map->tanks[3]->is_alive)
-                fire(map->tanks[3], &map->bullets, map->ratio);
-
-
-
+            for(int i= 0 ; i<4 ; i++){
+                if(map->players>i && event.key.keysym.scancode == map->tanks[i]->keys[4] && map->tanks[i]->is_alive)
+                    fire(map->tanks[i], &map->bullets, map->ratio);
+            }
         }
     }
     return 1;

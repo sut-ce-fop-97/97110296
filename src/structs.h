@@ -21,7 +21,7 @@ typedef struct {
     int score;
     Point corners[5];
     bool is_alive;
-    char *keys[5];
+    int keys[5];
 }Tank;
 
 typedef struct {
@@ -62,6 +62,7 @@ typedef struct {
     int count_of_walls;
     int count_of_bullets;
     int target;
+    int max_point;
     double maxx, maxy, ratio;
     int end_time;
     bool ai_mode;
