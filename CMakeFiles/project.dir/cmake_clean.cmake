@@ -6,6 +6,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/project.dir/src/logic.c.o"
   "CMakeFiles/project.dir/src/main.c.o"
   "CMakeFiles/project.dir/src/physics.c.o"
+  "CMakeFiles/project.dir/src/power-ups.c.o"
   "CMakeFiles/project.dir/src/simple_snake.c.o"
   "CMakeFiles/project.dir/src/stack.c.o"
   "CMakeFiles/project.dir/src/view.c.o"

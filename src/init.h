@@ -15,5 +15,6 @@ bool start_game(Map *map);
 void generate_walls(Cell ***cells, int a, int b);
 int load_last_game(Map *map);
 void create_tanks(Map *map) ;
+void initialize(Map *map, SDL_Window *window, SDL_Renderer *renderer);
 
 #endif //PROJECT_INIT_H

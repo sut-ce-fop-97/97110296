@@ -180,7 +180,9 @@ void show_scores(Map *map, SDL_Renderer *renderer) {
     SDL_RenderFillRect(renderer,&rect);
     char s[20] ;
     sprintf(s, "Round noumber: %d", map->round);
-    stringRGBA(renderer, 1105, 20, s, 0, 33, 168, 255);
+    SDL_RenderSetScale(map->renderer, 1.2, 1.2);
+    stringRGBA(renderer, 1105/1.2, 20/1.2, s, 0, 33, 168, 255);
+    SDL_RenderSetScale(map->renderer, 1, 1);
     double x = 1120, y = 160;
     for(int i = 0 ; i<map->players ; i++){
         Tank* tmp_tank = malloc(sizeof(Tank));
@@ -216,6 +218,8 @@ void show_scores(Map *map, SDL_Renderer *renderer) {
         tmp_tank->y = y;
         tmp_tank->angle = M_PI/2;
         show_tank(tmp_tank, renderer);
+        if(map->tanks[i]->power_up->model)
+            filledCircleRGBA(map->renderer, tmp_tank->x, tmp_tank->y - tmp_tank->barrel_lenght ,10, black);
         *s = '\0';
         sprintf(s,"%s%d","Score: ",map->tanks[i]->score);
         if(map->tanks[i]->is_alive)
@@ -358,9 +362,6 @@ void *to_letter(char *result,int i) {
         case 39:
             strcpy(result, "0");
             break;
-        case 42:
-            strcpy(result, "BackSpace");
-            break;
         case 43:
             strcpy(result, "Tab");
             break;
@@ -418,4 +419,41 @@ void *to_letter(char *result,int i) {
     }
 
 }
+
+void show_button(SDL_Renderer *r, button_t *btn, Map *map, bool error) {
+    if(error)
+        SDL_SetRenderDrawColor(r, 255, 0, 0, 255);
+    else
+        SDL_SetRenderDrawColor(r, btn->colour.r, btn->colour.g, btn->colour.b, btn->colour.a);
+    SDL_RenderFillRect(r, &btn->draw_rect);
+    SDL_SetRenderDrawColor(r, 0, 0, 0, 255);
+    SDL_RenderDrawRect(r, &btn->draw_rect);
+    SDL_RenderSetScale(map->renderer, 1.3, 1.3);
+    if(error)
+        stringRGBA(map->renderer, (btn->draw_rect.x + btn->draw_rect.w/2 - 5* strlen(btn->text))/1.3,
+                   (btn->draw_rect.y + btn->draw_rect.h/2 -3)/1.3 , btn->text, 100, 0,0, 150);
+    else
+        stringRGBA(map->renderer, (btn->draw_rect.x + btn->draw_rect.w/2 - 5* strlen(btn->text))/1.3,
+                   (btn->draw_rect.y + btn->draw_rect.h/2 -3)/1.3 , btn->text, black);
+    SDL_RenderSetScale(map->renderer, 1, 1);
+
+}
+
+void show_power_up(Map *map, power_up *param) {
+    filledCircleRGBA(map->renderer, param->x, param->y , 0.05*map->ratio, black);
+//    SDL_Surface * image;
+//    switch (param.model){
+//        case 1:
+//            image = SDL_LoadBMP("Mine.jpg");
+//
+//            break;
+//        default:
+//            break;
+//    }
+//    SDL_Texture * texture = SDL_CreateTextureFromSurface(map->renderer, image);
+//    SDL_RenderCopy(map->renderer, texture, NULL, NULL);
+//    SDL_DestroyTexture(texture);
+//    SDL_FreeSurface(image);
+}
+
 

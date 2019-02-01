@@ -17,8 +17,7 @@
 #include "logic.h"
 #include "UI.h"
 #include "effects.h"
-
-
+#include "power-ups.h"
 
 
 
@@ -32,13 +31,7 @@ int main() {
 
     ///initializing
     Map *map = malloc(sizeof(Map));
-    map->window = window;
-    map->renderer = renderer;
-    map->round = 0;
-    map->target = 10;
-    map->max_point = 0;
-    create_tanks(map);
-    map->players = starting_UI(map);
+    initialize(map, window, renderer);
     const float FPS = 4/sqrt(map->players);
     bool finished = false;
 
@@ -52,8 +45,8 @@ int main() {
 
         ///seting renderer
         int start_ticks = SDL_GetTicks();
-        SDL_SetRenderDrawColor(renderer, 206, 239, 255, 255);
-        SDL_RenderClear(renderer);
+        SDL_SetRenderDrawColor(map->renderer, 206, 239, 255, 255);
+        SDL_RenderClear(map->renderer);
 
         ///handling keys
         handle_keys(map);
@@ -70,10 +63,16 @@ int main() {
         show_scores(map , renderer);
         if(map->bullets != NULL)
             show_bullet(map, renderer);
+        for(int i = 0 ;i<map->power_ups_number ; i++)
+            show_power_up(map, map->power_ups[i]);
 
 
         ///End time
         finished = check_end(map, &renderer, window);
+
+        ///Bullets and Power-Ups
+        refresh_bullets(map);
+        refresh_powerups(map);
 
         ///present render
         SDL_RenderPresent(renderer);

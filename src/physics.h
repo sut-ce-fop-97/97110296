@@ -15,6 +15,8 @@ void handle_keys(Map *map);
 void add_bullet(Bullet *b, Bullet_Node **bullets);
 void update_corners(Tank *t);
 void go_ai(Map *map);
+void refresh_bullets(Map *map) ;
+
 #endif //PROJECT_PHYSICS_H
 
 

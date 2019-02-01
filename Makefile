@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/clion/58/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /snap/clion/61/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /snap/clion/58/bin/cmake/linux/bin/cmake -E remove -f
+RM = /snap/clion/61/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/amin/Desktop/project
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/snap/clion/58/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/snap/clion/61/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/snap/clion/58/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/snap/clion/61/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -312,6 +312,33 @@ src/physics.c.s:
 	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/src/physics.c.s
 .PHONY : src/physics.c.s
 
+src/power-ups.o: src/power-ups.c.o
+
+.PHONY : src/power-ups.o
+
+# target to build an object file
+src/power-ups.c.o:
+	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/src/power-ups.c.o
+.PHONY : src/power-ups.c.o
+
+src/power-ups.i: src/power-ups.c.i
+
+.PHONY : src/power-ups.i
+
+# target to preprocess a source file
+src/power-ups.c.i:
+	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/src/power-ups.c.i
+.PHONY : src/power-ups.c.i
+
+src/power-ups.s: src/power-ups.c.s
+
+.PHONY : src/power-ups.s
+
+# target to generate assembly for a file
+src/power-ups.c.s:
+	$(MAKE) -f CMakeFiles/project.dir/build.make CMakeFiles/project.dir/src/power-ups.c.s
+.PHONY : src/power-ups.c.s
+
 src/simple_snake.o: src/simple_snake.c.o
 
 .PHONY : src/simple_snake.o
@@ -423,6 +450,9 @@ help:
 	@echo "... src/physics.o"
 	@echo "... src/physics.i"
 	@echo "... src/physics.s"
+	@echo "... src/power-ups.o"
+	@echo "... src/power-ups.i"
+	@echo "... src/power-ups.s"
 	@echo "... src/simple_snake.o"
 	@echo "... src/simple_snake.i"
 	@echo "... src/simple_snake.s"

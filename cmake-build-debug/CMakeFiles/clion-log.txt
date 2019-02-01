@@ -1,4 +1,4 @@
-/snap/clion/58/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/amin/Desktop/project
+/snap/clion/61/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/amin/Desktop/project
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /home/amin/Desktop/project

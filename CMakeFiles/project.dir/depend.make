@@ -180,6 +180,7 @@ CMakeFiles/project.dir/src/main.c.o: src/init.h
 CMakeFiles/project.dir/src/main.c.o: src/logic.h
 CMakeFiles/project.dir/src/main.c.o: src/main.c
 CMakeFiles/project.dir/src/main.c.o: src/physics.h
+CMakeFiles/project.dir/src/main.c.o: src/power-ups.h
 CMakeFiles/project.dir/src/main.c.o: src/structs.h
 CMakeFiles/project.dir/src/main.c.o: src/view.h
 CMakeFiles/project.dir/src/main.c.o: /usr/include/SDL2/SDL_blendmode.h
@@ -199,10 +200,12 @@ CMakeFiles/project.dir/src/main.c.o: /usr/include/SDL2/begin_code.h
 CMakeFiles/project.dir/src/main.c.o: /usr/include/SDL2/close_code.h
 
 CMakeFiles/project.dir/src/physics.c.o: src/UI.h
+CMakeFiles/project.dir/src/physics.c.o: src/effects.h
 CMakeFiles/project.dir/src/physics.c.o: src/init.h
 CMakeFiles/project.dir/src/physics.c.o: src/logic.h
 CMakeFiles/project.dir/src/physics.c.o: src/physics.c
 CMakeFiles/project.dir/src/physics.c.o: src/physics.h
+CMakeFiles/project.dir/src/physics.c.o: src/power-ups.h
 CMakeFiles/project.dir/src/physics.c.o: src/structs.h
 CMakeFiles/project.dir/src/physics.c.o: /usr/include/SDL2/SDL_blendmode.h
 CMakeFiles/project.dir/src/physics.c.o: /usr/include/SDL2/SDL_config.h
@@ -225,9 +228,14 @@ CMakeFiles/project.dir/src/physics.c.o: /usr/include/SDL2/SDL_scancode.h
 CMakeFiles/project.dir/src/physics.c.o: /usr/include/SDL2/SDL_stdinc.h
 CMakeFiles/project.dir/src/physics.c.o: /usr/include/SDL2/SDL_surface.h
 CMakeFiles/project.dir/src/physics.c.o: /usr/include/SDL2/SDL_touch.h
+CMakeFiles/project.dir/src/physics.c.o: /usr/include/SDL2/SDL_types.h
 CMakeFiles/project.dir/src/physics.c.o: /usr/include/SDL2/SDL_video.h
 CMakeFiles/project.dir/src/physics.c.o: /usr/include/SDL2/begin_code.h
 CMakeFiles/project.dir/src/physics.c.o: /usr/include/SDL2/close_code.h
+
+CMakeFiles/project.dir/src/power-ups.c.o: src/power-ups.c
+CMakeFiles/project.dir/src/power-ups.c.o: src/power-ups.h
+CMakeFiles/project.dir/src/power-ups.c.o: src/structs.h
 
 
 CMakeFiles/project.dir/src/stack.c.o: src/stack.c

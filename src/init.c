@@ -40,14 +40,14 @@ void init_tank(Map *map, int k, bool *** ocupied) {
         t->y = rand()%((int)map->maxy-1);
     }while((*ocupied)[(int)t->x][(int)t->y]);
     (*ocupied)[(int)t->x][(int)t->y] = true;
-    t->x = map->ratio*(0.65+t->x) + (1000-map->ratio*(map->maxx-1))/2 + 40;
-    t->y = map->ratio*(0.65+t->y) + (1000-map->ratio*(map->maxy-1))/2 + 40;
+    t->x = map->ratio*(-0.35+t->x) + (1000-map->ratio*(map->maxx-1))/2 + 40;
+    t->y = map->ratio*(-0.35+t->y) + (1000-map->ratio*(map->maxy-1))/2 + 40;
     t->angle = rand();
     t->lenght = 0.4*map->ratio;
     t->width = 0.35*map->ratio;
     t->barrel_lenght = 0.3*map->ratio;
     t->barrel_thickness = 0.08*map->ratio;
-
+    t->refresh_time = 3000;
 
     map->tanks[k] = t;
 }
@@ -58,6 +58,8 @@ void create_tanks(Map *map) {
     for(int i = 0 ; i<4 ; i++){
         map->tanks[i] = malloc(sizeof(Tank));
         map->tanks[i]->score = 0;
+        map->tanks[i]->power_up = malloc(sizeof(power_up));
+        map->tanks[i]->power_up->model = 0;
     }
     for(int k = 0 ; k<4 ; k++){
         switch(k){
@@ -117,6 +119,10 @@ bool start_game(Map *map) {
         map->ai_mode = false;
     map->round++;
     map->end_time = -1;
+    map->powerup_time = 1000;
+    map->mines_number = 0;
+    map->power_ups_number = 0;
+    map->mines = NULL;
     map->maxx = map->maxy = 0;
     map->bullets = NULL;
     updlode_walls(map);
@@ -131,6 +137,20 @@ bool start_game(Map *map) {
 
     for(int i = 0 ; i<4 ; i++)
         init_tank(map, i, &ocupied);
+
+    if(map->ai_mode){
+        map->tanks[1]->light_color =  100 | (100 << 8) | (100<< 16) | (255 << 24);
+        map->tanks[1]->dark_color = 50 | (50 << 8) | (50<< 16) | (255 << 24);
+    } else{
+        map->tanks[1]->light_color =  66 | (134 << 8) | (244<< 16) | (255 << 24);
+        map->tanks[1]->dark_color = 0 | (80 << 8) | (255<< 16) | (255 << 24);
+        map->tanks[1]->keys[0] = 7;
+        map->tanks[1]->keys[1] = 4;
+        map->tanks[1]->keys[2] = 26;
+        map->tanks[1]->keys[3] = 22;
+        map->tanks[1]->keys[4] = 20;
+    }
+
 
 
     return 1;
@@ -254,3 +274,12 @@ int load_last_game(Map *map) {
 
 
 
+void initialize(Map *map, SDL_Window *window, SDL_Renderer *renderer) {
+    map->window = window;
+    map->renderer = renderer;
+    map->round = 0;
+    map->target = 10;
+    map->max_point = 0;
+    create_tanks(map);
+    map->players = starting_UI(map);
+}

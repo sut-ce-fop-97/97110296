@@ -34,10 +34,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/clion/58/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /snap/clion/61/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /snap/clion/58/bin/cmake/linux/bin/cmake -E remove -f
+RM = /snap/clion/61/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -148,9 +148,22 @@ CMakeFiles/project.dir/src/physics.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/project.dir/src/physics.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/amin/Desktop/project/src/physics.c -o CMakeFiles/project.dir/src/physics.c.s
 
+CMakeFiles/project.dir/src/power-ups.c.o: CMakeFiles/project.dir/flags.make
+CMakeFiles/project.dir/src/power-ups.c.o: src/power-ups.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/amin/Desktop/project/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/project.dir/src/power-ups.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/project.dir/src/power-ups.c.o   -c /home/amin/Desktop/project/src/power-ups.c
+
+CMakeFiles/project.dir/src/power-ups.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/project.dir/src/power-ups.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/amin/Desktop/project/src/power-ups.c > CMakeFiles/project.dir/src/power-ups.c.i
+
+CMakeFiles/project.dir/src/power-ups.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/project.dir/src/power-ups.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/amin/Desktop/project/src/power-ups.c -o CMakeFiles/project.dir/src/power-ups.c.s
+
 CMakeFiles/project.dir/src/simple_snake.c.o: CMakeFiles/project.dir/flags.make
 CMakeFiles/project.dir/src/simple_snake.c.o: src/simple_snake.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/amin/Desktop/project/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/project.dir/src/simple_snake.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/amin/Desktop/project/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/project.dir/src/simple_snake.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/project.dir/src/simple_snake.c.o   -c /home/amin/Desktop/project/src/simple_snake.c
 
 CMakeFiles/project.dir/src/simple_snake.c.i: cmake_force
@@ -163,7 +176,7 @@ CMakeFiles/project.dir/src/simple_snake.c.s: cmake_force
 
 CMakeFiles/project.dir/src/stack.c.o: CMakeFiles/project.dir/flags.make
 CMakeFiles/project.dir/src/stack.c.o: src/stack.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/amin/Desktop/project/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/project.dir/src/stack.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/amin/Desktop/project/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/project.dir/src/stack.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/project.dir/src/stack.c.o   -c /home/amin/Desktop/project/src/stack.c
 
 CMakeFiles/project.dir/src/stack.c.i: cmake_force
@@ -176,7 +189,7 @@ CMakeFiles/project.dir/src/stack.c.s: cmake_force
 
 CMakeFiles/project.dir/src/view.c.o: CMakeFiles/project.dir/flags.make
 CMakeFiles/project.dir/src/view.c.o: src/view.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/amin/Desktop/project/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/project.dir/src/view.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/amin/Desktop/project/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/project.dir/src/view.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/project.dir/src/view.c.o   -c /home/amin/Desktop/project/src/view.c
 
 CMakeFiles/project.dir/src/view.c.i: cmake_force
@@ -196,6 +209,7 @@ project_OBJECTS = \
 "CMakeFiles/project.dir/src/logic.c.o" \
 "CMakeFiles/project.dir/src/main.c.o" \
 "CMakeFiles/project.dir/src/physics.c.o" \
+"CMakeFiles/project.dir/src/power-ups.c.o" \
 "CMakeFiles/project.dir/src/simple_snake.c.o" \
 "CMakeFiles/project.dir/src/stack.c.o" \
 "CMakeFiles/project.dir/src/view.c.o"
@@ -210,12 +224,13 @@ project: CMakeFiles/project.dir/src/init.c.o
 project: CMakeFiles/project.dir/src/logic.c.o
 project: CMakeFiles/project.dir/src/main.c.o
 project: CMakeFiles/project.dir/src/physics.c.o
+project: CMakeFiles/project.dir/src/power-ups.c.o
 project: CMakeFiles/project.dir/src/simple_snake.c.o
 project: CMakeFiles/project.dir/src/stack.c.o
 project: CMakeFiles/project.dir/src/view.c.o
 project: CMakeFiles/project.dir/build.make
 project: CMakeFiles/project.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/amin/Desktop/project/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking C executable project"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/amin/Desktop/project/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking C executable project"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/project.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

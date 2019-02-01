@@ -37,6 +37,7 @@ bool is_lefthand(Point p, Line l) {
 }
 
 bool is_inside(Point p, Tank *t) {
+    update_corners(t);
     for(int i = 0 ; i<5 ; i++){
         Line l;
         l.p[0].x = t->corners[i].x;

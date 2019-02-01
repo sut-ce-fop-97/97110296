@@ -17,22 +17,6 @@ int deltax[] = { +90  , -90 ,  0   ,  0  , 0 }
    ,deltay[] = {  0   ,  0  , -90  , +90 , 0 };
 
 
-void show_button(SDL_Renderer *r, button_t *btn, Map *map, bool error) {
-    if(error)
-        SDL_SetRenderDrawColor(r, 255, 0, 0, 255);
-    else
-        SDL_SetRenderDrawColor(r, btn->colour.r, btn->colour.g, btn->colour.b, btn->colour.a);
-    SDL_RenderFillRect(r, &btn->draw_rect);
-    SDL_SetRenderDrawColor(r, 0, 0, 0, 255);
-    SDL_RenderDrawRect(r, &btn->draw_rect);
-    if(error)
-        stringRGBA(map->renderer, btn->draw_rect.x + btn->draw_rect.w/2 - 4* strlen(btn->text),
-                   btn->draw_rect.y + btn->draw_rect.h/2 -3 , btn->text, 100, 0,0, 150);
-    else
-        stringRGBA(map->renderer, btn->draw_rect.x + btn->draw_rect.w/2 - 4* strlen(btn->text),
-                   btn->draw_rect.y + btn->draw_rect.h/2 -3 , btn->text, black);
-
-}
 
 static void button_process_event(button_t *buttons, int k, const SDL_Event *ev, int *focus, int mode) {
     // react on mouse click within button rectangle by setting 'pressed'
@@ -47,8 +31,7 @@ static void button_process_event(button_t *buttons, int k, const SDL_Event *ev, 
             buttons[k].colour.g -= 30;
             buttons[k].colour.r -= 30;
             buttons[k].focused = true;
-            if(*focus != -1)
-                *focus = k;
+            *focus = k;
         }
         else if(!(ev->button.x >= buttons[k].draw_rect.x &&
                   ev->button.x <= (buttons[k].draw_rect.x + buttons[k].draw_rect.w) &&
@@ -63,7 +46,7 @@ static void button_process_event(button_t *buttons, int k, const SDL_Event *ev, 
         }
     }
     if((ev->type == SDL_MOUSEBUTTONDOWN && ev->button.button == SDL_BUTTON_LEFT && buttons[k].focused) ||
-            (ev->key.keysym.sym == SDLK_RETURN && buttons[k].focused && (*focus != -1||mode))) {
+            (ev->type == SDL_KEYDOWN && ev->key.keysym.sym == SDLK_RETURN && buttons[k].focused && !mode)) {
         buttons[k].pressed = true;
         buttons[k].colour.g -= 20;
         buttons[k].colour.r -= 20;
@@ -252,8 +235,9 @@ int starting_UI(Map *map) {
             quit = 1;
         }
 
-        stringRGBA(map->renderer, mainx - 60, mainy - 100, "How many players do we have?", black);
-
+        SDL_RenderSetScale(map->renderer, 2, 2);
+        stringRGBA(map->renderer, mainx - 405, mainy - 230, "How many players do we have?", black);
+        SDL_RenderSetScale(map->renderer, 1, 1);
 
         SDL_RenderPresent(map->renderer);
     }
@@ -338,7 +322,7 @@ int pause_UI(Map *map){
                (evt.type == SDL_WINDOWEVENT && evt.window.event == SDL_WINDOWEVENT_CLOSE)) {
                 return 0;
             }
-            if(evt.type == SDL_KEYDOWN && evt.key.keysym.sym == SDLK_ESCAPE)
+            if(evt.type == SDL_KEYDOWN && (evt.key.keysym.sym == SDLK_ESCAPE || evt.key.keysym.sym == SDLK_BACKSPACE))
                 return 1;
 
             // pass event to button
@@ -432,59 +416,54 @@ int settings_UI(Map *map){
 
 
     // buttons initing
-    button_t keys[4][5];
-    button_t back_btn, target_btn;
+    button_t keys[22];
 
-    back_btn.pressed = 0;
-    back_btn.focused = false;
-    strcpy(back_btn.text, "back");
+    keys[21].pressed = 0;
+    keys[21].focused = false;
+    strcpy(keys[21].text, "back");
     
-    back_btn.colour.r = 120;
-    back_btn.colour.g = 120;
-    back_btn.colour.b = 120;
-    back_btn.colour.a = 255;
+    keys[21].colour.r = 120;
+    keys[21].colour.g = 120;
+    keys[21].colour.b = 120;
+    keys[21].colour.a = 255;
 
-    back_btn.draw_rect.x = 20;
-    back_btn.draw_rect.y = 880;
-    back_btn.draw_rect.h = 100;
-    back_btn.draw_rect.w = 200;
+    keys[21].draw_rect.x = 20;
+    keys[21].draw_rect.y = 880;
+    keys[21].draw_rect.h = 100;
+    keys[21].draw_rect.w = 200;
     
-    
-
-    target_btn.pressed = 0;
-    target_btn.focused = false;
-    strcpy(target_btn.text, "Change Target");
-
-    target_btn.colour.r = 200;
-    target_btn.colour.g = 200;
-    target_btn.colour.b = 200;
-    target_btn.colour.a = 255;
-
-    target_btn.draw_rect.x = 610;
-    target_btn.draw_rect.y = 390;
-    target_btn.draw_rect.h = 150;
-    target_btn.draw_rect.w = 150;
     
 
+    keys[20].pressed = 0;
+    keys[20].focused = false;
+    strcpy(keys[20].text, "Change Target");
 
-    for(int i = 0 ; i<4 ; i++) {
-        for (int j = 0; j < 5; j++) {
-            keys[i][j].focused = false;
-            keys[i][j].pressed = 0;
-            to_letter(keys[i][j].text, map->tanks[i]->keys[j]);
+    keys[20].colour.r = 200;
+    keys[20].colour.g = 200;
+    keys[20].colour.b = 200;
+    keys[20].colour.a = 255;
 
-            keys[i][j].colour.r = 200;
-            keys[i][j].colour.g = 200;
-            keys[i][j].colour.b = 200;
-            keys[i][j].colour.a = 255;
+    keys[20].draw_rect.x = 610;
+    keys[20].draw_rect.y = 390;
+    keys[20].draw_rect.h = 150;
+    keys[20].draw_rect.w = 150;
+    
 
-            keys[i][j].draw_rect.x = 320 + (i&1)*650 + deltax[j];
-            keys[i][j].draw_rect.y = 220 + (i>>1)*400 + deltay[j];
-            keys[i][j].draw_rect.h = 91;
-            keys[i][j].draw_rect.w = 91;
-            
-            
-        }
+
+    for(int i = 0 ; i<20 ; i++) {
+            keys[i].focused = false;
+            keys[i].pressed = 0;
+            to_letter(keys[i].text, map->tanks[i/5]->keys[i%5]);
+
+            keys[i].colour.r = 200;
+            keys[i].colour.g = 200;
+            keys[i].colour.b = 200;
+            keys[i].colour.a = 255;
+
+            keys[i].draw_rect.x = 320 + (i/5&1)*650 + deltax[i%5];
+            keys[i].draw_rect.y = 220 + (i/5>>1)*400 + deltay[i%5];
+            keys[i].draw_rect.h = 91;
+            keys[i].draw_rect.w = 91;
         
     }
 
@@ -495,54 +474,62 @@ int settings_UI(Map *map){
         SDL_Event evt;
 
         if(SDL_PollEvent(&evt)) {
+            // pass event to button
+            if (!mode){
+                for (int i = 0; i < 22; i++)
+                    button_process_event(keys, i, &evt, &focus, mode);
+                tab_controler(evt, keys, &focus, 22);
+            }
             // quit on close, pWindow close, or 'escape' key hit
-            if((evt.type == SDL_QUIT ||
-               (evt.type == SDL_WINDOWEVENT && evt.window.event == SDL_WINDOWEVENT_CLOSE)) ) {
+            if ((evt.type == SDL_QUIT ||
+                 (evt.type == SDL_WINDOWEVENT && evt.window.event == SDL_WINDOWEVENT_CLOSE))) {
                 return 0;
             }
-            if(evt.type == SDL_KEYDOWN && evt.key.keysym.sym == SDLK_ESCAPE&& !mode)
+            if (evt.type == SDL_KEYDOWN && (evt.key.keysym.sym == SDLK_ESCAPE || evt.key.keysym.sym == SDLK_BACKSPACE) && !mode)
                 return 1;
-            if(evt.type == SDL_KEYDOWN && evt.key.keysym.sym == SDLK_RETURN ){
-                if(mode == 21 && is_valid[1]){
-                    target_btn.colour.r = 170;
-                    target_btn.colour.g = 170;
-                    target_btn.colour.b = 170;
+            if (evt.type == SDL_KEYDOWN && evt.key.keysym.sym == SDLK_RETURN) {
+                if (mode == 21 && is_valid[1]) {
+                    keys[20].colour.r = 170;
+                    keys[20].colour.g = 170;
+                    keys[20].colour.b = 170;
                     mode = 0;
                     is_valid[1] = true;
-                } else if(0<mode && mode<21 && is_valid[0]){
-                    map->tanks[(mode-1)/5]->keys[(mode-1)%5] = changing;
-                    keys[(mode-1)/5][(mode-1)%5].colour.r = 170;
-                    keys[(mode-1)/5][(mode-1)%5].colour.g = 170;
-                    keys[(mode-1)/5][(mode-1)%5].colour.b = 170;
+                }
+
+                if (0 < mode && mode < 21 && is_valid[0]) {
+                    map->tanks[(mode - 1) / 5]->keys[(mode - 1) % 5] = changing;
+                    keys[mode - 1].colour.r = 170;
+                    keys[mode - 1].colour.g = 170;
+                    keys[mode - 1].colour.b = 170;
                     mode = 0;
                     is_valid[0] = true;
                 }
             }
             char tmp[100];
             to_letter(tmp, changing);
-            if(mode && evt.type == SDL_KEYDOWN  && evt.key.keysym.scancode != SDL_SCANCODE_RETURN){
+            if (mode && evt.type == SDL_KEYDOWN && evt.key.keysym.scancode != SDL_SCANCODE_RETURN) {
                 changing = evt.key.keysym.scancode;
-                if ( mode == 21) {
-                    if(evt.key.keysym.sym == SDLK_UP)
+                if (mode == 21) {
+                    if (evt.key.keysym.sym == SDLK_UP)
                         map->target++;
-                    if(evt.key.keysym.sym == SDLK_DOWN)
+                    if (evt.key.keysym.sym == SDLK_DOWN)
                         map->target--;
                     int maxx = 0;
-                    for(int i = 0 ; i<4 ; i++)
-                        if(map->tanks[i]->score > maxx)
+                    for (int i = 0; i < 4; i++)
+                        if (map->tanks[i]->score > maxx)
                             maxx = map->tanks[i]->score;
-                    if(map->target <= maxx)
+                    if (map->target <= maxx)
                         is_valid[1] = false;
                     else
                         is_valid[1] = true;
 
-                } else if(mode && strcmp(tmp,"\0") ){
+                } else if (mode && strcmp(tmp, "\0")) {
                     bool flag = true;
                     for (int i = 0; i < 4; i++)
                         for (int j = 0; j < 5; j++)
-                            if (changing == map->tanks[i]->keys[j] && 5*i + j + 1 != mode)
+                            if (changing == map->tanks[i]->keys[j] && 5 * i + j + 1 != mode)
                                 flag = false;
-                    to_letter(keys[(mode-1)/5][(mode-1)%5].text, changing);
+                    to_letter(keys[mode - 1].text, changing);
                     if (flag)
                         is_valid[0] = true;
                     else
@@ -550,60 +537,44 @@ int settings_UI(Map *map){
                 }
             }
 
-            // pass event to button
-            if(!mode){
-                for(int i = 0 ; i<4 ; i++)
-                    for(int j = 0 ; j<5 ; j++)
-                        button_process_event(keys[i], j, &evt, &focus, 0);
-                button_process_event(&back_btn, 0, &evt, &focus, 0);
-                button_process_event(&target_btn, 0, &evt, &focus, 0);
 
-            }
 
         }
 
         SDL_SetRenderDrawColor(map->renderer, 255, 225, 175, 255);
         SDL_RenderClear(map->renderer);
 
-        for(int i = 0 ; i<4 ; i++)
-            for(int j = 0 ; j<5 ; j++)
-                show_button(map->renderer, &keys[i][j], map, (5*i+j+1 == mode)*!is_valid[0]);
-        show_button(map->renderer, &back_btn, map, 0);
-        show_button(map->renderer, &target_btn, map, (21 == mode)*!is_valid[1]);
+        for(int i = 0 ; i<22 ; i++)
+            show_button(map->renderer, &keys[i], map, (i+1 == mode)*!is_valid[i/20]);
 
         if(state == STATE_IN_MENU && !mode) {
-            if(button(&back_btn))
+            if(button(&keys[21]))
                 state = STATE_IN_GAME;
-            if(button(&target_btn)) {
-                target_btn.colour.b = 200;
-                target_btn.colour.g = 50;
-                target_btn.colour.r = 50;
-                mode = 21;
-            }
-            for(int i = 0 ; i<4 ; i++)
-                for(int j = 0 ; j<5; j++){
-                    if(button(&keys[i][j])){
-                        keys[i][j].colour.b = 200;
-                        keys[i][j].colour.g = 50;
-                        keys[i][j].colour.r = 50;
-                        mode = 5*i + j + 1;
-                    }
+            for(int i = 0 ; i<21 ; i++)
+                if(button(&keys[i])){
+                    keys[i].colour.b = 200;
+                    keys[i].colour.g = 50;
+                    keys[i].colour.r = 50;
+                    mode = i+1;
                 }
         } else if(state == STATE_IN_GAME) {
             SDL_Delay(200);
             quit = 1;
         }
-        stringRGBA(map->renderer, 336, 100, "Player 1", black);
-        stringRGBA(map->renderer, 986, 100, "Player 2", black);
-        stringRGBA(map->renderer, 336, 500, "Player 3", black);
-        stringRGBA(map->renderer, 986, 500, "Player 4", black);
+        SDL_RenderSetScale(map->renderer, 1.4,1.4);
+        stringRGBA(map->renderer, 326/1.4, 100/1.4, "Player 1", black);
+        stringRGBA(map->renderer, 976/1.4, 100/1.4, "Player 2", black);
+        stringRGBA(map->renderer, 326/1.4, 500/1.4, "Player 3", black);
+        stringRGBA(map->renderer, 976/1.4, 500/1.4, "Player 4", black);
 
         char tmp[20];
         sprintf(tmp , "%d", map->target);
+        SDL_RenderSetScale(map->renderer, 1.3,1.3);
         if(mode && !is_valid[1])
-            stringRGBA(map->renderer, 680, 480, tmp, 100, 0, 0 , 255);
+            stringRGBA(map->renderer, 675/1.3, 480/1.3, tmp, 100, 0, 0 , 255);
         else
-            stringRGBA(map->renderer, 680, 480, tmp, black);
+            stringRGBA(map->renderer, 675/1.3, 480/1.3, tmp, black);
+        SDL_RenderSetScale(map->renderer, 1,1);
 
         SDL_RenderPresent(map->renderer);
 

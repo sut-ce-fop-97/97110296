@@ -109,6 +109,12 @@
 		<Unit filename="/home/amin/Desktop/project/src/physics.h">
 			<Option target="project"/>
 		</Unit>
+		<Unit filename="/home/amin/Desktop/project/src/power-ups.c">
+			<Option target="project"/>
+		</Unit>
+		<Unit filename="/home/amin/Desktop/project/src/power-ups.h">
+			<Option target="project"/>
+		</Unit>
 		<Unit filename="/home/amin/Desktop/project/src/simple_snake.c">
 			<Option target="project"/>
 		</Unit>

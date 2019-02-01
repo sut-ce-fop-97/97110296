@@ -6,33 +6,51 @@
 
 #IncludeRegexTransform: 
 
-/home/amin/Desktop/project/src/UI.c
+/home/amin/Desktop/project/src/init.c
+SDL_events.h
+-
+stdbool.h
+-
+SDL_system.h
+-
+SDL.h
+-
 SDL2_gfxPrimitives.h
 -
-UI.h
-/home/amin/Desktop/project/src/UI.h
+zconf.h
+-
+time.h
+-
+bits/types/stack_t.h
+-
 init.h
 /home/amin/Desktop/project/src/init.h
 structs.h
 /home/amin/Desktop/project/src/structs.h
 view.h
 /home/amin/Desktop/project/src/view.h
-stdlib.h
--
-stdio.h
--
+physics.h
+/home/amin/Desktop/project/src/physics.h
+stack.h
+/home/amin/Desktop/project/src/stack.h
+logic.h
+/home/amin/Desktop/project/src/logic.h
 
-/home/amin/Desktop/project/src/UI.h
-SDL_render.h
--
+/home/amin/Desktop/project/src/init.h
+structs.h
+/home/amin/Desktop/project/src/structs.h
+
+/home/amin/Desktop/project/src/logic.h
 stdbool.h
 -
 structs.h
 /home/amin/Desktop/project/src/structs.h
 
-/home/amin/Desktop/project/src/init.h
+/home/amin/Desktop/project/src/physics.h
 structs.h
 /home/amin/Desktop/project/src/structs.h
+
+/home/amin/Desktop/project/src/stack.h
 
 /home/amin/Desktop/project/src/structs.h
 SDL2/SDL.h
