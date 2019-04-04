@@ -1,3 +1,3 @@
-/home/amin/Desktop/project/CMakeFiles/rebuild_cache.dir
-/home/amin/Desktop/project/CMakeFiles/project.dir
-/home/amin/Desktop/project/CMakeFiles/edit_cache.dir
+/home/amin/Desktop/Programming/Classes/C/project/CMakeFiles/rebuild_cache.dir
+/home/amin/Desktop/Programming/Classes/C/project/CMakeFiles/project.dir
+/home/amin/Desktop/Programming/Classes/C/project/CMakeFiles/edit_cache.dir

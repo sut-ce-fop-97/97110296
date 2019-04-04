@@ -30,7 +30,7 @@ void play_sound_effect() {
     SDL_AudioSpec wavSpec;
     Uint8* wavStart;
     Uint32 wavLength;
-    char* filePath = "/home/amin/Desktop/project/sound effects/Explosion+1.wav";
+    char* filePath = "Explosion+1.wav";
 
     if(SDL_LoadWAV(filePath, &wavSpec, &wavStart, &wavLength) == NULL)
     {

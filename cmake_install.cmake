@@ -1,4 +1,4 @@
-# Install script for directory: /home/amin/Desktop/project
+# Install script for directory: /home/amin/Desktop/Programming/Classes/C/project
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/amin/Desktop/project/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/amin/Desktop/Programming/Classes/C/project/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
